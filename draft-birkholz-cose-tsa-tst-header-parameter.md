@@ -1,7 +1,7 @@
 ---
-title: Header parameter for RFC 3161 Time-Stamp Tokens 
+title: Header parameter for RFC 3161 Time-Stamp Tokens
 abbrev: TST Header
-docname: draft-birkholz-cose-tsa-tst-header-parameter-latest 
+docname: draft-birkholz-cose-tsa-tst-header-parameter-latest
 stand_alone: true
 ipr: trust200902
 area: Security
