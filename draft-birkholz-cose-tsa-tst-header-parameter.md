@@ -1,5 +1,5 @@
 ---
-title: Header parameter for RFC 3161 Time-Stamp Tokens
+title: 'COSE: Header parameter for RFC 3161 Time-Stamp Tokens'
 abbrev: TST Header
 docname: draft-birkholz-cose-tsa-tst-header-parameter-latest
 stand_alone: true
@@ -32,16 +32,10 @@ author:
 normative:
   RFC2630: CMS
   RFC3161: TSA
-  RFC8949: COSE
+  RFC9052: COSE
 
 informative:
   I-D.ietf-cose-countersign:
-  I-D.birkholz-scitt-architecture:
-  CCF_Merkle_Tree:
-    target: https://microsoft.github.io/CCF/main/architecture/merkle_tree.html
-    title: CCF - Merkle Tree
-    author:
-      ins: Microsoft Research
 
 --- abstract
 
@@ -64,6 +58,7 @@ Useful new COSE {{-COSE}} header member that is the TST output of RFC 3161.
 The use of RFC 3161 Time-Stamp Tokens, often in combination with X.509 certificates, allows for an existing trust infrastructure to be used with COSE.
 
 The new COSE header parameter for carrying time-stamp tokens is defined as:
+
 * Name: RFC 3161 time-stamp tokens
 * Label: TBD
 * Value Type: bstr / [+ bstr]
