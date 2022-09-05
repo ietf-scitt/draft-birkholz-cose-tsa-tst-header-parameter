@@ -9,7 +9,7 @@ Expires: 9 March 2023                                          Microsoft
                                                         5 September 2022
 
 
-            Header parameter for RFC 3161 Time-Stamp Tokens
+         COSE: Header parameter for RFC 3161 Time-Stamp Tokens
           draft-birkholz-cose-tsa-tst-header-parameter-latest
 
 Abstract
@@ -74,7 +74,7 @@ Table of Contents
 
 1.  Introduction
 
-   Useful new COSE [RFC8949] header member that is the TST output of RFC
+   Useful new COSE [RFC9052] header member that is the TST output of RFC
    3161.
 
 1.1.  Requirements Notation
@@ -92,9 +92,19 @@ Table of Contents
    used with COSE.
 
    The new COSE header parameter for carrying time-stamp tokens is
-   defined as: * Name: RFC 3161 time-stamp tokens * Label: TBD * Value
-   Type: bstr / [+ bstr] * Value Registry: none * Description: One or
-   more RFC 3161 time-stamp tokens. * Reference: TBD
+   defined as:
+
+   *  Name: RFC 3161 time-stamp tokens
+
+   *  Label: TBD
+
+   *  Value Type: bstr / [+ bstr]
+
+   *  Value Registry: none
+
+   *  Description: One or more RFC 3161 time-stamp tokens.
+
+   *  Reference: TBD
 
    The content of the bstr are the bytes of the DER-encoded RFC 3161
    TimeStampToken structure.
@@ -163,25 +173,12 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
-              Representation (CBOR)", STD 94, RFC 8949,
-              DOI 10.17487/RFC8949, December 2020,
-              <https://www.rfc-editor.org/rfc/rfc8949>.
+   [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9052>.
 
 5.2.  Informative References
-
-   [CCF_Merkle_Tree]
-              Microsoft Research, "CCF - Merkle Tree", n.d.,
-              <https://microsoft.github.io/CCF/main/architecture/
-              merkle_tree.html>.
-
-   [I-D.birkholz-scitt-architecture]
-              Birkholz, H., Delignat-Lavaud, A., and C. Fournet, "An
-              Architecture for Trustworthy and Transparent Digital
-              Supply Chains", Work in Progress, Internet-Draft, draft-
-              birkholz-scitt-architecture-00, 7 March 2022,
-              <https://datatracker.ietf.org/doc/html/draft-birkholz-
-              scitt-architecture-00>.
 
    [I-D.ietf-cose-countersign]
               Schaad, J. and R. Housley, "CBOR Object Signing and
