@@ -129,8 +129,9 @@ Table of Contents
    used for signing the COSE message.
 
    RFC 3161 time-stamp tokens use CMS as signature envelope format.
-   Refer to [RFC2630] for details on signature verification.  The
-   payload of the signed time-stamp token is a TSTInfo structure as
+   Refer to [RFC2630] for details on signature verification, and further
+   to [RFC3161] for details specific to time-stamp token validation.
+   The payload of the signed time-stamp token is a TSTInfo structure as
    defined in [RFC3161] and contains the message imprint that was sent
    to the TSA.  As part of validation, the message imprint MUST be
    matched to the hash of the bytes within the bstr of the signature
