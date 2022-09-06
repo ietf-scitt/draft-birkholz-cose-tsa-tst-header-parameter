@@ -70,11 +70,11 @@ The content of the bstr are the bytes of the DER-encoded RFC 3161 TimeStampToken
 
 This header parameter allows for a single time-stamp token or multiple time-stamp tokens to be carried in the message. If a single time-stamp token is conveyed, it is placed in a CBOR byte string. If multiple time-stamp tokens are conveyed, a CBOR array of byte strings is used, with each time-stamp token being in its own byte string.
 
-When sending a request to an RFC 3161 Time Stamping Authority (TSA, see {{-TSA}}) , then the so-called message imprint of the request MUST be the hash of the bytes within the bstr of the signature field of the COSE structure. The hash algorithm does not have to match the algorithm used for signing the COSE message.
-
 Given that time-stamp tokens in this context are a type of countersignature, the header parameter can only be included in the unprotected header of a COSE message.
 
-RFC 3161 time-stamp tokens use Cryptographic Message Syntax (CMS, see {{-CMS}}) as signature format. Refer to {{-CMS}} for details on signature verification.
+When sending a request to an RFC 3161 Time Stamping Authority (TSA, see {{-TSA}}) to obtain a time-stamp token, then the so-called message imprint of the request MUST be the hash of the bytes within the bstr of the signature field of the COSE structure to be time-stamped. The hash algorithm does not have to match the algorithm used for signing the COSE message.
+
+RFC 3161 time-stamp tokens use Cryptographic Message Syntax (CMS, see {{-CMS}}) as signature envelope format. Refer to {{-CMS}} for details on signature verification. The payload of the signed time-stamp token is a TSTInfo structure as defined in {{-TSA}} and contains the message imprint that was sent to the TSA. As part of validation, the message imprint MUST be matched against the hash of the bytes within the bstr of the signature field of the time-stamped COSE structure. The hash algorithm is contained in the message imprint structure, together with the hash itself.
 
 Appendix B of RFC 3161 provides an example of how time-stamp tokens can be used during signature verification of a time-stamped message when using X.509 certificates.
 
