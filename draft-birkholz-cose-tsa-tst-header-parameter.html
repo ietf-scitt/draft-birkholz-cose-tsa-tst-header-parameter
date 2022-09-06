@@ -1040,7 +1040,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz &amp; Riechert</td>
-<td class="center">Expires 9 March 2023</td>
+<td class="center">Expires 10 March 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1053,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-birkholz-cose-tsa-tst-header-parameter-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-09-05" class="published">5 September 2022</time>
+<time datetime="2022-09-06" class="published">6 September 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-03-09">9 March 2023</time></dd>
+<dd class="expires"><time datetime="2023-03-10">10 March 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1104,7 +1104,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 March 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 March 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1211,9 +1211,9 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
         </ul>
 <p id="section-1.2-4">The content of the bstr are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.<a href="#section-1.2-4" class="pilcrow">¶</a></p>
 <p id="section-1.2-5">This header parameter allows for a single time-stamp token or multiple time-stamp tokens to be carried in the message. If a single time-stamp token is conveyed, it is placed in a CBOR byte string. If multiple time-stamp tokens are conveyed, a CBOR array of byte strings is used, with each time-stamp token being in its own byte string.<a href="#section-1.2-5" class="pilcrow">¶</a></p>
-<p id="section-1.2-6">When sending a request to an RFC 3161 Time Stamping Authority (TSA, see <span>[<a href="#RFC3161" class="xref">RFC3161</a>]</span>) , then the so-called message imprint of the request <span class="bcp14">MUST</span> be the hash of the bytes within the bstr of the signature field of the COSE structure. The hash algorithm does not have to match the algorithm used for signing the COSE message.<a href="#section-1.2-6" class="pilcrow">¶</a></p>
-<p id="section-1.2-7">Given that time-stamp tokens in this context are a type of countersignature, the header parameter can only be included in the unprotected header of a COSE message.<a href="#section-1.2-7" class="pilcrow">¶</a></p>
-<p id="section-1.2-8">RFC 3161 time-stamp tokens use Cryptographic Message Syntax (CMS, see <span>[<a href="#RFC2630" class="xref">RFC2630</a>]</span>) as signature format. Refer to <span>[<a href="#RFC2630" class="xref">RFC2630</a>]</span> for details on signature verification.<a href="#section-1.2-8" class="pilcrow">¶</a></p>
+<p id="section-1.2-6">Given that time-stamp tokens in this context are a type of countersignature, the header parameter can only be included in the unprotected header of a COSE message.<a href="#section-1.2-6" class="pilcrow">¶</a></p>
+<p id="section-1.2-7">When sending a request to an RFC 3161 Time Stamping Authority (TSA, see <span>[<a href="#RFC3161" class="xref">RFC3161</a>]</span>) to obtain a time-stamp token, then the so-called message imprint of the request <span class="bcp14">MUST</span> be the hash of the bytes within the bstr of the signature field of the COSE structure to be time-stamped. The hash algorithm does not have to match the algorithm used for signing the COSE message.<a href="#section-1.2-7" class="pilcrow">¶</a></p>
+<p id="section-1.2-8">RFC 3161 time-stamp tokens use Cryptographic Message Syntax (CMS, see <span>[<a href="#RFC2630" class="xref">RFC2630</a>]</span>) as signature envelope format. Refer to <span>[<a href="#RFC2630" class="xref">RFC2630</a>]</span> for details on signature verification. The payload of the signed time-stamp token is a TSTInfo structure as defined in <span>[<a href="#RFC3161" class="xref">RFC3161</a>]</span> and contains the message imprint that was sent to the TSA. As part of validation, the message imprint <span class="bcp14">MUST</span> be matched against the hash of the bytes within the bstr of the signature field of the time-stamped COSE structure. The hash algorithm is contained in the message imprint structure, together with the hash itself.<a href="#section-1.2-8" class="pilcrow">¶</a></p>
 <p id="section-1.2-9">Appendix B of RFC 3161 provides an example of how time-stamp tokens can be used during signature verification of a time-stamped message when using X.509 certificates.<a href="#section-1.2-9" class="pilcrow">¶</a></p>
 </section>
 </div>
