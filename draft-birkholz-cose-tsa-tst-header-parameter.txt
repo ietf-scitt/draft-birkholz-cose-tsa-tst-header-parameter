@@ -133,10 +133,10 @@ Table of Contents
    payload of the signed time-stamp token is a TSTInfo structure as
    defined in [RFC3161] and contains the message imprint that was sent
    to the TSA.  As part of validation, the message imprint MUST be
-   matched against the hash of the bytes within the bstr of the
-   signature field of the time-stamped COSE structure.  The hash
-   algorithm is contained in the message imprint structure, together
-   with the hash itself.
+   matched to the hash of the bytes within the bstr of the signature
+   field of the time-stamped COSE structure.  The hash algorithm is
+   contained in the message imprint structure, together with the hash
+   itself.
 
    Appendix B of RFC 3161 provides an example of how time-stamp tokens
    can be used during signature verification of a time-stamped message
