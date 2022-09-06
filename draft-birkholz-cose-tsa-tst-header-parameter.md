@@ -74,7 +74,7 @@ Given that time-stamp tokens in this context are a type of countersignature, the
 
 When sending a request to an RFC 3161 Time Stamping Authority (TSA, see {{-TSA}}) to obtain a time-stamp token, then the so-called message imprint of the request MUST be the hash of the bytes within the bstr of the signature field of the COSE structure to be time-stamped. The hash algorithm does not have to match the algorithm used for signing the COSE message.
 
-RFC 3161 time-stamp tokens use CMS as signature envelope format. Refer to {{-CMS}} for details on signature verification. The payload of the signed time-stamp token is a TSTInfo structure as defined in {{-TSA}} and contains the message imprint that was sent to the TSA. As part of validation, the message imprint MUST be matched against the hash of the bytes within the bstr of the signature field of the time-stamped COSE structure. The hash algorithm is contained in the message imprint structure, together with the hash itself.
+RFC 3161 time-stamp tokens use CMS as signature envelope format. Refer to {{-CMS}} for details on signature verification. The payload of the signed time-stamp token is a TSTInfo structure as defined in {{-TSA}} and contains the message imprint that was sent to the TSA. As part of validation, the message imprint MUST be matched to the hash of the bytes within the bstr of the signature field of the time-stamped COSE structure. The hash algorithm is contained in the message imprint structure, together with the hash itself.
 
 Appendix B of RFC 3161 provides an example of how time-stamp tokens can be used during signature verification of a time-stamped message when using X.509 certificates.
 
