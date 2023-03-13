@@ -30,12 +30,10 @@ author:
   country: UK
 
 normative:
-  RFC2630: CMS
+  RFC5652: CMS
   RFC3161: TSA
   RFC9052: COSE
-
-informative:
-  I-D.ietf-cose-countersign: countersign
+  RFC9338: countersign
 
 --- abstract
 
@@ -70,7 +68,7 @@ The content of the bstr are the bytes of the DER-encoded RFC 3161 TimeStampToken
 
 This header parameter allows for a single time-stamp token or multiple time-stamp tokens to be carried in the message. If a single time-stamp token is conveyed, it is placed in a CBOR byte string. If multiple time-stamp tokens are conveyed, a CBOR array of byte strings is used, with each time-stamp token being in its own byte string.
 
-Given that time-stamp tokens in this context are similar to a countersignature {{-countersign}}, the header parameter can is included in the unprotected header of a COSE envelope.
+Given that time-stamp tokens in this context are similar to a countersignature {{-countersign}}, the header parameter is included in the unprotected header of a COSE envelope.
 
 When sending a request to an RFC 3161 Time Stamping Authority (TSA, see {{-TSA}}) to obtain a time-stamp token, then the so-called message imprint of the request MUST be the hash of the bytes within the bstr of the signature field of the COSE structure to be time-stamped. The hash algorithm does not have to match the algorithm used for signing the COSE message.
 
