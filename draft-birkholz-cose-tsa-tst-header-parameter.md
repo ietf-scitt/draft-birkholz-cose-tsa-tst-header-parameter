@@ -5,7 +5,7 @@ docname: draft-birkholz-cose-tsa-tst-header-parameter-latest
 stand_alone: true
 ipr: trust200902
 area: Security
-wg: TBD
+wg: COSE
 kw: Internet-Draft
 cat: std
 pi:
@@ -25,8 +25,8 @@ author:
   country: Germany
 - ins: T. Fossati
   name: Thomas Fossati
-  organization: arm
-  email: Thomas.Fossati@arm.com
+  organization: Linaro
+  email: thomas.fossati@linaro.org
 - ins: M. Riechert
   name: Maik Riechert
   organization: Microsoft
@@ -45,57 +45,114 @@ normative:
 informative:
   RFC9338: countersign
 
+entity:
+  SELF: "RFCthis"
+
 --- abstract
 
-RFC 3161 provides a method to time-stamp a message digest to prove that it was created before a given time. This document defines how signatures of CBOR Signing And Encrypted (COSE) message structures can be time-stamped using RFC 3161 along with the needed header parameter to carry the corresponding time-stamp.
+RFC 3161 provides a method for timestamping a message digest to prove that the message was created before a given time.
+This document defines a CBOR Signing And Encrypted (COSE) header parameter that can be used to combine COSE message structures used for signing (i.e., COSE_Sign and COSE_Sign1) with existing RFC 3161-based timestamping infrastructure.
 
 --- middle
 
 # Introduction
 
-This document defines a new COSE {{-COSE}} header parameter that carries the TST output of RFC 3161.
+RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that it was created before a given time.
+
+This document defines a new COSE {{-COSE}} header parameter that carries the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
 
 ## Requirements Notation
 
 {::boilerplate bcp14-tagged}
 
-{: #mybody}
+# Modes of use
 
-# RFC 3161 Time-Stamp Tokens COSE Header Parameter
+There are two different modes of composing COSE protection and timestamping.
 
-The use of RFC 3161 Time-Stamp Tokens, often in combination with X.509 certificates, allows for an existing trust infrastructure to be used with COSE.
+## Timestamp then COSE {#sec-timestamp-then-cose}
 
-The new COSE header parameter for carrying time-stamp tokens is defined as:
+{{fig-timestamp-then-cose}} shows the case where a datum is first digested and submitted to a TSA to be timestamped.
+
+A signed COSE message is then built as follows:
+
+* The obtained timestamp token is added to the protected headers,
+* The original datum becomes the payload of the signed COSE message.
+
+~~~ aasvg
+.---------.              .---------------.     .----------------------.
+| payload +------------->| Sig_structure +---->| COSE_Sign/COSE_Sign1 |
+'----+----'              '---------------'     '----------------------'
+     |                          ^
+     |     .---.                |
+     |    |     |     .-----.   |
+     '--->| TSA +---->| TST +---'
+          |     |     '-----'
+           '---'
+~~~
+{: #fig-timestamp-then-cose artwork-align="center"
+   title="Timestamp, then COSE"}
+
+## COSE then Timestamp {#sec-cose-then-timestamp}
+
+{{fig-cose-then-timestamp}} shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
+The obtained timestamp token is then added back as an unprotected header into the same COSE object.
+
+In this context, timestamp tokens are similar to a countersignature {{-countersign}} made by the TSA.
+
+~~~ aasvg
+.----------------------.         .-----.
+| COSE_Sign/COSE_Sign1 |<--------+ TST |
+'----+-----------------'         '-----'
+     |                              ^
+     v                              |
+.----------------------.            |
+| signatures/signature |            |
+'----+-----------------'            |
+     |                     .---.    |
+     |                    |     |   |
+     '------------------->| TSA +---'
+                          |     |
+                           '---'
+~~~
+{: #fig-cose-then-timestamp artwork-align="center"
+   title="COSE, then Timestamp"}
+
+# RFC 3161 Time-Stamp Tokens COSE Header Parameter {#sec-tst-hdr}
+
+To carry RFC 3161 timestamp tokens in COSE signed messages, a new COSE header parameter, `rfc3161-tst`, is defined as follows:
 
 * Name: rfc3161-tst
 * Label: TBD
-* Value Type: bstr / [2*bstr]
+* Value Type: bstr
 * Value Registry: none
-* Description: One or more RFC 3161 time-stamp tokens.
-* Reference: TBD
+* Description: RFC 3161 timestamp token
+* Reference: {{&SELF}}
 
-FIXME(tho)
-The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure. FooFIXME matches the content of the equivalent header attribute defined in {{-TSA}} for Cryptographic Message Syntax (CMS, see {{-CMS}}) envelopes.
+The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.
 
-A rfc3161-tst header parameter allows for a single time-stamp token or multiple time-stamp tokens to be carried in COSE header maps. If a single time-stamp token is conveyed, it is placed in a CBOR byte string. If multiple time-stamp tokens are conveyed, a CBOR array of two or more byte strings is used, with each time-stamp token being in its own byte string.
+When used as described in {{sec-timestamp-then-cose}}, the message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
 
-Time-stamp tokens in this context are similar to a countersignature {{-countersign}}. Therefore, the header parameter is included in the unprotected header of COSE envelopes.
+When used as described in {{sec-cose-then-timestamp}}, the message imprint sent in the request to the TSA MUST be either:
 
-When sending a request to an RFC 3161 Time Stamping Authority (TSA, see {{-TSA}}) to obtain a time-stamp token, the message imprint ({{Section 2.4 of -TSA}}) of the request MUST be the hash of the signature field of the COSE envelope to be time-stamped. The hash algorithm does not have to match the algorithm used for signing the COSE message.
+* the hash of the signature field of the COSE_Sign1.
+* the hash of the signatures field of the COSE_Sign message.
 
-RFC 3161 time-stamp tokens use CMS as signature envelope format. {{-CMS}} illustrates details of signature verification and {{-TSA}} provides the details specific to time-stamp token validation. The payload of the signed time-stamp token is a TSTInfo structure as defined in {{-TSA}} and contains the message imprint that was sent to the TSA. As part of validation of the COSE envelope, the message imprint MUST match the hash of the signature field of the time-stamped COSE envelope. The hash algorithm is contained in the message imprint structure, together with the hash itself.
+In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.  This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
 
-WHY_ALWAYS_ME?(tho)
-Explicit guidance is illustrated in {{Appendix B of -TSA}} via an example that shows how time-stamp tokens can be used during signature verification of a time-stamped message when using X.509 certificates.
+RFC 3161 timestamp tokens use CMS as signature envelope format. {{-CMS}} provides the details about signature verification, and {{-TSA}} provides the details specific to timestamp token validation.
+The payload of the signed timestamp token is the TSTInfo structure defined in {{-TSA}}, which contains the message imprint that was sent to the TSA.
+The hash algorithm is contained in the message imprint structure, together with the hash itself.
+
+As part of the signature verification, the receiver MUST make sure that the message imprint in the embedded timestamp token matches either the payload or the signature fields, depending on the mode of use..
+
+Guidance is illustrated in {{Appendix B of -TSA}} via an example that shows how timestamp tokens can be used during signature verification of a timestamped message when using X.509 certificates.
 
 # Security Considerations
 
-Similar security considerations as described in RFC 3161 as well as the security considerations of RFC 9338 apply.
+The security considerations made in {{-TSA}} as well as those of {{-countersign}} apply.
 
 # IANA Considerations
 
-TBD
-
-IANA is requested to register the new COSE Header parameter described in section TBD in the "COSE Header Parameters" registry.
+IANA is requested to add the COSE Header parameter described in {{sec-tst-hdr}} to the "COSE Header Parameters" of the {{!IANA.cose}} registry.
 
 --- back
