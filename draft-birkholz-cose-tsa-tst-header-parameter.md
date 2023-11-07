@@ -122,10 +122,10 @@ In this context, timestamp tokens are similar to a countersignature {{-countersi
 To carry RFC 3161 timestamp tokens in COSE signed messages, a new COSE header parameter, `rfc3161-tst`, is defined as follows:
 
 * Name: rfc3161-tst
-* Label: tst
+* Label: TBD
 * Value Type: bstr
 * Value Registry: none
-* Description: One or more RFC 3161 timestamp tokens.
+* Description: RFC 3161 timestamp token
 * Reference: {{&SELF}}
 
 The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.
