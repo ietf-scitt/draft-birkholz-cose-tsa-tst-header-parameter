@@ -1,0 +1,117 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-03-14T01:02:15.963957+00:00",
+  "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOH8Js785d9-Bg",
+      "title": "Next steps",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/1",
+      "state": "OPEN",
+      "author": "letmaik",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "help wanted",
+        "question"
+      ],
+      "body": "@henkbirkholz What are the next steps to progress this? COSE WG mailing list? Any content changes?",
+      "createdAt": "2023-02-08T17:27:52Z",
+      "updatedAt": "2023-02-08T17:27:52Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOH8Js785L8BYB",
+      "title": "Minor cleanup",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/2",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-13T21:54:26Z",
+      "updatedAt": "2023-03-13T22:17:07Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "60256de5fbead9cba5d1872183a0d5ab73803e04",
+      "headRepository": "cabo/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "cleanup",
+      "headRefOid": "a9749c8c23217b0a87bc510bae9a554b572f29bb",
+      "closedAt": "2023-03-13T22:17:07Z",
+      "mergedAt": "2023-03-13T22:17:07Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "fa7d919057accec1ce05209e76328069018f1ac9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js785PwME8",
+          "commit": {
+            "abbreviatedOid": "a9749c8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "thx! lgtm",
+          "createdAt": "2023-03-13T22:15:37Z",
+          "updatedAt": "2023-03-13T22:15:37Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
