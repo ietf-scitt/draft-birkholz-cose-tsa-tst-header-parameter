@@ -92,12 +92,12 @@ A signed COSE message is then built as follows:
 {: #fig-timestamp-then-cose artwork-align="center"
    title="Timestamp, then COSE"}
 
+The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+
 ## COSE then Timestamp {#sec-cose-then-timestamp}
 
 {{fig-cose-then-timestamp}} shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
 The obtained timestamp token is then added back as an unprotected header into the same COSE object.
-
-In this context, timestamp tokens are similar to a countersignature {{-countersign}} made by the TSA.
 
 ~~~ aasvg
 .----------------------.         .-----.
@@ -117,35 +117,59 @@ In this context, timestamp tokens are similar to a countersignature {{-countersi
 {: #fig-cose-then-timestamp artwork-align="center"
    title="COSE, then Timestamp"}
 
-# RFC 3161 Time-Stamp Tokens COSE Header Parameter {#sec-tst-hdr}
+In this context, timestamp tokens are similar to a countersignature {{-countersign}} made by the TSA.
 
-To carry RFC 3161 timestamp tokens in COSE signed messages, a new COSE header parameter, `rfc3161-tst`, is defined as follows:
+# RFC 3161 Time-Stamp Tokens COSE Header Parameters {#sec-tst-hdr}
 
-* Name: rfc3161-tst
+The two modes described in {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} use different inputs into the timestamping machinery, and consequently create different kinds of binding between COSE and TST.
+To clearly separate their semantics two different COSE header parameters are defined as described in the following subsections.
+
+## `3161-ttc` {#sec-tst-hdr-ttc}
+
+The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode described in {{sec-timestamp-then-cose}}.
+
+The `3161-ttc` protected header is defined as follows:
+
+* Name: 3161-ttc
 * Label: TBD
 * Value Type: bstr
 * Value Registry: none
 * Description: RFC 3161 timestamp token
-* Reference: {{&SELF}}
+* Reference: {{sec-tst-hdr-ttc}} of {{&SELF}}
 
 The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.
 
-When used as described in {{sec-timestamp-then-cose}}, the message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+## `3161-ctt` {#sec-tst-hdr-ctt}
 
-When used as described in {{sec-cose-then-timestamp}}, the message imprint sent in the request to the TSA MUST be either:
+The `3161-ctt` COSE _unprotected_ header parameter MUST be used for the mode described in {{sec-cose-then-timestamp}}.
+
+The message imprint sent in the request to the TSA MUST be either:
 
 * the hash of the signature field of the COSE_Sign1.
 * the hash of the signatures field of the COSE_Sign message.
 
-In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.  This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
+In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
+This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
 
-RFC 3161 timestamp tokens use CMS as signature envelope format. {{-CMS}} provides the details about signature verification, and {{-TSA}} provides the details specific to timestamp token validation.
+The `3161-ctt` unprotected header is defined as follows:
+
+* Name: 3161-ctt
+* Label: TBD
+* Value Type: bstr
+* Value Registry: none
+* Description: RFC 3161 timestamp token
+* Reference: {{sec-tst-hdr-ctt}} of {{&SELF}}
+
+# Timestamp Processing
+
+RFC 3161 timestamp tokens use CMS as signature envelope format.
+{{-CMS}} provides the details about signature verification, and {{-TSA}} provides the details specific to timestamp token validation.
 The payload of the signed timestamp token is the TSTInfo structure defined in {{-TSA}}, which contains the message imprint that was sent to the TSA.
 The hash algorithm is contained in the message imprint structure, together with the hash itself.
 
-As part of the signature verification, the receiver MUST make sure that the message imprint in the embedded timestamp token matches either the payload or the signature fields, depending on the mode of use..
+As part of the signature verification, the receiver MUST make sure that the message imprint in the embedded timestamp token matches either the payload or the signature fields, depending on the mode of use.
 
-Guidance is illustrated in {{Appendix B of -TSA}} via an example that shows how timestamp tokens can be used during signature verification of a timestamped message when using X.509 certificates.
+{{Appendix B of -TSA}} provides an example that illustrates how timestamp tokens can be used to verify signatures of a timestamped message when utilizing X.509 certificates.
 
 # Security Considerations
 
@@ -153,6 +177,6 @@ The security considerations made in {{-TSA}} as well as those of {{-countersign}
 
 # IANA Considerations
 
-IANA is requested to add the COSE Header parameter described in {{sec-tst-hdr}} to the "COSE Header Parameters" of the {{!IANA.cose}} registry.
+IANA is requested to add the two COSE Header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" of the {{!IANA.cose}} registry.
 
 --- back
