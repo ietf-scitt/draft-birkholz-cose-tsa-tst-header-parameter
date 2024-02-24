@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 10 May 2024                                              Linaro
+Expires: 27 August 2024                                           Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                         7 November 2023
+                                                        24 February 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -46,11 +46,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 May 2024.
+   This Internet-Draft will expire on 27 August 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -67,14 +67,17 @@ Table of Contents
    1.  Introduction
      1.1.  Requirements Notation
    2.  Modes of use
-     2.1.  Timestamp then COSE
-     2.2.  COSE then Timestamp
-   3.  RFC 3161 Time-Stamp Tokens COSE Header Parameter
-   4.  Security Considerations
-   5.  IANA Considerations
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
+     2.1.  Timestamp then COSE (TTC)
+     2.2.  COSE then Timestamp (CTT)
+   3.  RFC 3161 Time-Stamp Tokens COSE Header Parameters
+     3.1.  3161-ttc
+     3.2.  3161-ctt
+   4.  Timestamp Processing
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -100,7 +103,7 @@ Table of Contents
    There are two different modes of composing COSE protection and
    timestamping.
 
-2.1.  Timestamp then COSE
+2.1.  Timestamp then COSE (TTC)
 
    Figure 1 shows the case where a datum is first digested and submitted
    to a TSA to be timestamped.
@@ -121,17 +124,17 @@ Table of Contents
            |     |     '-----'
             '---'
 
-                     Figure 1: Timestamp, then COSE
+                  Figure 1: Timestamp, then COSE (TTC)
 
-2.2.  COSE then Timestamp
+   The message imprint sent to the TSA (Section 2.4 of [RFC3161]) MUST
+   be the hash of the payload field of the COSE signed object.
+
+2.2.  COSE then Timestamp (CTT)
 
    Figure 2 shows the case where the signature(s) field of the signed
    COSE object is digested and submitted to a TSA to be timestamped.
    The obtained timestamp token is then added back as an unprotected
    header into the same COSE object.
-
-   In this context, timestamp tokens are similar to a countersignature
-   [RFC9338] made by the TSA.
 
                  .----------------------.         .-----.
                  | COSE_Sign/COSE_Sign1 |<--------+ TST |
@@ -147,14 +150,27 @@ Table of Contents
                                            |     |
                                             '---'
 
-                       Figure 2: COSE, then Timestamp
+                    Figure 2: COSE, then Timestamp (CTT)
 
-3.  RFC 3161 Time-Stamp Tokens COSE Header Parameter
+   In this context, timestamp tokens are similar to a countersignature
+   [RFC9338] made by the TSA.
 
-   To carry RFC 3161 timestamp tokens in COSE signed messages, a new
-   COSE header parameter, rfc3161-tst, is defined as follows:
+3.  RFC 3161 Time-Stamp Tokens COSE Header Parameters
 
-   *  Name: rfc3161-tst
+   The two modes described in Section 2.1 and Section 2.2 use different
+   inputs into the timestamping machinery, and consequently create
+   different kinds of binding between COSE and TST.  To clearly separate
+   their semantics two different COSE header parameters are defined as
+   described in the following subsections.
+
+3.1.  3161-ttc
+
+   The 3161-ttc COSE _protected_ header parameter MUST be used for the
+   mode described in Section 2.1.
+
+   The 3161-ttc protected header is defined as follows:
+
+   *  Name: 3161-ttc
 
    *  Label: TBD
 
@@ -164,17 +180,17 @@ Table of Contents
 
    *  Description: RFC 3161 timestamp token
 
-   *  Reference: RFCthis
+   *  Reference: Section 3.1 of RFCthis
 
    The content of the byte string are the bytes of the DER-encoded RFC
    3161 TimeStampToken structure.
 
-   When used as described in Section 2.1, the message imprint sent to
-   the TSA (Section 2.4 of [RFC3161]) MUST be the hash of the payload
-   field of the COSE signed object.
+3.2.  3161-ctt
 
-   When used as described in Section 2.2, the message imprint sent in
-   the request to the TSA MUST be either:
+   The 3161-ctt COSE _unprotected_ header parameter MUST be used for the
+   mode described in Section 2.2.
+
+   The message imprint sent in the request to the TSA MUST be either:
 
    *  the hash of the signature field of the COSE_Sign1.
 
@@ -184,6 +200,22 @@ Table of Contents
    be the same as the algorithm used for signing the COSE message.  This
    may not be possible if the timestamp token has been obtained outside
    the processing context in which the COSE object is assembled.
+
+   The 3161-ctt unprotected header is defined as follows:
+
+   *  Name: 3161-ctt
+
+   *  Label: TBD
+
+   *  Value Type: bstr
+
+   *  Value Registry: none
+
+   *  Description: RFC 3161 timestamp token
+
+   *  Reference: Section 3.2 of RFCthis
+
+4.  Timestamp Processing
 
    RFC 3161 timestamp tokens use CMS as signature envelope format.
    [STD70] provides the details about signature verification, and
@@ -196,26 +228,26 @@ Table of Contents
    As part of the signature verification, the receiver MUST make sure
    that the message imprint in the embedded timestamp token matches
    either the payload or the signature fields, depending on the mode of
-   use..
+   use.
 
-   Guidance is illustrated in Appendix B of [RFC3161] via an example
-   that shows how timestamp tokens can be used during signature
-   verification of a timestamped message when using X.509 certificates.
+   Appendix B of [RFC3161] provides an example that illustrates how
+   timestamp tokens can be used to verify signatures of a timestamped
+   message when utilizing X.509 certificates.
 
-4.  Security Considerations
+5.  Security Considerations
 
    The security considerations made in [RFC3161] as well as those of
    [RFC9338] apply.
 
-5.  IANA Considerations
+6.  IANA Considerations
 
-   IANA is requested to add the COSE Header parameter described in
+   IANA is requested to add the two COSE Header parameters described in
    Section 3 to the "COSE Header Parameters" of the [IANA.cose]
    registry.
 
-6.  References
+7.  References
 
-6.1.  Normative References
+7.1.  Normative References
 
    [IANA.cose]
               IANA, "CBOR Object Signing and Encryption (COSE)",
@@ -244,7 +276,7 @@ Table of Contents
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [RFC9338]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Countersignatures", STD 96, RFC 9338,
