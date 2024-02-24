@@ -133,7 +133,7 @@ The `3161-ttc` protected header is defined as follows:
 * Name: 3161-ttc
 * Label: TBD
 * Value Type: bstr
-* Value Registry: none
+* Value Registry: {{!IANA.cose}}
 * Description: RFC 3161 timestamp token
 * Reference: {{sec-tst-hdr-ttc}} of {{&SELF}}
 
@@ -145,7 +145,7 @@ The `3161-ctt` COSE _unprotected_ header parameter MUST be used for the mode des
 
 The message imprint sent in the request to the TSA MUST be either:
 
-* the hash of the signature field of the COSE_Sign1.
+* the hash of the signature field of the COSE_Sign1 message.
 * the hash of the signatures field of the COSE_Sign message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
@@ -156,7 +156,7 @@ The `3161-ctt` unprotected header is defined as follows:
 * Name: 3161-ctt
 * Label: TBD
 * Value Type: bstr
-* Value Registry: none
+* Value Registry: {{!IANA.cose}}
 * Description: RFC 3161 timestamp token
 * Reference: {{sec-tst-hdr-ctt}} of {{&SELF}}
 
@@ -177,6 +177,6 @@ The security considerations made in {{-TSA}} as well as those of {{-countersign}
 
 # IANA Considerations
 
-IANA is requested to add the two COSE Header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" of the {{!IANA.cose}} registry.
+IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" subregistry of the {{!IANA.cose}} registry.
 
 --- back
