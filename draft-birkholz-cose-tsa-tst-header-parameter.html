@@ -1371,7 +1371,7 @@ To clearly separate their semantics two different COSE header parameters are def
             <p id="section-3.1-3.3.1">Value Type: bstr<a href="#section-3.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-3.4">
-            <p id="section-3.1-3.4.1">Value Registry: none<a href="#section-3.1-3.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-3.4.1">Value Registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-3.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-3.5">
             <p id="section-3.1-3.5.1">Description: RFC 3161 timestamp token<a href="#section-3.1-3.5.1" class="pilcrow">¶</a></p>
@@ -1392,7 +1392,7 @@ To clearly separate their semantics two different COSE header parameters are def
 <p id="section-3.2-2">The message imprint sent in the request to the TSA <span class="bcp14">MUST</span> be either:<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-3.1">
-            <p id="section-3.2-3.1.1">the hash of the signature field of the COSE_Sign1.<a href="#section-3.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-3.1.1">the hash of the signature field of the COSE_Sign1 message.<a href="#section-3.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-3.2">
             <p id="section-3.2-3.2.1">the hash of the signatures field of the COSE_Sign message.<a href="#section-3.2-3.2.1" class="pilcrow">¶</a></p>
@@ -1412,7 +1412,7 @@ This may not be possible if the timestamp token has been obtained outside the pr
             <p id="section-3.2-6.3.1">Value Type: bstr<a href="#section-3.2-6.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.4">
-            <p id="section-3.2-6.4.1">Value Registry: none<a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-6.4.1">Value Registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-6.5">
             <p id="section-3.2-6.5.1">Description: RFC 3161 timestamp token<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
@@ -1451,7 +1451,7 @@ The hash algorithm is contained in the message imprint structure, together with 
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">IANA is requested to add the two COSE Header parameters described in <a href="#sec-tst-hdr" class="auto internal xref">Section 3</a> to the "COSE Header Parameters" of the <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span> registry.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">IANA is requested to add the two COSE header parameters described in <a href="#sec-tst-hdr" class="auto internal xref">Section 3</a> to the "COSE Header Parameters" subregistry of the <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span> registry.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-7">
