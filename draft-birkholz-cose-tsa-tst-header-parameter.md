@@ -69,7 +69,7 @@ This document defines a new COSE {{-COSE}} header parameter that carries the Tim
 
 There are two different modes of composing COSE protection and timestamping.
 
-## Timestamp then COSE {#sec-timestamp-then-cose}
+## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
 {{fig-timestamp-then-cose}} shows the case where a datum is first digested and submitted to a TSA to be timestamped.
 
@@ -90,11 +90,11 @@ A signed COSE message is then built as follows:
            '---'
 ~~~
 {: #fig-timestamp-then-cose artwork-align="center"
-   title="Timestamp, then COSE"}
+   title="Timestamp, then COSE (TTC)"}
 
 The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
 
-## COSE then Timestamp {#sec-cose-then-timestamp}
+## COSE then Timestamp (CTT) {#sec-cose-then-timestamp}
 
 {{fig-cose-then-timestamp}} shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
 The obtained timestamp token is then added back as an unprotected header into the same COSE object.
@@ -115,7 +115,7 @@ The obtained timestamp token is then added back as an unprotected header into th
                            '---'
 ~~~
 {: #fig-cose-then-timestamp artwork-align="center"
-   title="COSE, then Timestamp"}
+   title="COSE, then Timestamp (CTT)"}
 
 In this context, timestamp tokens are similar to a countersignature {{-countersign}} made by the TSA.
 
