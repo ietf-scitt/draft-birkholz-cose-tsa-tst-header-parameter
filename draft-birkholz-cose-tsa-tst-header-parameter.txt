@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 27 August 2024                                           Linaro
+Expires: 21 January 2025                                          Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                        24 February 2024
+                                                            20 July 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 August 2024.
+   This Internet-Draft will expire on 21 January 2025.
 
 Copyright Notice
 
@@ -237,7 +237,9 @@ Table of Contents
 5.  Security Considerations
 
    The security considerations made in [RFC3161] as well as those of
-   [RFC9338] apply.
+   [RFC9338] apply.  In the Timestamp, then COSE (TTC) sequence of
+   operation, the TSA is given an opaque identifier for the payload, but
+   the content of the payload is not revealed.
 
 6.  IANA Considerations
 
@@ -250,8 +252,8 @@ Table of Contents
 7.1.  Normative References
 
    [IANA.cose]
-              IANA, "CBOR Object Signing and Encryption (COSE)",
-              <http://www.iana.org/assignments/cose>.
+              IANA, "CBOR Object Signing and Encryption (COSE)", 11
+              January 2017, <https://www.iana.org/assignments/cose>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
