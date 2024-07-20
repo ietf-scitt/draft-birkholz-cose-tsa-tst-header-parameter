@@ -173,7 +173,7 @@ As part of the signature verification, the receiver MUST make sure that the mess
 
 # Security Considerations
 
-The security considerations made in {{-TSA}} as well as those of {{-countersign}} apply.
+The security considerations made in {{-TSA}} as well as those of {{-countersign}} apply. In the Timestamp, then COSE (TTC) sequence of operation, the TSA is given an opaque identifier for the payload, but the content of the payload is not revealed.
 
 # IANA Considerations
 
