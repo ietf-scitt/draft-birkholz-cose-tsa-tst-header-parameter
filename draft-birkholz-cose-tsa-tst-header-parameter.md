@@ -173,7 +173,18 @@ As part of the signature verification, the receiver MUST make sure that the mess
 
 # Security Considerations
 
-The security considerations made in {{-TSA}} as well as those of {{-countersign}} apply. In the Timestamp, then COSE (TTC) sequence of operation, the TSA is given an opaque identifier for the payload, but the content of the payload is not revealed.
+The security considerations made in {{-TSA}} as well as those of {{-countersign}} apply.
+
+In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
+given an opaque identifier (a cryptographic hash value) for the
+payload.
+While this means that the content of the payload is not directly
+revealed, to prevent comparison with known payloads or disclosure of
+identical payloads being used over time, the payload would need to be
+armored, e.g., with a nonce that is shared with the recipient of the
+header parameter but not the TSA.
+Such a mechanism can be employed inside the ones described in this
+specification, but is out of scope for this document.
 
 # IANA Considerations
 
