@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 21 January 2025                                          Linaro
+Expires: 22 January 2025                                          Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                            20 July 2024
+                                                            21 July 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2025.
+   This Internet-Draft will expire on 22 January 2025.
 
 Copyright Notice
 
@@ -237,9 +237,17 @@ Table of Contents
 5.  Security Considerations
 
    The security considerations made in [RFC3161] as well as those of
-   [RFC9338] apply.  In the Timestamp, then COSE (TTC) sequence of
-   operation, the TSA is given an opaque identifier for the payload, but
-   the content of the payload is not revealed.
+   [RFC9338] apply.
+
+   In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
+   given an opaque identifier (a cryptographic hash value) for the
+   payload.  While this means that the content of the payload is not
+   directly revealed, to prevent comparison with known payloads or
+   disclosure of identical payloads being used over time, the payload
+   would need to be armored, e.g., with a nonce that is shared with the
+   recipient of the header parameter but not the TSA.  Such a mechanism
+   can be employed inside the ones described in this specification, but
+   is out of scope for this document.
 
 6.  IANA Considerations
 
