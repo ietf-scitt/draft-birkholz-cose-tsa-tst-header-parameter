@@ -177,6 +177,6 @@ The security considerations made in {{-TSA}} as well as those of {{-countersign}
 
 # IANA Considerations
 
-IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" subregistry of the {{!IANA.cose}} registry.
+IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" registry in the {{!IANA.cose}} registry group.
 
 --- back
