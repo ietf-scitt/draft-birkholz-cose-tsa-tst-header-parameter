@@ -1,21 +1,17 @@
 ---
+v: 3
+
 title: 'COSE Header parameter for RFC 3161 Time-Stamp Tokens'
 abbrev: TST Header
 docname: draft-birkholz-cose-tsa-tst-header-parameter-latest
-stand_alone: true
-ipr: trust200902
 area: Security
 wg: COSE
 kw: Internet-Draft
 cat: std
-pi:
-  toc: yes
-  sortrefs: yes
-  symrefs: yes
+stream: IETF
 
 author:
-- ins: H. Birkholz
-  name: Henk Birkholz
+- name: Henk Birkholz
   org: Fraunhofer SIT
   abbrev: Fraunhofer SIT
   email: henk.birkholz@sit.fraunhofer.de
@@ -23,12 +19,10 @@ author:
   code: '64295'
   city: Darmstadt
   country: Germany
-- ins: T. Fossati
-  name: Thomas Fossati
+- name: Thomas Fossati
   organization: Linaro
   email: thomas.fossati@linaro.org
-- ins: M. Riechert
-  name: Maik Riechert
+- name: Maik Riechert
   organization: Microsoft
   email: Maik.Riechert@microsoft.com
   country: UK
@@ -188,6 +182,6 @@ specification, but is out of scope for this document.
 
 # IANA Considerations
 
-IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" subregistry of the {{!IANA.cose}} registry.
+IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" registry in the {{!IANA.cose}} registry group.
 
 --- back
