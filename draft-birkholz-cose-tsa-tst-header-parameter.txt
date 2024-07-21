@@ -252,8 +252,8 @@ Table of Contents
 6.  IANA Considerations
 
    IANA is requested to add the two COSE header parameters described in
-   Section 3 to the "COSE Header Parameters" subregistry of the
-   [IANA.cose] registry.
+   Section 3 to the "COSE Header Parameters" registry in the [IANA.cose]
+   registry group.
 
 7.  References
 
