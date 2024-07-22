@@ -3,12 +3,16 @@ v: 3
 
 title: 'COSE Header parameter for RFC 3161 Time-Stamp Tokens'
 abbrev: TST Header
-docname: draft-birkholz-cose-tsa-tst-header-parameter-latest
+docname: draft-ietf-cose-tsa-tst-header-parameter-latest
 area: Security
 wg: COSE
 kw: Internet-Draft
 cat: std
 stream: IETF
+
+venue:
+  github: ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter
+
 
 author:
 - name: Henk Birkholz
