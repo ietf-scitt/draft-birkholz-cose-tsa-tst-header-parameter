@@ -117,6 +117,8 @@ This mode is utilized when a record of the timing of the signature operation is 
 
 In this context, timestamp tokens are similar to a countersignature made by the TSA.
 
+The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+
 # RFC 3161 Time-Stamp Tokens COSE Header Parameters {#sec-tst-hdr}
 
 The two modes described in {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} use different inputs into the timestamping machinery, and consequently create different kinds of binding between COSE and TST.
