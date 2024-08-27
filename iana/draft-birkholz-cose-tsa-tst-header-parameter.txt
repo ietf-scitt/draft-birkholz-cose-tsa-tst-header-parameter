@@ -240,11 +240,11 @@ Table of Contents
    | Name      | Label | Value | Value    | Description | Reference |
    |           |       | Type  | Registry |             |           |
    +===========+=======+=======+==========+=============+===========+
-   | 31610-tcc | TBD   | bstr  | -        | RFC 3161    | RFCthis,  |
+   | 31610-tcc | TBD1  | bstr  | -        | RFC 3161    | RFCthis,  |
    |           |       |       |          | timestamp   | Section   |
    |           |       |       |          | token       | 3.1       |
    +-----------+-------+-------+----------+-------------+-----------+
-   | 31610-ctt | TBD   | bstr  | -        | RFC 3161    | RFCthis,  |
+   | 31610-ctt | TBD2  | bstr  | -        | RFC 3161    | RFCthis,  |
    |           |       |       |          | timestamp   | Section   |
    |           |       |       |          | token       | 3.2       |
    +-----------+-------+-------+----------+-------------+-----------+
