@@ -44,8 +44,7 @@ entity:
 
 --- abstract
 
-RFC 3161 provides a method for timestamping a message digest to prove that the message was created before a given time.
-This document defines a CBOR Signing And Encrypted (COSE) header parameter that can be used to combine COSE message structures used for signing (i.e., COSE_Sign and COSE_Sign1) with existing RFC 3161-based timestamping infrastructure.
+This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (COSE_Sign and COSE_Sign1). This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
 
 --- middle
 
@@ -53,7 +52,7 @@ This document defines a CBOR Signing And Encrypted (COSE) header parameter that 
 
 RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that it was created before a given time.
 
-This document defines a new COSE {{-COSE}} header parameter that carries the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
+This document defines a new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameter that carries the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
 
 ## Requirements Notation
 
@@ -66,6 +65,8 @@ There are two different modes of composing COSE protection and timestamping.
 ## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
 {{fig-timestamp-then-cose}} shows the case where a datum is first digested and submitted to a TSA to be timestamped.
+
+This mode is utilized when the signature should also be performed over the timestamp to provide an immutable timestamp.
 
 A signed COSE message is then built as follows:
 
@@ -92,6 +93,8 @@ The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash o
 
 {{fig-cose-then-timestamp}} shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
 The obtained timestamp token is then added back as an unprotected header into the same COSE object.
+
+This mode is utilized when a record of the timing of the signature operation is desired.
 
 ~~~ aasvg
 .----------------------.         .-----.
