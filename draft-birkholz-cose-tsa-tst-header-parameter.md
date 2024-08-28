@@ -129,16 +129,7 @@ To clearly separate their semantics two different COSE header parameters are def
 
 The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode described in {{sec-timestamp-then-cose}}.
 
-The `3161-ttc` protected header is defined as follows:
-
-* Name: 3161-ttc
-* Label: TBD
-* Value Type: bstr
-* Value Registry: {{!IANA.cose}}
-* Description: RFC 3161 timestamp token
-* Reference: {{sec-tst-hdr-ttc}} of {{&SELF}}
-
-The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.
+The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
 ## `3161-ctt` {#sec-tst-hdr-ctt}
 
@@ -152,14 +143,7 @@ The message imprint sent in the request to the TSA MUST be either:
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
 
-The `3161-ctt` unprotected header is defined as follows:
-
-* Name: 3161-ctt
-* Label: TBD
-* Value Type: bstr
-* Value Registry: {{!IANA.cose}}
-* Description: RFC 3161 timestamp token
-* Reference: {{sec-tst-hdr-ctt}} of {{&SELF}}
+The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
 # Timestamp Processing
 
@@ -189,7 +173,12 @@ specification, but is out of scope for this document.
 
 # IANA Considerations
 
-IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" registry in the {{!IANA.cose}} registry group.
+IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} to the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
+
+| Name | Label | Value Type | Value Registry | Description | Reference |
+| `3161-tcc` | TBD1 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |
+| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |
+{: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
 
