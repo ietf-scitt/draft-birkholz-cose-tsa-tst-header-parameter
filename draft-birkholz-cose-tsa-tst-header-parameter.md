@@ -161,24 +161,18 @@ Please review the Security Considerations section in {{-TSA}}; these considerati
 
 Also review the Security Considerations section in {{-COSE}}; these considerations apply to this document as well, especially the need for implementations to protect private key material.
 
-We assume an attacker who has the ability to manipulate the clocks on the COSE signer's clock and its relying parties, but not the clock of the TSA.
-Additionally, we are assuming that the TSA is a trusted third party, meaning that the attacker cannot impersonate the TSA and create valid timestamp tokens.
-Manipulations that happen on the COSE signer's side are not impactful because, once the timestamp is received from the TSA, it becomes the sole reliable source of time.
-However, a denial of service is possible if the attacker is able to move the clock of the relying party into the future, potentially disrupting the validation of the timestamp.
+The following assumes an attacker who has the ability to manipulate the clocks on the COSE signer and its relying parties, but not the clock of the TSA.
+It is also assumed that the TSA is a trusted third party, meaning that the attacker cannot impersonate the TSA and create valid timestamp tokens.
+In such a setting, any tampering with the COSE signer's clock does not have an impact because, once the timestamp is obtained from the TSA, it becomes the only reliable source of time.
+However, it is possible for a denial of service to occur if the attacker can adjust the relying party's clock to a future time, which could disrupt the validation of the timestamp.
+
 
 In CTT mode, an attacker could manipulate the unprotected header by removing the timestamp or replacing it with one of their choosing.
 In this threat model, the signed COSE object should be securely wrapped in an envelope both during transit and at rest.
 
-In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
-given an opaque identifier (a cryptographic hash value) for the
-payload.
-While this means that the content of the payload is not directly
-revealed, to prevent comparison with known payloads or disclosure of
-identical payloads being used over time, the payload would need to be
-armored, e.g., with a nonce that is shared with the recipient of the
-header parameter but not the TSA.
-Such a mechanism can be employed inside the ones described in this
-specification, but is out of scope for this document.
+In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) for the payload.
+While this means that the content of the payload is not directly revealed, to prevent comparison with known payloads or disclosure of identical payloads being used over time, the payload would need to be armored, e.g., with a nonce that is shared with the recipient of the header parameter but not the TSA.
+Such a mechanism can be employed inside the ones described in this specification, but is out of scope for this document.
 
 # IANA Considerations
 
