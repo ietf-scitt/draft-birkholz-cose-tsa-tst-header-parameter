@@ -9,8 +9,7 @@
 <meta content="Thomas Fossati" name="author">
 <meta content="Maik Riechert" name="author">
 <meta content="
-       RFC 3161 provides a method for timestamping a message digest to prove that the message was created before a given time.
-This document defines a CBOR Signing And Encrypted (COSE) header parameter that can be used to combine COSE message structures used for signing (i.e., COSE_Sign and COSE_Sign1) with existing RFC 3161-based timestamping infrastructure. 
+       This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (COSE_Sign and COSE_Sign1). This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message. 
     " name="description">
 <meta content="xml2rfc 3.23.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1031,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 28 February 2025</td>
+<td class="center">Expires 1 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-birkholz-cose-tsa-tst-header-parameter-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-27" class="published">27 August 2024</time>
+<time datetime="2024-08-28" class="published">28 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-02-28">28 February 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-01">1 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1070,8 +1069,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">COSE Header parameter for RFC 3161 Time-Stamp Tokens</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">RFC 3161 provides a method for timestamping a message digest to prove that the message was created before a given time.
-This document defines a CBOR Signing And Encrypted (COSE) header parameter that can be used to combine COSE message structures used for signing (i.e., COSE_Sign and COSE_Sign1) with existing RFC 3161-based timestamping infrastructure.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (COSE_Sign and COSE_Sign1). This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1100,7 +1098,7 @@ This document defines a CBOR Signing And Encrypted (COSE) header parameter that 
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1169,18 +1167,16 @@ This document defines a CBOR Signing And Encrypted (COSE) header parameter that 
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1192,7 +1188,7 @@ This document defines a CBOR Signing And Encrypted (COSE) header parameter that 
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">RFC 3161 <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> provides a method to timestamp a message digest to prove that it was created before a given time.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This document defines a new COSE <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> header parameter that carries the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document defines a new CBOR Object Signing and Encryption (COSE) <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> header parameter that carries the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="requirements-notation">
 <section id="section-1.1">
         <h3 id="name-requirements-notation">
@@ -1218,19 +1214,20 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-timestamp-then-cose-ttc" class="section-name selfRef">Timestamp then COSE (TTC)</a>
         </h3>
 <p id="section-2.1-1"><a href="#fig-timestamp-then-cose" class="auto internal xref">Figure 1</a> shows the case where a datum is first digested and submitted to a TSA to be timestamped.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">A signed COSE message is then built as follows:<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">This mode is utilized when the signature should also be performed over the timestamp to provide an immutable timestamp.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">A signed COSE message is then built as follows:<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2.1-3.1">
-            <p id="section-2.1-3.1.1">The obtained timestamp token is added to the protected headers,<a href="#section-2.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2.1-4.1">
+            <p id="section-2.1-4.1.1">The obtained timestamp token is added to the protected headers,<a href="#section-2.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.1-3.2">
-            <p id="section-2.1-3.2.1">The original datum becomes the payload of the signed COSE message.<a href="#section-2.1-3.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.1-4.2">
+            <p id="section-2.1-4.2.1">The original datum becomes the payload of the signed COSE message.<a href="#section-2.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <span id="name-timestamp-then-cose-ttc-2"></span><div id="fig-timestamp-then-cose">
 <figure id="figure-1">
-          <div id="section-2.1-4.1">
-            <div class="alignCenter art-svg artwork" id="section-2.1-4.1.1">
+          <div id="section-2.1-5.1">
+            <div class="alignCenter art-svg artwork" id="section-2.1-5.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="176" width="576" viewBox="0 0 576 176" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                 <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
                 <path d="M 48,64 L 48,128" fill="none" stroke="black"></path>
@@ -1275,14 +1272,14 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
                   <text x="112" y="132">TSA</text>
                   <text x="208" y="132">TST</text>
                 </g>
-              </svg><a href="#section-2.1-4.1.1" class="pilcrow">¶</a>
+              </svg><a href="#section-2.1-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-timestamp-then-cose-ttc-2" class="selfRef">Timestamp, then COSE (TTC)</a>
           </figcaption></figure>
 </div>
-<p id="section-2.1-5">The message imprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload field of the COSE signed object.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
+<p id="section-2.1-6">The message imprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload field of the COSE signed object.<a href="#section-2.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-cose-then-timestamp">
@@ -1292,10 +1289,11 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
         </h3>
 <p id="section-2.2-1"><a href="#fig-cose-then-timestamp" class="auto internal xref">Figure 2</a> shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
 The obtained timestamp token is then added back as an unprotected header into the same COSE object.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">This mode is utilized when a record of the timing of the signature operation is desired.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <span id="name-cose-then-timestamp-ctt-2"></span><div id="fig-cose-then-timestamp">
 <figure id="figure-2">
-          <div id="section-2.2-2.1">
-            <div class="alignCenter art-svg artwork" id="section-2.2-2.1.1">
+          <div id="section-2.2-3.1">
+            <div class="alignCenter art-svg artwork" id="section-2.2-3.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="240" width="328" viewBox="0 0 328 240" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                 <path d="M 8,32 L 8,64" fill="none" stroke="black"></path>
                 <path d="M 8,112 L 8,144" fill="none" stroke="black"></path>
@@ -1333,15 +1331,14 @@ The obtained timestamp token is then added back as an unprotected header into th
                   <text x="100" y="132">signatures/signature</text>
                   <text x="240" y="196">TSA</text>
                 </g>
-              </svg><a href="#section-2.2-2.1.1" class="pilcrow">¶</a>
+              </svg><a href="#section-2.2-3.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-cose-then-timestamp-ctt-2" class="selfRef">COSE, then Timestamp (CTT)</a>
           </figcaption></figure>
 </div>
-<p id="section-2.2-3">In this context, timestamp tokens are similar to a countersignature <span>[<a href="#RFC9338" class="cite xref">RFC9338</a>]</span> made by the TSA.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.2-4">The message imprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload field of the COSE signed object.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">In this context, timestamp tokens are similar to a countersignature made by the TSA.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1359,28 +1356,8 @@ To clearly separate their semantics two different COSE header parameters are def
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-3161-ttc" class="section-name selfRef"><code>3161-ttc</code></a>
         </h3>
 <p id="section-3.1-1">The <code>3161-ttc</code> COSE <em>protected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">The <code>3161-ttc</code> protected header is defined as follows:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.1-3.1">
-            <p id="section-3.1-3.1.1">Name: 3161-ttc<a href="#section-3.1-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.2">
-            <p id="section-3.1-3.2.1">Label: TBD<a href="#section-3.1-3.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.3">
-            <p id="section-3.1-3.3.1">Value Type: bstr<a href="#section-3.1-3.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.4">
-            <p id="section-3.1-3.4.1">Value Registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-3.1-3.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.5">
-            <p id="section-3.1-3.5.1">Description: RFC 3161 timestamp token<a href="#section-3.1-3.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.6">
-            <p id="section-3.1-3.6.1">Reference: <a href="#sec-tst-hdr-ttc" class="auto internal xref">Section 3.1</a> of RFCthis<a href="#section-3.1-3.6.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-3.1-4">The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">To minimize dependencies, the hash algorithm used for signing the COSE message <span class="bcp14">SHOULD</span> be the same as the algorithm used in the RFC3161 MessageImprint.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-tst-hdr-ctt">
@@ -1400,27 +1377,7 @@ To clearly separate their semantics two different COSE header parameters are def
         </ul>
 <p id="section-3.2-4">In either case, to minimize dependencies, the hash algorithm <span class="bcp14">SHOULD</span> be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">The <code>3161-ctt</code> unprotected header is defined as follows:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.2-6.1">
-            <p id="section-3.2-6.1.1">Name: 3161-ctt<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.2">
-            <p id="section-3.2-6.2.1">Label: TBD<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.3">
-            <p id="section-3.2-6.3.1">Value Type: bstr<a href="#section-3.2-6.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.4">
-            <p id="section-3.2-6.4.1">Value Registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.5">
-            <p id="section-3.2-6.5.1">Description: RFC 3161 timestamp token<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.6">
-            <p id="section-3.2-6.6.1">Reference: <a href="#sec-tst-hdr-ctt" class="auto internal xref">Section 3.2</a> of RFCthis<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-3.2-5">The <code>3161-ctt</code> unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1443,8 +1400,9 @@ The hash algorithm is contained in the message imprint structure, together with 
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">The security considerations made in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> as well as those of <span>[<a href="#RFC9338" class="cite xref">RFC9338</a>]</span> apply.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
+<p id="section-5-1">Please review the Security Considerations section in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>; these considerations apply to this document as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Also review the Security Considerations section in <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>; these considerations apply to this document as well, especially the need for implementations to protect private key material.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
 given an opaque identifier (a cryptographic hash value) for the
 payload.
 While this means that the content of the payload is not directly
@@ -1453,7 +1411,7 @@ identical payloads being used over time, the payload would need to be
 armored, e.g., with a nonce that is shared with the recipient of the
 header parameter but not the TSA.
 Such a mechanism can be employed inside the ones described in this
-specification, but is out of scope for this document.<a href="#section-5-2" class="pilcrow">¶</a></p>
+specification, but is out of scope for this document.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1461,64 +1419,116 @@ specification, but is out of scope for this document.<a href="#section-5-2" clas
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">IANA is requested to add the two COSE header parameters described in <a href="#sec-tst-hdr" class="auto internal xref">Section 3</a> to the "COSE Header Parameters" registry in the <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span> registry group.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">IANA is requested to add the COSE header parameters defined in <a href="#tbl-new-hdrs" class="auto internal xref">Table 1</a> to the "COSE Header Parameters" registry <span>[<a href="#IANA.cose_header-parameters" class="cite xref">IANA.cose_header-parameters</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<span id="name-new-cose-header-parameters"></span><div id="tbl-new-hdrs">
+<table class="left" id="table-1">
+        <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-new-cose-header-parameters" class="selfRef">New COSE Header Parameters</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Name</th>
+            <th class="text-left" rowspan="1" colspan="1">Label</th>
+            <th class="text-left" rowspan="1" colspan="1">Value Type</th>
+            <th class="text-left" rowspan="1" colspan="1">Value Registry</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>3161-tcc</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">TBD1</td>
+            <td class="text-left" rowspan="1" colspan="1">bstr</td>
+            <td class="text-left" rowspan="1" colspan="1">-</td>
+            <td class="text-left" rowspan="1" colspan="1">RFC 3161 timestamp token</td>
+            <td class="text-left" rowspan="1" colspan="1">RFCthis, <a href="#sec-tst-hdr-ttc" class="auto internal xref">Section 3.1</a>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>3161-ctt</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">TBD2</td>
+            <td class="text-left" rowspan="1" colspan="1">bstr</td>
+            <td class="text-left" rowspan="1" colspan="1">-</td>
+            <td class="text-left" rowspan="1" colspan="1">RFC 3161 timestamp token</td>
+            <td class="text-left" rowspan="1" colspan="1">RFCthis, <a href="#sec-tst-hdr-ctt" class="auto internal xref">Section 3.2</a>
+</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
 </section>
 </div>
-<div id="sec-combined-references">
-<section id="section-7">
-      <h2 id="name-references">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
 <div id="sec-normative-references">
-<section id="section-7.1">
-        <h3 id="name-normative-references">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
+<section id="section-7">
+      <h2 id="name-normative-references">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
 <dl class="references">
-<dt id="IANA.cose">[IANA.cose]</dt>
-        <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cose">https://www.iana.org/assignments/cose</a>&gt;</span>. </dd>
+<dt id="IANA.cose_header-parameters">[IANA.cose_header-parameters]</dt>
+      <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"COSE Header Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cose">https://www.iana.org/assignments/cose</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC3161">[RFC3161]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Adams, C.</span>, <span class="refAuthor">Cain, P.</span>, <span class="refAuthor">Pinkas, D.</span>, and <span class="refAuthor">R. Zuccherato</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)"</span>, <span class="seriesInfo">RFC 3161</span>, <span class="seriesInfo">DOI 10.17487/RFC3161</span>, <time datetime="2001-08" class="refDate">August 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3161">https://www.rfc-editor.org/rfc/rfc3161</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STD70">[STD70]</dt>
-        <dd>
+      <dd>
 <span class="refAuthor">Housley, R.</span>, <span class="refTitle">"Cryptographic Message Syntax (CMS)"</span>, <span class="seriesInfo">STD 70</span>, <span class="seriesInfo">RFC 5652</span>, <span class="seriesInfo">DOI 10.17487/RFC5652</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5652">https://www.rfc-editor.org/rfc/rfc5652</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STD96">[STD96]</dt>
-      <dd>
+    <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
 </div>
-<div id="sec-informative-references">
-<section id="section-7.2">
-        <h3 id="name-informative-references">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
-<dl class="references">
-<dt id="RFC9338">[RFC9338]</dt>
-      <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Countersignatures"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9338</span>, <span class="seriesInfo">DOI 10.17487/RFC9338</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9338">https://www.rfc-editor.org/rfc/rfc9338</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-</dl>
+<div id="acknowledgments">
+<section id="appendix-A">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-A-1">The editors would like to thank
+Carl Wallace,
+Leonard Rosenthol,
+Michael B. Jones,
+Michael Prorock,
+Orie Steele,
+and
+Steve Lasker
+for their reviews and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="contributors">
+<section id="appendix-B">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Carsten Bormann</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:cabo@tzi.org" class="email">cabo@tzi.org</a>
+</div>
+</address>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-A">
+<section id="appendix-C">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

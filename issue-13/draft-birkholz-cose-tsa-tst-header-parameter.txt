@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 28 February 2025                                         Linaro
+Expires: 1 March 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                          27 August 2024
+                                                          28 August 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -16,12 +16,11 @@ Expires: 28 February 2025                                         Linaro
 
 Abstract
 
-   RFC 3161 provides a method for timestamping a message digest to prove
-   that the message was created before a given time.  This document
-   defines a CBOR Signing And Encrypted (COSE) header parameter that can
-   be used to combine COSE message structures used for signing (i.e.,
-   COSE_Sign and COSE_Sign1) with existing RFC 3161-based timestamping
-   infrastructure.
+   This document defines a CBOR Signing And Encrypted (COSE) header
+   parameter for incorporating RFC 3161-based timestamping into COSE
+   message structures (COSE_Sign and COSE_Sign1).  This enables the use
+   of established RFC 3161 timestamping infrastructure to prove the
+   creation time of a message.
 
 Discussion Venues
 
@@ -46,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2025.
+   This Internet-Draft will expire on 1 March 2025.
 
 Copyright Notice
 
@@ -75,9 +74,9 @@ Table of Contents
    4.  Timestamp Processing
    5.  Security Considerations
    6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   7.  Normative References
+   Acknowledgments
+   Contributors
    Authors' Addresses
 
 1.  Introduction
@@ -85,10 +84,11 @@ Table of Contents
    RFC 3161 [RFC3161] provides a method to timestamp a message digest to
    prove that it was created before a given time.
 
-   This document defines a new COSE [STD96] header parameter that
-   carries the TimestampToken (TST) output of RFC 3161, thus allowing
-   existing and widely deployed trust infrastructure to be used with
-   COSE structures used for signing (COSE_Sign and COSE_Sign1).
+   This document defines a new CBOR Object Signing and Encryption (COSE)
+   [STD96] header parameter that carries the TimestampToken (TST) output
+   of RFC 3161, thus allowing existing and widely deployed trust
+   infrastructure to be used with COSE structures used for signing
+   (COSE_Sign and COSE_Sign1).
 
 1.1.  Requirements Notation
 
@@ -107,6 +107,9 @@ Table of Contents
 
    Figure 1 shows the case where a datum is first digested and submitted
    to a TSA to be timestamped.
+
+   This mode is utilized when the signature should also be performed
+   over the timestamp to provide an immutable timestamp.
 
    A signed COSE message is then built as follows:
 
@@ -136,6 +139,9 @@ Table of Contents
    The obtained timestamp token is then added back as an unprotected
    header into the same COSE object.
 
+   This mode is utilized when a record of the timing of the signature
+   operation is desired.
+
                  .----------------------.         .-----.
                  | COSE_Sign/COSE_Sign1 |<--------+ TST |
                  '----+-----------------'         '-----'
@@ -153,10 +159,7 @@ Table of Contents
                     Figure 2: COSE, then Timestamp (CTT)
 
    In this context, timestamp tokens are similar to a countersignature
-   [RFC9338] made by the TSA.
-
-   The message imprint sent to the TSA (Section 2.4 of [RFC3161]) MUST
-   be the hash of the payload field of the COSE signed object.
+   made by the TSA.
 
 3.  RFC 3161 Time-Stamp Tokens COSE Header Parameters
 
@@ -171,22 +174,12 @@ Table of Contents
    The 3161-ttc COSE _protected_ header parameter MUST be used for the
    mode described in Section 2.1.
 
-   The 3161-ttc protected header is defined as follows:
+   The 3161-ttc protected header parameter contains a DER-encoded
+   RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
-   *  Name: 3161-ttc
-
-   *  Label: TBD
-
-   *  Value Type: bstr
-
-   *  Value Registry: [IANA.cose]
-
-   *  Description: RFC 3161 timestamp token
-
-   *  Reference: Section 3.1 of RFCthis
-
-   The content of the byte string are the bytes of the DER-encoded RFC
-   3161 TimeStampToken structure.
+   To minimize dependencies, the hash algorithm used for signing the
+   COSE message SHOULD be the same as the algorithm used in the RFC3161
+   MessageImprint.
 
 3.2.  3161-ctt
 
@@ -204,19 +197,8 @@ Table of Contents
    may not be possible if the timestamp token has been obtained outside
    the processing context in which the COSE object is assembled.
 
-   The 3161-ctt unprotected header is defined as follows:
-
-   *  Name: 3161-ctt
-
-   *  Label: TBD
-
-   *  Value Type: bstr
-
-   *  Value Registry: [IANA.cose]
-
-   *  Description: RFC 3161 timestamp token
-
-   *  Reference: Section 3.2 of RFCthis
+   The 3161-ctt unprotected header parameter contains a DER-encoded
+   RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
 4.  Timestamp Processing
 
@@ -239,8 +221,12 @@ Table of Contents
 
 5.  Security Considerations
 
-   The security considerations made in [RFC3161] as well as those of
-   [RFC9338] apply.
+   Please review the Security Considerations section in [RFC3161]; these
+   considerations apply to this document as well.
+
+   Also review the Security Considerations section in [STD96]; these
+   considerations apply to this document as well, especially the need
+   for implementations to protect private key material.
 
    In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
    given an opaque identifier (a cryptographic hash value) for the
@@ -254,16 +240,29 @@ Table of Contents
 
 6.  IANA Considerations
 
-   IANA is requested to add the two COSE header parameters described in
-   Section 3 to the "COSE Header Parameters" registry in the [IANA.cose]
-   registry group.
+   IANA is requested to add the COSE header parameters defined in
+   Table 1 to the "COSE Header Parameters" registry
+   [IANA.cose_header-parameters].
 
-7.  References
+   +==========+=======+=======+==========+=================+===========+
+   | Name     | Label | Value | Value    | Description     | Reference |
+   |          |       | Type  | Registry |                 |           |
+   +==========+=======+=======+==========+=================+===========+
+   | 3161-tcc | TBD1  | bstr  | -        | RFC 3161        | RFCthis,  |
+   |          |       |       |          | timestamp       | Section   |
+   |          |       |       |          | token           | 3.1       |
+   +----------+-------+-------+----------+-----------------+-----------+
+   | 3161-ctt | TBD2  | bstr  | -        | RFC 3161        | RFCthis,  |
+   |          |       |       |          | timestamp       | Section   |
+   |          |       |       |          | token           | 3.2       |
+   +----------+-------+-------+----------+-----------------+-----------+
 
-7.1.  Normative References
+                    Table 1: New COSE Header Parameters
 
-   [IANA.cose]
-              IANA, "CBOR Object Signing and Encryption (COSE)",
+7.  Normative References
+
+   [IANA.cose_header-parameters]
+              IANA, "COSE Header Parameters",
               <https://www.iana.org/assignments/cose>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -289,12 +288,17 @@ Table of Contents
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
 
-7.2.  Informative References
+Acknowledgments
 
-   [RFC9338]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
-              Countersignatures", STD 96, RFC 9338,
-              DOI 10.17487/RFC9338, December 2022,
-              <https://www.rfc-editor.org/rfc/rfc9338>.
+   The editors would like to thank Carl Wallace, Leonard Rosenthol,
+   Michael B.  Jones, Michael Prorock, Orie Steele, and Steve Lasker for
+   their reviews and comments.
+
+Contributors
+
+   Carsten Bormann
+   Email: cabo@tzi.org
+
 
 Authors' Addresses
 
