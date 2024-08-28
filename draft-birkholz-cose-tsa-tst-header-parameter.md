@@ -40,6 +40,9 @@ normative:
     =: RFC9052
     -: COSE
 
+informative:
+  I-D.ietf-scitt-architecture: SCITT
+
 entity:
   SELF: "RFCthis"
 
@@ -55,13 +58,35 @@ RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that 
 
 This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
 
+To motivate the two different modes of use that are specified in this documents, two usage scenarios are illustrated in {{use-one}} and {{use-two}} below.
+{{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} then define the corresponding modes of use.
+
+## Usage Scenario 1: A TST Included in Signed PDF Documents {#use-one}
+
+In support of legal assurances, the quality of a signed PDF document can be improved by including a trustworthy signed timestamp.
+In essence, a PDF signer wants to strengthen the assertion that a PDF was not signed before a certain point in time ("the signature cannot be older than").
+To achieve this goal, the PDF signer acquires a TST from a TSA, includes it in the to-be-signed PDF that becomes the COSE payload and then signs it.
+Using only its local clock instead, a PDF signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.
+
+This usage scenario motivates the "Timestamp then COSE" mode below.
+
+## Usage Scenario 2: Registering a Signed Statement at a Transparency Service {#use-two}
+
+Transparency services as described in {{-SCITT}} notarize COSE-signed statements by registering them in verifiable data structures that constitute append-only logs.
+Once a signed statement is registered, it cannot be changed.
+In some applications, the registration policy of a transparency service could enforce adding a timestamp to the unprotected header of the COSE-signed statement in order to strengthen the assurance at which point of time the registration occurred ("the registration cannot have happened before").
+To achieve this goal, the transparency service acquires a TST from a TSA, includes it in the unprotected header of the COSE-signed statement and then registers it.
+Using only its local clock instead, a transparency service would be able to tamper with its clock an thereby falsify the recentness of the registration procedure.
+
+This usage scenario motivates the "COSE then Timstamp" mode below.
+
 ## Requirements Notation
 
 {::boilerplate bcp14-tagged}
 
-# Modes of use
+# Modes of Use
 
-There are two different modes of composing COSE protection and timestamping.
+There are two different modes of composing COSE protection and timestamping motivated by the usage scenarios above.
 
 ## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
