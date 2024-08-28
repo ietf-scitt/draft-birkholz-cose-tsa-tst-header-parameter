@@ -74,9 +74,7 @@ Table of Contents
    4.  Timestamp Processing
    5.  Security Considerations
    6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   7.  Normative References
    Acknowledgments
    Contributors
    Authors' Addresses
@@ -161,7 +159,7 @@ Table of Contents
                     Figure 2: COSE, then Timestamp (CTT)
 
    In this context, timestamp tokens are similar to a countersignature
-   [RFC9338] made by the TSA.
+   made by the TSA.
 
 3.  RFC 3161 Time-Stamp Tokens COSE Header Parameters
 
@@ -219,8 +217,12 @@ Table of Contents
 
 5.  Security Considerations
 
-   The security considerations made in [RFC3161] as well as those of
-   [RFC9338] apply.
+   Please review the Security Considerations section in [RFC3161]; these
+   considerations apply to this document as well.
+
+   Also review the Security Considerations section in [STD96]; these
+   considerations apply to this document as well, especially the need
+   for implementations to protect private key material.
 
    In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
    given an opaque identifier (a cryptographic hash value) for the
@@ -253,9 +255,7 @@ Table of Contents
 
                     Table 1: New COSE Header Parameters
 
-7.  References
-
-7.1.  Normative References
+7.  Normative References
 
    [IANA.cose_header-parameters]
               IANA, "COSE Header Parameters",
@@ -283,13 +283,6 @@ Table of Contents
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
-
-7.2.  Informative References
-
-   [RFC9338]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
-              Countersignatures", STD 96, RFC 9338,
-              DOI 10.17487/RFC9338, December 2022,
-              <https://www.rfc-editor.org/rfc/rfc9338>.
 
 Acknowledgments
 
