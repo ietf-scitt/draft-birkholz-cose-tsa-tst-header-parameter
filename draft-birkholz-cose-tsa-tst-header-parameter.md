@@ -27,6 +27,10 @@ author:
   email: Maik.Riechert@microsoft.com
   country: UK
 
+contributor:
+- name: Carsten Bormann
+  email: cabo@tzi.org
+
 normative:
   STD70:
     =: RFC5652
@@ -188,3 +192,16 @@ specification, but is out of scope for this document.
 IANA is requested to add the two COSE header parameters described in {{sec-tst-hdr}} to the "COSE Header Parameters" registry in the {{!IANA.cose}} registry group.
 
 --- back
+
+# Acknowledgments
+{:unnumbered}
+
+The editors would like to thank
+Carl Wallace,
+Leonard Rosenthol,
+Michael B. Jones,
+Michael Prorock,
+Orie Steele,
+and
+Steve Lasker
+for their reviews and comments.
