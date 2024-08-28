@@ -166,7 +166,6 @@ It is also assumed that the TSA is a trusted third party, meaning that the attac
 In such a setting, any tampering with the COSE signer's clock does not have an impact because, once the timestamp is obtained from the TSA, it becomes the only reliable source of time.
 However, it is possible for a denial of service to occur if the attacker can adjust the relying party's clock to a future time, which could disrupt the validation of the timestamp.
 
-
 In CTT mode, an attacker could manipulate the unprotected header by removing the timestamp or replacing it with one of their choosing.
 In this threat model, the signed COSE object should be securely wrapped in an envelope both during transit and at rest.
 
