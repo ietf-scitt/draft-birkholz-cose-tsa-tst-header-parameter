@@ -177,6 +177,10 @@ Table of Contents
    The 3161-ttc protected header parameter contains a DER-encoded
    RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
+   To minimize dependencies, the hash algorithm used for signing the
+   COSE message SHOULD be the same as the algorithm used in the RFC3161
+   MessageImprint.
+
 3.2.  3161-ctt
 
    The 3161-ctt COSE _unprotected_ header parameter MUST be used for the
@@ -207,9 +211,9 @@ Table of Contents
    message imprint structure, together with the hash itself.
 
    As part of the signature verification, the receiver MUST make sure
-   that the message imprint in the embedded timestamp token matches
-   either the payload or the signature fields, depending on the mode of
-   use.
+   that the message imprint in the embedded timestamp token matches a
+   hash of either the payload, signature, or signature fields, depending
+   on the mode of use and type of COSE structure.
 
    Appendix B of [RFC3161] provides an example that illustrates how
    timestamp tokens can be used to verify signatures of a timestamped

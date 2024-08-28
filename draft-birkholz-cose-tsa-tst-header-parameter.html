@@ -1357,6 +1357,7 @@ To clearly separate their semantics two different COSE header parameters are def
         </h3>
 <p id="section-3.1-1">The <code>3161-ttc</code> COSE <em>protected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">To minimize dependencies, the hash algorithm used for signing the COSE message <span class="bcp14">SHOULD</span> be the same as the algorithm used in the RFC3161 MessageImprint.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-tst-hdr-ctt">
@@ -1390,7 +1391,7 @@ This may not be possible if the timestamp token has been obtained outside the pr
 <span>[<a href="#STD70" class="cite xref">STD70</a>]</span> provides the details about signature verification, and <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> provides the details specific to timestamp token validation.
 The payload of the signed timestamp token is the TSTInfo structure defined in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>, which contains the message imprint that was sent to the TSA.
 The hash algorithm is contained in the message imprint structure, together with the hash itself.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">As part of the signature verification, the receiver <span class="bcp14">MUST</span> make sure that the message imprint in the embedded timestamp token matches either the payload or the signature fields, depending on the mode of use.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-2">As part of the signature verification, the receiver <span class="bcp14">MUST</span> make sure that the message imprint in the embedded timestamp token matches a hash of either the payload, signature, or signature fields, depending on the mode of use and type of COSE structure.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3"><span><a href="https://rfc-editor.org/rfc/rfc3161#appendix-B" class="relref">Appendix B</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> provides an example that illustrates how timestamp tokens can be used to verify signatures of a timestamped message when utilizing X.509 certificates.<a href="#section-4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
