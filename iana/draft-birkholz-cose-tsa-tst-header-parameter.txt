@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 28 February 2025                                         Linaro
+Expires: 1 March 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                          27 August 2024
+                                                          28 August 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 February 2025.
+   This Internet-Draft will expire on 1 March 2025.
 
 Copyright Notice
 
@@ -236,20 +236,20 @@ Table of Contents
    Table 1 to the "COSE Header Parameters" registry
    [IANA.cose_header-parameters].
 
-   +===========+=======+=======+==========+=============+===========+
-   | Name      | Label | Value | Value    | Description | Reference |
-   |           |       | Type  | Registry |             |           |
-   +===========+=======+=======+==========+=============+===========+
-   | 31610-tcc | TBD1  | bstr  | -        | RFC 3161    | RFCthis,  |
-   |           |       |       |          | timestamp   | Section   |
-   |           |       |       |          | token       | 3.1       |
-   +-----------+-------+-------+----------+-------------+-----------+
-   | 31610-ctt | TBD2  | bstr  | -        | RFC 3161    | RFCthis,  |
-   |           |       |       |          | timestamp   | Section   |
-   |           |       |       |          | token       | 3.2       |
-   +-----------+-------+-------+----------+-------------+-----------+
+   +==========+=======+=======+==========+=================+===========+
+   | Name     | Label | Value | Value    | Description     | Reference |
+   |          |       | Type  | Registry |                 |           |
+   +==========+=======+=======+==========+=================+===========+
+   | 3161-tcc | TBD1  | bstr  | -        | RFC 3161        | RFCthis,  |
+   |          |       |       |          | timestamp       | Section   |
+   |          |       |       |          | token           | 3.1       |
+   +----------+-------+-------+----------+-----------------+-----------+
+   | 3161-ctt | TBD2  | bstr  | -        | RFC 3161        | RFCthis,  |
+   |          |       |       |          | timestamp       | Section   |
+   |          |       |       |          | token           | 3.2       |
+   +----------+-------+-------+----------+-----------------+-----------+
 
-                  Table 1: New COSE Header Parameters
+                    Table 1: New COSE Header Parameters
 
 7.  References
 
