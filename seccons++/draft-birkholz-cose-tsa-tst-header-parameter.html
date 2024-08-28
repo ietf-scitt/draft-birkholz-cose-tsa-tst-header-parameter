@@ -1402,7 +1402,7 @@ The hash algorithm is contained in the message imprint structure, together with 
       </h2>
 <p id="section-5-1">Please review the Security Considerations section in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>; these considerations apply to this document as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Also review the Security Considerations section in <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>; these considerations apply to this document as well, especially the need for implementations to protect private key material.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">We assume an attacker who has the ability to manipulate the clocks on the COSE signer's clock and its relying parties, but not the clock of the TSA.
+<p id="section-5-3">We assume an attacker who has the ability to manipulate the clocks on the COSE signer and its relying parties, but not the clock of the TSA.
 Additionally, we are assuming that the TSA is a trusted third party, meaning that the attacker cannot impersonate the TSA and create valid timestamp tokens.
 Manipulations that happen on the COSE signer's side are not impactful because, once the timestamp is received from the TSA, it becomes the sole reliable source of time.
 However, a denial of service is possible if the attacker is able to move the clock of the relying party into the future, potentially disrupting the validation of the timestamp.<a href="#section-5-3" class="pilcrow">¶</a></p>
