@@ -40,9 +40,6 @@ normative:
     =: RFC9052
     -: COSE
 
-informative:
-  RFC9338: countersign
-
 entity:
   SELF: "RFCthis"
 
@@ -118,7 +115,7 @@ This mode is utilized when a record of the timing of the signature operation is 
 {: #fig-cose-then-timestamp artwork-align="center"
    title="COSE, then Timestamp (CTT)"}
 
-In this context, timestamp tokens are similar to a countersignature {{-countersign}} made by the TSA.
+In this context, timestamp tokens are similar to a countersignature made by the TSA.
 
 # RFC 3161 Time-Stamp Tokens COSE Header Parameters {#sec-tst-hdr}
 
@@ -158,7 +155,9 @@ As part of the signature verification, the receiver MUST make sure that the mess
 
 # Security Considerations
 
-The security considerations made in {{-TSA}} as well as those of {{-countersign}} apply.
+Please review the Security Considerations section in {{-TSA}}; these considerations apply to this document as well.
+
+Also review the Security Considerations section in {{-COSE}}; these considerations apply to this document as well, especially the need for implementations to protect private key material.
 
 In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
 given an opaque identifier (a cryptographic hash value) for the
