@@ -1364,28 +1364,7 @@ To clearly separate their semantics two different COSE header parameters are def
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-3161-ttc" class="section-name selfRef"><code>3161-ttc</code></a>
         </h3>
 <p id="section-3.1-1">The <code>3161-ttc</code> COSE <em>protected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">The <code>3161-ttc</code> protected header is defined as follows:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.1-3.1">
-            <p id="section-3.1-3.1.1">Name: 3161-ttc<a href="#section-3.1-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.2">
-            <p id="section-3.1-3.2.1">Label: TBD<a href="#section-3.1-3.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.3">
-            <p id="section-3.1-3.3.1">Value Type: bstr<a href="#section-3.1-3.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.4">
-            <p id="section-3.1-3.4.1">Value Registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-3.1-3.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.5">
-            <p id="section-3.1-3.5.1">Description: RFC 3161 timestamp token<a href="#section-3.1-3.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.1-3.6">
-            <p id="section-3.1-3.6.1">Reference: <a href="#sec-tst-hdr-ttc" class="auto internal xref">Section 3.1</a> of RFCthis<a href="#section-3.1-3.6.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-3.1-4">The content of the byte string are the bytes of the DER-encoded RFC 3161 TimeStampToken structure.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-tst-hdr-ctt">
@@ -1405,27 +1384,7 @@ To clearly separate their semantics two different COSE header parameters are def
         </ul>
 <p id="section-3.2-4">In either case, to minimize dependencies, the hash algorithm <span class="bcp14">SHOULD</span> be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">The <code>3161-ctt</code> unprotected header is defined as follows:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.2-6.1">
-            <p id="section-3.2-6.1.1">Name: 3161-ctt<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.2">
-            <p id="section-3.2-6.2.1">Label: TBD<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.3">
-            <p id="section-3.2-6.3.1">Value Type: bstr<a href="#section-3.2-6.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.4">
-            <p id="section-3.2-6.4.1">Value Registry: <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span><a href="#section-3.2-6.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.5">
-            <p id="section-3.2-6.5.1">Description: RFC 3161 timestamp token<a href="#section-3.2-6.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-6.6">
-            <p id="section-3.2-6.6.1">Reference: <a href="#sec-tst-hdr-ctt" class="auto internal xref">Section 3.2</a> of RFCthis<a href="#section-3.2-6.6.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-3.2-5">The <code>3161-ctt</code> unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1466,7 +1425,49 @@ specification, but is out of scope for this document.<a href="#section-5-2" clas
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">IANA is requested to add the two COSE header parameters described in <a href="#sec-tst-hdr" class="auto internal xref">Section 3</a> to the "COSE Header Parameters" registry in the <span>[<a href="#IANA.cose" class="cite xref">IANA.cose</a>]</span> registry group.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">IANA is requested to add the COSE header parameters defined in <a href="#tbl-new-hdrs" class="auto internal xref">Table 1</a> to the "COSE Header Parameters" registry <span>[<a href="#IANA.cose_header-parameters" class="cite xref">IANA.cose_header-parameters</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<span id="name-new-cose-header-parameters"></span><div id="tbl-new-hdrs">
+<table class="left" id="table-1">
+        <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-new-cose-header-parameters" class="selfRef">New COSE Header Parameters</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Name</th>
+            <th class="text-left" rowspan="1" colspan="1">Label</th>
+            <th class="text-left" rowspan="1" colspan="1">Value Type</th>
+            <th class="text-left" rowspan="1" colspan="1">Value Registry</th>
+            <th class="text-left" rowspan="1" colspan="1">Description</th>
+            <th class="text-left" rowspan="1" colspan="1">Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>3161-tcc</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">TBD1</td>
+            <td class="text-left" rowspan="1" colspan="1">bstr</td>
+            <td class="text-left" rowspan="1" colspan="1">-</td>
+            <td class="text-left" rowspan="1" colspan="1">RFC 3161 timestamp token</td>
+            <td class="text-left" rowspan="1" colspan="1">RFCthis, <a href="#sec-tst-hdr-ttc" class="auto internal xref">Section 3.1</a>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>3161-ctt</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">TBD2</td>
+            <td class="text-left" rowspan="1" colspan="1">bstr</td>
+            <td class="text-left" rowspan="1" colspan="1">-</td>
+            <td class="text-left" rowspan="1" colspan="1">RFC 3161 timestamp token</td>
+            <td class="text-left" rowspan="1" colspan="1">RFCthis, <a href="#sec-tst-hdr-ctt" class="auto internal xref">Section 3.2</a>
+</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1480,9 +1481,9 @@ specification, but is out of scope for this document.<a href="#section-5-2" clas
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="IANA.cose">[IANA.cose]</dt>
+<dt id="IANA.cose_header-parameters">[IANA.cose_header-parameters]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cose">https://www.iana.org/assignments/cose</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"COSE Header Parameters"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cose">https://www.iana.org/assignments/cose</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>

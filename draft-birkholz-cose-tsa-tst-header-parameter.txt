@@ -176,22 +176,8 @@ Table of Contents
    The 3161-ttc COSE _protected_ header parameter MUST be used for the
    mode described in Section 2.1.
 
-   The 3161-ttc protected header is defined as follows:
-
-   *  Name: 3161-ttc
-
-   *  Label: TBD
-
-   *  Value Type: bstr
-
-   *  Value Registry: [IANA.cose]
-
-   *  Description: RFC 3161 timestamp token
-
-   *  Reference: Section 3.1 of RFCthis
-
-   The content of the byte string are the bytes of the DER-encoded RFC
-   3161 TimeStampToken structure.
+   The 3161-ttc protected header parameter contains a DER-encoded
+   RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
 3.2.  3161-ctt
 
@@ -209,19 +195,8 @@ Table of Contents
    may not be possible if the timestamp token has been obtained outside
    the processing context in which the COSE object is assembled.
 
-   The 3161-ctt unprotected header is defined as follows:
-
-   *  Name: 3161-ctt
-
-   *  Label: TBD
-
-   *  Value Type: bstr
-
-   *  Value Registry: [IANA.cose]
-
-   *  Description: RFC 3161 timestamp token
-
-   *  Reference: Section 3.2 of RFCthis
+   The 3161-ctt unprotected header parameter contains a DER-encoded
+   RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
 4.  Timestamp Processing
 
@@ -259,16 +234,31 @@ Table of Contents
 
 6.  IANA Considerations
 
-   IANA is requested to add the two COSE header parameters described in
-   Section 3 to the "COSE Header Parameters" registry in the [IANA.cose]
-   registry group.
+   IANA is requested to add the COSE header parameters defined in
+   Table 1 to the "COSE Header Parameters" registry
+   [IANA.cose_header-parameters].
+
+   +==========+=======+=======+==========+=================+===========+
+   | Name     | Label | Value | Value    | Description     | Reference |
+   |          |       | Type  | Registry |                 |           |
+   +==========+=======+=======+==========+=================+===========+
+   | 3161-tcc | TBD1  | bstr  | -        | RFC 3161        | RFCthis,  |
+   |          |       |       |          | timestamp       | Section   |
+   |          |       |       |          | token           | 3.1       |
+   +----------+-------+-------+----------+-----------------+-----------+
+   | 3161-ctt | TBD2  | bstr  | -        | RFC 3161        | RFCthis,  |
+   |          |       |       |          | timestamp       | Section   |
+   |          |       |       |          | token           | 3.2       |
+   +----------+-------+-------+----------+-----------------+-----------+
+
+                    Table 1: New COSE Header Parameters
 
 7.  References
 
 7.1.  Normative References
 
-   [IANA.cose]
-              IANA, "CBOR Object Signing and Encryption (COSE)",
+   [IANA.cose_header-parameters]
+              IANA, "COSE Header Parameters",
               <https://www.iana.org/assignments/cose>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
