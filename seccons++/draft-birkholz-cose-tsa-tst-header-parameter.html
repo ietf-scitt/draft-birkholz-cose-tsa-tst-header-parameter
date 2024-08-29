@@ -1030,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 1 March 2025</td>
+<td class="center">Expires 2 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-birkholz-cose-tsa-tst-header-parameter-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-28" class="published">28 August 2024</time>
+<time datetime="2024-08-29" class="published">29 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-03-01">1 March 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-02">2 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1098,7 +1098,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1402,12 +1402,13 @@ The hash algorithm is contained in the message imprint structure, together with 
       </h2>
 <p id="section-5-1">Please review the Security Considerations section in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>; these considerations apply to this document as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Also review the Security Considerations section in <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>; these considerations apply to this document as well, especially the need for implementations to protect private key material.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">The following assumes an attacker who has the ability to manipulate the clocks on the COSE signer and its relying parties, but not the clock of the TSA.
-It is also assumed that the TSA is a trusted third party, meaning that the attacker cannot impersonate the TSA and create valid timestamp tokens.
+<p id="section-5-3">The following scenario assumes an attacker can manipulate the clocks on the COSE signer and its relying parties, but not the TSA.
+It is also assumed that the TSA is a trusted third party, so the attacker cannot impersonate the TSA and create valid timestamp tokens.
 In such a setting, any tampering with the COSE signer's clock does not have an impact because, once the timestamp is obtained from the TSA, it becomes the only reliable source of time.
-However, it is possible for a denial of service to occur if the attacker can adjust the relying party's clock to a future time, which could disrupt the validation of the timestamp.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">In CTT mode, an attacker could manipulate the unprotected header by removing the timestamp or replacing it with one of their choosing.
-In this threat model, the signed COSE object should be securely wrapped in an envelope both during transit and at rest.<a href="#section-5-4" class="pilcrow">¶</a></p>
+However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock to a future time.
+This could disrupt the timestamp validation.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
+To avoid that, the signed COSE object should be securely wrapped in an envelope during transit and at rest.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) for the payload.
 While this means that the content of the payload is not directly revealed, to prevent comparison with known payloads or disclosure of identical payloads being used over time, the payload would need to be armored, e.g., with a nonce that is shared with the recipient of the header parameter but not the TSA.
 Such a mechanism can be employed inside the ones described in this specification, but is out of scope for this document.<a href="#section-5-5" class="pilcrow">¶</a></p>
