@@ -107,9 +107,9 @@ Table of Contents
    strengthen the assertion that a certain document existed at a certain
    date.  To achieve this goal, the PDF signer acquires a TST from a
    TSA, includes it in the to-be-signed PDF that becomes the COSE
-   payload and then signs it.  Using only its local clock instead, a PDF
-   signer would be able to tamper with its clock and thereby falsify the
-   recentness of the signing procedure.
+   payload and then signs it.  Using only its local clock instead, a
+   document signer would be able to tamper with its clock and thereby
+   falsify the recentness of the signing procedure.
 
    This usage scenario motivates the "Timestamp then COSE" mode below.
 
