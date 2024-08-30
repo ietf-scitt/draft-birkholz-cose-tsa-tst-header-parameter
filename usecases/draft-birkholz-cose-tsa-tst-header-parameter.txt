@@ -96,8 +96,8 @@ Table of Contents
 
 1.1.   Use Cases
 
-   This section presents two use cases, each representing one of the two
-   modes of use defined in Section 2.
+   This section discusses two use cases, each representing one of the
+   two modes of use defined in Section 2.
 
    A first use case is a document signed alongside a trustworthy
    timestamp.  This is a common case in legal contracts.  In such
@@ -130,7 +130,7 @@ Table of Contents
    which may have been maliciously altered or simply inaccurate.
 
    This usage scenario motivates the "COSE then Timestamp" mode
-   described in Section 2.1.
+   described in Section 2.2.
 
 1.2.  Requirements Notation
 

@@ -1210,7 +1210,7 @@ This enables the use of established RFC 3161 timestamping infrastructure to prov
         <h3 id="name-use-cases">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-use-cases" class="section-name selfRef">Use Cases</a>
         </h3>
-<p id="section-1.1-1">This section presents two use cases, each representing one of the two modes of use defined in <a href="#modes" class="auto internal xref">Section 2</a>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">This section discusses two use cases, each representing one of the two modes of use defined in <a href="#modes" class="auto internal xref">Section 2</a>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">A first use case is a document signed alongside a trustworthy timestamp.
 This is a common case in legal contracts.
 In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
@@ -1225,7 +1225,7 @@ In certain cases, the registration policy of a Transparency Service may require 
 This is done to enhance confidence in the timing of the registration, ensuring that the registration could not have occurred before a certain point in time.
 To achieve this, the Transparency Service acquires a TST from a TSA, includes it in the unprotected header of the COSE-signed statement and then registers it.
 Again, a relying party that wants to ascertain the time of registration of a given statement does not have to trust the Transparency Service's clock, which may have been maliciously altered or simply inaccurate.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">This usage scenario motivates the "COSE then Timestamp" mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">This usage scenario motivates the "COSE then Timestamp" mode described in <a href="#sec-cose-then-timestamp" class="auto internal xref">Section 2.2</a>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-notation">
