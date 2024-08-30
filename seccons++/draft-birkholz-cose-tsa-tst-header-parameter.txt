@@ -236,8 +236,8 @@ Table of Contents
    have an impact because, once the timestamp is obtained from the TSA,
    it becomes the only reliable source of time.  However, in both CTT
    and TTC mode, a denial of service can occur if the attacker can
-   adjust the relying party's clock to a future time.  This could
-   disrupt the timestamp validation.
+   adjust the relying party's clock so that the CMS validation fails.
+   This could disrupt the timestamp validation.
 
    In CTT mode, an attacker could manipulate the unprotected header by
    removing or replacing the timestamp.  To avoid that, the signed COSE
