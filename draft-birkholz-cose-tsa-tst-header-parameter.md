@@ -218,11 +218,15 @@ Similar diagrams for `COSE_Sign` can be derived by allowing multiple `SK_cose` b
 
 ~~~ aasvg
 {::include ascii-art/ttc.ascii-art}
+
+{::include ascii-art/legenda.ascii-art}
 ~~~
 {: #fig-ttc artwork-align="left" title="Timestamp then COSE"}
 
 ~~~ aasvg
 {::include ascii-art/ctt.ascii-art}
+
+{::include ascii-art/legenda.ascii-art}
 ~~~
 {: #fig-ctt artwork-align="left" title="COSE then Timestamp"}
 
