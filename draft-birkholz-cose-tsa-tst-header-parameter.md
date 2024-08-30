@@ -179,8 +179,8 @@ Such a mechanism can be employed inside the ones described in this specification
 IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} to the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
 
 | Name | Label | Value Type | Value Registry | Description | Reference |
-| `3161-tcc` | TBD1 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |
-| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |
+| `3161-tcc` | TBD1 | bstr / [ + bstr ] | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |
+| `3161-ctt` | TBD2 | bstr / [ + bstr ] | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |
 {: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
