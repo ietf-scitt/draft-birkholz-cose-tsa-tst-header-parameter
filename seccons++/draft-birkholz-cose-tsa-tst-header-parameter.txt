@@ -241,8 +241,7 @@ Table of Contents
 
    In CTT mode, an attacker could manipulate the unprotected header by
    removing or replacing the timestamp.  To avoid that, the signed COSE
-   object should be securely wrapped in an envelope during transit and
-   at rest.
+   object should be integrity protected during transit and at rest.
 
    In TTC mode, the TSA is given an opaque identifier (a cryptographic
    hash value) for the payload.  While this means that the content of
