@@ -62,7 +62,7 @@ To motivate the two different modes of use that are specified in this documents,
 
 {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} then define the corresponding modes of use.
 
-## Usage Scenario 1: A TST Included in Signed PDF Documents {#use-one}
+## Usage Scenario 1: A TST Included in Signed Documents {#use-one}
 
 In support of legal assurances, a signed PDF document can be augmented with a trustworthy timestamp.
 In essence, a PDF signer wants to strengthen the assertion that a PDF was not signed before a certain point in time ("the signature cannot be older than").
