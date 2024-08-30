@@ -168,7 +168,7 @@ However, in both CTT and TTC mode, a denial of service can occur if the attacker
 This could disrupt the timestamp validation.
 
 In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
-To avoid that, the signed COSE object should be securely wrapped in an envelope during transit and at rest.
+To avoid that, the signed COSE object should be integrity protected during transit and at rest.
 
 In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) for the payload.
 While this means that the content of the payload is not directly revealed, to prevent comparison with known payloads or disclosure of identical payloads being used over time, the payload would need to be armored, e.g., with a nonce that is shared with the recipient of the header parameter but not the TSA.
