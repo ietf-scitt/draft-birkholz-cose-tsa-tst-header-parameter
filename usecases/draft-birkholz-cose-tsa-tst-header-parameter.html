@@ -1210,8 +1210,8 @@ To motivate the two different modes of use that are specified in this documents,
         <h3 id="name-usage-scenario-1-a-tst-incl">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-usage-scenario-1-a-tst-incl" class="section-name selfRef">Usage Scenario 1: A TST Included in Signed Documents</a>
         </h3>
-<p id="section-1.1-1">In support of legal assurances, a signed PDF document can be augmented with a trustworthy timestamp.
-In essence, a PDF signer wants to strengthen the assertion that a PDF was not signed before a certain point in time ("the signature cannot be older than").
+<p id="section-1.1-1">In support of legal assurances, a signed document can be augmented with a trustworthy timestamp.
+In essence, a document signer wants to strengthen the assertion that a certain document existed at a certain date.
 To achieve this goal, the PDF signer acquires a TST from a TSA, includes it in the to-be-signed PDF that becomes the COSE payload and then signs it.
 Using only its local clock instead, a PDF signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">This usage scenario motivates the "Timestamp then COSE" mode below.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
