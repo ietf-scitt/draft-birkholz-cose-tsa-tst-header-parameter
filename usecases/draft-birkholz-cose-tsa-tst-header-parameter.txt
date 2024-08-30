@@ -131,7 +131,7 @@ Table of Contents
    clock an thereby falsify the recentness of the registration
    procedure.
 
-   This usage scenario motivates the "COSE then Timstamp" mode below.
+   This usage scenario motivates the "COSE then Timestamp" mode below.
 
 1.3.  Requirements Notation
 
