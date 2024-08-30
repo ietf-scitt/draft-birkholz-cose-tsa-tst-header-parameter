@@ -9,7 +9,8 @@
 <meta content="Thomas Fossati" name="author">
 <meta content="Maik Riechert" name="author">
 <meta content="
-       This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (COSE_Sign and COSE_Sign1). This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message. 
+       This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures ( COSE_Sign  and  COSE_Sign1 ).
+This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message. 
     " name="description">
 <meta content="xml2rfc 3.23.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1069,7 +1070,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">COSE Header parameter for RFC 3161 Time-Stamp Tokens</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (COSE_Sign and COSE_Sign1). This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (<code>COSE_Sign</code> and <code>COSE_Sign1</code>).
+This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1128,16 +1130,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-usage-scenario-1-a-tst-incl" class="internal xref">Usage Scenario 1: A TST Included in Signed Documents</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-use-cases" class="internal xref">Use Cases</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-usage-scenario-2-registerin" class="internal xref">Usage Scenario 2: Registering a Signed Statement at a Transparency Service</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-requirements-notation" class="internal xref">Requirements Notation</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-requirements-notation" class="internal xref">Requirements Notation</a></p>
 </li>
             </ul>
 </li>
@@ -1184,13 +1183,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-diagrams" class="internal xref">Diagrams</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1202,53 +1204,49 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">RFC 3161 <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> provides a method to timestamp a message digest to prove that it was created before a given time.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This document defines a new CBOR Object Signing and Encryption (COSE) <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> header parameter that carries the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
-To motivate the two different modes of use that are specified in this documents, two usage scenarios are illustrated in <a href="#use-one" class="auto internal xref">Section 1.1</a> and <a href="#use-two" class="auto internal xref">Section 1.2</a> below.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3"><a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a> and <a href="#sec-cose-then-timestamp" class="auto internal xref">Section 2.2</a> then define the corresponding modes of use.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<div id="use-one">
+<p id="section-1-2">This document defines two new CBOR Object Signing and Encryption (COSE) <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (<code>COSE_Sign</code> and <code>COSE_Sign1</code>).<a href="#section-1-2" class="pilcrow">¶</a></p>
+<div id="use-cases">
 <section id="section-1.1">
-        <h3 id="name-usage-scenario-1-a-tst-incl">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-usage-scenario-1-a-tst-incl" class="section-name selfRef">Usage Scenario 1: A TST Included in Signed Documents</a>
+        <h3 id="name-use-cases">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-use-cases" class="section-name selfRef">Use Cases</a>
         </h3>
-<p id="section-1.1-1">In support of legal assurances, a signed document can be augmented with a trustworthy timestamp.
-In essence, a document signer wants to strengthen the assertion that a certain document existed at a certain date.
-To achieve this goal, the PDF signer acquires a TST from a TSA, includes it in the to-be-signed PDF that becomes the COSE payload and then signs it.
-Using only its local clock instead, a document signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">This usage scenario motivates the "Timestamp then COSE" mode below.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="use-two">
-<section id="section-1.2">
-        <h3 id="name-usage-scenario-2-registerin">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-usage-scenario-2-registerin" class="section-name selfRef">Usage Scenario 2: Registering a Signed Statement at a Transparency Service</a>
-        </h3>
-<p id="section-1.2-1">Transparency services as described in <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span> notarize COSE-signed statements by registering them in verifiable data structures that constitute append-only logs.
+<p id="section-1.1-1">This section presents two use cases, each representing one of the two modes of use defined in <a href="#modes" class="auto internal xref">Section 2</a>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">A first use case is a document signed alongside a trustworthy timestamp.
+This is a common case in legal contracts.
+In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
+To achieve this, the document signer acquires a fresh TST for the document from a TSA, combines it with the document, and then signs the bundle.
+Later on, a relying party consuming the signed bundle can be certain that the document existed <em>at least</em> at the time specified by the TSA.
+The relying party does not have to trust the signer's clock, which may have been maliciously altered or simply inaccurate.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">This usage scenario motivates the "Timestamp then COSE" mode defined in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">A second use case is the registration of a signed statement at a Transparency Service.
+Transparency Services, as described in <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>, notarize COSE-signed statements by registering them in verifiable append-only logs.
 Once a signed statement is registered, it cannot be changed.
-In some applications, the registration policy of a transparency service could enforce adding a timestamp to the unprotected header of the COSE-signed statement in order to strengthen the assurance at which point of time the registration occurred ("the registration cannot have happened before").
-To achieve this goal, the transparency service acquires a TST from a TSA, includes it in the unprotected header of the COSE-signed statement and then registers it.
-Using only its local clock instead, a transparency service would be able to tamper with its clock an thereby falsify the recentness of the registration procedure.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">This usage scenario motivates the "COSE then Timestamp" mode below.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+In certain cases, the registration policy of a Transparency Service may require adding a timestamp to the unprotected header of the COSE-signed statement.
+This is done to enhance confidence in the timing of the registration, ensuring that the registration could not have occurred before a certain point in time.
+To achieve this, the Transparency Service acquires a TST from a TSA, includes it in the unprotected header of the COSE-signed statement and then registers it.
+Again, a relying party that wants to ascertain the time of registration of a given statement does not have to trust the Transparency Service's clock, which may have been maliciously altered or simply inaccurate.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">This usage scenario motivates the "COSE then Timestamp" mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-notation">
-<section id="section-1.3">
+<section id="section-1.2">
         <h3 id="name-requirements-notation">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-requirements-notation" class="section-name selfRef">Requirements Notation</a>
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-requirements-notation" class="section-name selfRef">Requirements Notation</a>
         </h3>
-<p id="section-1.3-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-1.2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="modes-of-use">
+<div id="modes">
 <section id="section-2">
       <h2 id="name-modes-of-use">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-modes-of-use" class="section-name selfRef">Modes of Use</a>
       </h2>
-<p id="section-2-1">There are two different modes of composing COSE protection and timestamping motivated by the usage scenarios above.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">There are two different modes of composing COSE protection and timestamping, motivated by the usage scenarios discussed above.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div id="sec-timestamp-then-cose">
 <section id="section-2.1">
         <h3 id="name-timestamp-then-cose-ttc">
@@ -1443,16 +1441,16 @@ The hash algorithm is contained in the message imprint structure, together with 
       </h2>
 <p id="section-5-1">Please review the Security Considerations section in <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>; these considerations apply to this document as well.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Also review the Security Considerations section in <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>; these considerations apply to this document as well, especially the need for implementations to protect private key material.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">In the "Timestamp, then COSE" (TTC) sequence of operation, the TSA is
-given an opaque identifier (a cryptographic hash value) for the
-payload.
-While this means that the content of the payload is not directly
-revealed, to prevent comparison with known payloads or disclosure of
-identical payloads being used over time, the payload would need to be
-armored, e.g., with a nonce that is shared with the recipient of the
-header parameter but not the TSA.
-Such a mechanism can be employed inside the ones described in this
-specification, but is out of scope for this document.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">The following scenario assumes an attacker can manipulate the clocks on the COSE signer and its relying parties, but not the TSA.
+It is also assumed that the TSA is a trusted third party, so the attacker cannot impersonate the TSA and create valid timestamp tokens.
+In such a setting, any tampering with the COSE signer's clock does not have an impact because, once the timestamp is obtained from the TSA, it becomes the only reliable source of time.
+However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock so that the CMS validation fails.
+This could disrupt the timestamp validation.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
+To avoid that, the signed COSE object should be integrity protected during transit and at rest.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) for the payload.
+While this means that the content of the payload is not directly revealed, to prevent comparison with known payloads or disclosure of identical payloads being used over time, the payload would need to be armored, e.g., with a nonce that is shared with the recipient of the header parameter but not the TSA.
+Such a mechanism can be employed inside the ones described in this specification, but is out of scope for this document.<a href="#section-5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1558,12 +1556,335 @@ specification, but is out of scope for this document.<a href="#section-5-3" clas
 </div>
 </section>
 </div>
-<div id="acknowledgments">
+<div id="diagrams">
 <section id="appendix-A">
+      <h2 id="name-diagrams">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-diagrams" class="section-name selfRef">Diagrams</a>
+      </h2>
+<p id="appendix-A-1">The diagrams in this appendix illustrate the processing flow of the modes specified in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a> and <a href="#sec-cose-then-timestamp" class="auto internal xref">Section 2.2</a> respectively.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">For simplicity, only the <code>COSE_Sign1</code> processing is shown.
+Similar diagrams for <code>COSE_Sign</code> can be derived by allowing multiple <code>SK_cose</code> boxes and replacing the label <code>[signature]</code> with <code>[signatures]</code>.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<span id="name-timestamp-then-cose"></span><div id="fig-ttc">
+<figure id="figure-3">
+        <div id="appendix-A-3.1">
+          <div class="alignLeft art-svg artwork" id="appendix-A-3.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="640" width="568" viewBox="0 0 568 640" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,544" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 24,112" fill="none" stroke="black"></path>
+              <path d="M 40,112 L 40,560" fill="none" stroke="black"></path>
+              <path d="M 72,112 L 72,416" fill="none" stroke="black"></path>
+              <path d="M 80,32 L 80,64" fill="none" stroke="black"></path>
+              <path d="M 88,80 L 88,112" fill="none" stroke="black"></path>
+              <path d="M 128,592 L 128,624" fill="none" stroke="black"></path>
+              <path d="M 144,368 L 144,408" fill="none" stroke="black"></path>
+              <path d="M 144,448 L 144,480" fill="none" stroke="black"></path>
+              <path d="M 144,512 L 144,584" fill="none" stroke="black"></path>
+              <path d="M 216,176 L 216,208" fill="none" stroke="black"></path>
+              <path d="M 216,240 L 216,272" fill="none" stroke="black"></path>
+              <path d="M 216,304 L 216,384" fill="none" stroke="black"></path>
+              <path d="M 232,112 L 232,168" fill="none" stroke="black"></path>
+              <path d="M 232,336 L 232,368" fill="none" stroke="black"></path>
+              <path d="M 240,384 L 240,416" fill="none" stroke="black"></path>
+              <path d="M 264,384 L 264,480" fill="none" stroke="black"></path>
+              <path d="M 264,512 L 264,584" fill="none" stroke="black"></path>
+              <path d="M 280,240 L 280,272" fill="none" stroke="black"></path>
+              <path d="M 280,336 L 280,368" fill="none" stroke="black"></path>
+              <path d="M 280,592 L 280,624" fill="none" stroke="black"></path>
+              <path d="M 304,336 L 304,368" fill="none" stroke="black"></path>
+              <path d="M 304,432 L 304,512" fill="none" stroke="black"></path>
+              <path d="M 320,464 L 320,496" fill="none" stroke="black"></path>
+              <path d="M 344,512 L 344,560" fill="none" stroke="black"></path>
+              <path d="M 352,176 L 352,208" fill="none" stroke="black"></path>
+              <path d="M 352,336 L 352,368" fill="none" stroke="black"></path>
+              <path d="M 368,304 L 368,344" fill="none" stroke="black"></path>
+              <path d="M 368,360 L 368,384" fill="none" stroke="black"></path>
+              <path d="M 368,464 L 368,496" fill="none" stroke="black"></path>
+              <path d="M 384,432 L 384,512" fill="none" stroke="black"></path>
+              <path d="M 408,64 L 408,544" fill="none" stroke="black"></path>
+              <path d="M 432,32 L 432,288" fill="none" stroke="black"></path>
+              <path d="M 480,32 L 480,64" fill="none" stroke="black"></path>
+              <path d="M 496,112 L 496,152" fill="none" stroke="black"></path>
+              <path d="M 496,200 L 496,240" fill="none" stroke="black"></path>
+              <path d="M 496,288 L 496,336" fill="none" stroke="black"></path>
+              <path d="M 560,64 L 560,288" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 80,32" fill="none" stroke="black"></path>
+              <path d="M 432,32 L 480,32" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 408,64" fill="none" stroke="black"></path>
+              <path d="M 432,64 L 560,64" fill="none" stroke="black"></path>
+              <path d="M 24,80 L 88,80" fill="none" stroke="black"></path>
+              <path d="M 224,80 L 248,80" fill="none" stroke="black"></path>
+              <path d="M 88,96 L 200,96" fill="none" stroke="black"></path>
+              <path d="M 24,112 L 88,112" fill="none" stroke="black"></path>
+              <path d="M 224,112 L 248,112" fill="none" stroke="black"></path>
+              <path d="M 464,160 L 528,160" fill="none" stroke="black"></path>
+              <path d="M 216,176 L 352,176" fill="none" stroke="black"></path>
+              <path d="M 352,192 L 424,192" fill="none" stroke="black"></path>
+              <path d="M 464,192 L 528,192" fill="none" stroke="black"></path>
+              <path d="M 216,208 L 352,208" fill="none" stroke="black"></path>
+              <path d="M 216,240 L 280,240" fill="none" stroke="black"></path>
+              <path d="M 464,240 L 536,240" fill="none" stroke="black"></path>
+              <path d="M 280,256 L 424,256" fill="none" stroke="black"></path>
+              <path d="M 216,272 L 280,272" fill="none" stroke="black"></path>
+              <path d="M 448,272 L 520,272" fill="none" stroke="black"></path>
+              <path d="M 432,288 L 560,288" fill="none" stroke="black"></path>
+              <path d="M 216,304 L 368,304" fill="none" stroke="black"></path>
+              <path d="M 120,336 L 200,336" fill="none" stroke="black"></path>
+              <path d="M 232,336 L 280,336" fill="none" stroke="black"></path>
+              <path d="M 304,336 L 352,336" fill="none" stroke="black"></path>
+              <path d="M 360,352 L 480,352" fill="none" stroke="black"></path>
+              <path d="M 104,368 L 184,368" fill="none" stroke="black"></path>
+              <path d="M 232,368 L 280,368" fill="none" stroke="black"></path>
+              <path d="M 304,368 L 352,368" fill="none" stroke="black"></path>
+              <path d="M 216,384 L 368,384" fill="none" stroke="black"></path>
+              <path d="M 128,416 L 160,416" fill="none" stroke="black"></path>
+              <path d="M 88,432 L 104,432" fill="none" stroke="black"></path>
+              <path d="M 184,432 L 224,432" fill="none" stroke="black"></path>
+              <path d="M 304,432 L 384,432" fill="none" stroke="black"></path>
+              <path d="M 128,448 L 160,448" fill="none" stroke="black"></path>
+              <path d="M 320,464 L 368,464" fill="none" stroke="black"></path>
+              <path d="M 320,496 L 368,496" fill="none" stroke="black"></path>
+              <path d="M 304,512 L 384,512" fill="none" stroke="black"></path>
+              <path d="M 8,544 L 408,544" fill="none" stroke="black"></path>
+              <path d="M 128,592 L 280,592" fill="none" stroke="black"></path>
+              <path d="M 56,608 L 120,608" fill="none" stroke="black"></path>
+              <path d="M 288,608 L 328,608" fill="none" stroke="black"></path>
+              <path d="M 128,624 L 280,624" fill="none" stroke="black"></path>
+              <path d="M 104,368 L 120,336" fill="none" stroke="black"></path>
+              <path d="M 184,368 L 200,336" fill="none" stroke="black"></path>
+              <path d="M 448,272 L 464,240" fill="none" stroke="black"></path>
+              <path d="M 520,272 L 536,240" fill="none" stroke="black"></path>
+              <path d="M 224,80 C 215.16936,80 208,87.16936 208,96" fill="none" stroke="black"></path>
+              <path d="M 248,80 C 256.83064,80 264,87.16936 264,96" fill="none" stroke="black"></path>
+              <path d="M 496,80 C 487.16936,80 480,87.16936 480,96" fill="none" stroke="black"></path>
+              <path d="M 496,80 C 504.83064,80 512,87.16936 512,96" fill="none" stroke="black"></path>
+              <path d="M 224,112 C 215.16936,112 208,104.83064 208,96" fill="none" stroke="black"></path>
+              <path d="M 248,112 C 256.83064,112 264,104.83064 264,96" fill="none" stroke="black"></path>
+              <path d="M 496,112 C 487.16936,112 480,104.83064 480,96" fill="none" stroke="black"></path>
+              <path d="M 496,112 C 504.83064,112 512,104.83064 512,96" fill="none" stroke="black"></path>
+              <path d="M 464,160 C 455.16936,160 448,167.16936 448,176" fill="none" stroke="black"></path>
+              <path d="M 528,160 C 536.83064,160 544,167.16936 544,176" fill="none" stroke="black"></path>
+              <path d="M 464,192 C 455.16936,192 448,184.83064 448,176" fill="none" stroke="black"></path>
+              <path d="M 528,192 C 536.83064,192 544,184.83064 544,176" fill="none" stroke="black"></path>
+              <path d="M 480,352 C 488.83064,352 496,344.83064 496,336" fill="none" stroke="black"></path>
+              <path d="M 128,416 C 119.16936,416 112,423.16936 112,432" fill="none" stroke="black"></path>
+              <path d="M 160,416 C 168.83064,416 176,423.16936 176,432" fill="none" stroke="black"></path>
+              <path d="M 88,432 C 79.16936,432 72,424.83064 72,416" fill="none" stroke="black"></path>
+              <path d="M 224,432 C 232.83064,432 240,424.83064 240,416" fill="none" stroke="black"></path>
+              <path d="M 128,448 C 119.16936,448 112,440.83064 112,432" fill="none" stroke="black"></path>
+              <path d="M 160,448 C 168.83064,448 176,440.83064 176,432" fill="none" stroke="black"></path>
+              <path d="M 56,608 C 47.16936,608 40,600.83064 40,592" fill="none" stroke="black"></path>
+              <path d="M 328,608 C 336.83064,608 344,600.83064 344,592" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="504,200 492,194.4 492,205.6" fill="black" transform="rotate(270,496,200)"></polygon>
+              <polygon class="arrowhead" points="504,152 492,146.4 492,157.6" fill="black" transform="rotate(90,496,152)"></polygon>
+              <polygon class="arrowhead" points="432,256 420,250.4 420,261.6" fill="black" transform="rotate(0,424,256)"></polygon>
+              <polygon class="arrowhead" points="432,192 420,186.4 420,197.6" fill="black" transform="rotate(0,424,192)"></polygon>
+              <polygon class="arrowhead" points="368,352 356,346.4 356,357.6" fill="black" transform="rotate(180,360,352)"></polygon>
+              <polygon class="arrowhead" points="296,608 284,602.4 284,613.6" fill="black" transform="rotate(180,288,608)"></polygon>
+              <polygon class="arrowhead" points="272,584 260,578.4 260,589.6" fill="black" transform="rotate(90,264,584)"></polygon>
+              <polygon class="arrowhead" points="240,168 228,162.4 228,173.6" fill="black" transform="rotate(90,232,168)"></polygon>
+              <polygon class="arrowhead" points="208,96 196,90.4 196,101.6" fill="black" transform="rotate(0,200,96)"></polygon>
+              <polygon class="arrowhead" points="192,432 180,426.4 180,437.6" fill="black" transform="rotate(180,184,432)"></polygon>
+              <polygon class="arrowhead" points="152,584 140,578.4 140,589.6" fill="black" transform="rotate(90,144,584)"></polygon>
+              <polygon class="arrowhead" points="152,408 140,402.4 140,413.6" fill="black" transform="rotate(90,144,408)"></polygon>
+              <polygon class="arrowhead" points="128,608 116,602.4 116,613.6" fill="black" transform="rotate(0,120,608)"></polygon>
+              <polygon class="arrowhead" points="112,432 100,426.4 100,437.6" fill="black" transform="rotate(0,104,432)"></polygon>
+              <g class="text">
+                <text x="44" y="52">Signer</text>
+                <text x="456" y="52">TSA</text>
+                <text x="56" y="100">datum</text>
+                <text x="236" y="100">hash</text>
+                <text x="496" y="100">L</text>
+                <text x="496" y="180">timestamp</text>
+                <text x="284" y="196">messageImprint</text>
+                <text x="248" y="260">nonce</text>
+                <text x="492" y="260">SK_tsa</text>
+                <text x="292" y="324">phdr</text>
+                <text x="152" y="356">SK_cose</text>
+                <text x="256" y="356">...</text>
+                <text x="328" y="356">TST</text>
+                <text x="144" y="436">Sign1</text>
+                <text x="340" y="452">uhdr</text>
+                <text x="344" y="484">...</text>
+                <text x="144" y="500">[signature]</text>
+                <text x="268" y="500">[phdr]</text>
+                <text x="48" y="580">[payload]</text>
+                <text x="348" y="580">[uhdr]</text>
+                <text x="184" y="612">rfc3161-ttc</text>
+                <text x="252" y="612">COSE</text>
+              </g>
+            </svg><a href="#appendix-A-3.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-timestamp-then-cose" class="selfRef">Timestamp then COSE</a>
+        </figcaption></figure>
+</div>
+<span id="name-cose-then-timestamp"></span><div id="fig-ctt">
+<figure id="figure-4">
+        <div id="appendix-A-4.1">
+          <div class="alignLeft art-svg artwork" id="appendix-A-4.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="688" width="584" viewBox="0 0 584 688" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,592" fill="none" stroke="black"></path>
+              <path d="M 24,112 L 24,144" fill="none" stroke="black"></path>
+              <path d="M 48,144 L 48,608" fill="none" stroke="black"></path>
+              <path d="M 64,144 L 64,192" fill="none" stroke="black"></path>
+              <path d="M 80,32 L 80,64" fill="none" stroke="black"></path>
+              <path d="M 88,112 L 88,144" fill="none" stroke="black"></path>
+              <path d="M 120,640 L 120,672" fill="none" stroke="black"></path>
+              <path d="M 136,224 L 136,432" fill="none" stroke="black"></path>
+              <path d="M 136,464 L 136,632" fill="none" stroke="black"></path>
+              <path d="M 144,144 L 144,184" fill="none" stroke="black"></path>
+              <path d="M 152,224 L 152,240" fill="none" stroke="black"></path>
+              <path d="M 216,80 L 216,160" fill="none" stroke="black"></path>
+              <path d="M 232,160 L 232,208" fill="none" stroke="black"></path>
+              <path d="M 240,112 L 240,144" fill="none" stroke="black"></path>
+              <path d="M 248,160 L 248,248" fill="none" stroke="black"></path>
+              <path d="M 248,264 L 248,432" fill="none" stroke="black"></path>
+              <path d="M 248,464 L 248,632" fill="none" stroke="black"></path>
+              <path d="M 264,480 L 264,560" fill="none" stroke="black"></path>
+              <path d="M 272,320 L 272,352" fill="none" stroke="black"></path>
+              <path d="M 272,384 L 272,416" fill="none" stroke="black"></path>
+              <path d="M 272,640 L 272,672" fill="none" stroke="black"></path>
+              <path d="M 280,512 L 280,544" fill="none" stroke="black"></path>
+              <path d="M 288,112 L 288,144" fill="none" stroke="black"></path>
+              <path d="M 312,80 L 312,160" fill="none" stroke="black"></path>
+              <path d="M 312,272 L 312,312" fill="none" stroke="black"></path>
+              <path d="M 328,512 L 328,544" fill="none" stroke="black"></path>
+              <path d="M 336,384 L 336,416" fill="none" stroke="black"></path>
+              <path d="M 336,560 L 336,608" fill="none" stroke="black"></path>
+              <path d="M 344,512 L 344,544" fill="none" stroke="black"></path>
+              <path d="M 392,512 L 392,544" fill="none" stroke="black"></path>
+              <path d="M 408,320 L 408,352" fill="none" stroke="black"></path>
+              <path d="M 408,480 L 408,520" fill="none" stroke="black"></path>
+              <path d="M 408,536 L 408,560" fill="none" stroke="black"></path>
+              <path d="M 424,64 L 424,592" fill="none" stroke="black"></path>
+              <path d="M 448,224 L 448,496" fill="none" stroke="black"></path>
+              <path d="M 496,224 L 496,256" fill="none" stroke="black"></path>
+              <path d="M 512,304 L 512,344" fill="none" stroke="black"></path>
+              <path d="M 512,392 L 512,432" fill="none" stroke="black"></path>
+              <path d="M 512,496 L 512,512" fill="none" stroke="black"></path>
+              <path d="M 576,256 L 576,496" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 80,32" fill="none" stroke="black"></path>
+              <path d="M 8,64 L 424,64" fill="none" stroke="black"></path>
+              <path d="M 216,80 L 312,80" fill="none" stroke="black"></path>
+              <path d="M 24,112 L 88,112" fill="none" stroke="black"></path>
+              <path d="M 120,112 L 200,112" fill="none" stroke="black"></path>
+              <path d="M 240,112 L 288,112" fill="none" stroke="black"></path>
+              <path d="M 24,144 L 88,144" fill="none" stroke="black"></path>
+              <path d="M 104,144 L 184,144" fill="none" stroke="black"></path>
+              <path d="M 240,144 L 288,144" fill="none" stroke="black"></path>
+              <path d="M 216,160 L 312,160" fill="none" stroke="black"></path>
+              <path d="M 128,192 L 160,192" fill="none" stroke="black"></path>
+              <path d="M 80,208 L 104,208" fill="none" stroke="black"></path>
+              <path d="M 184,208 L 232,208" fill="none" stroke="black"></path>
+              <path d="M 128,224 L 160,224" fill="none" stroke="black"></path>
+              <path d="M 448,224 L 496,224" fill="none" stroke="black"></path>
+              <path d="M 304,240 L 328,240" fill="none" stroke="black"></path>
+              <path d="M 168,256 L 280,256" fill="none" stroke="black"></path>
+              <path d="M 448,256 L 576,256" fill="none" stroke="black"></path>
+              <path d="M 304,272 L 328,272" fill="none" stroke="black"></path>
+              <path d="M 272,320 L 408,320" fill="none" stroke="black"></path>
+              <path d="M 408,336 L 440,336" fill="none" stroke="black"></path>
+              <path d="M 272,352 L 408,352" fill="none" stroke="black"></path>
+              <path d="M 480,352 L 544,352" fill="none" stroke="black"></path>
+              <path d="M 272,384 L 336,384" fill="none" stroke="black"></path>
+              <path d="M 480,384 L 544,384" fill="none" stroke="black"></path>
+              <path d="M 336,400 L 440,400" fill="none" stroke="black"></path>
+              <path d="M 272,416 L 336,416" fill="none" stroke="black"></path>
+              <path d="M 480,432 L 552,432" fill="none" stroke="black"></path>
+              <path d="M 464,464 L 536,464" fill="none" stroke="black"></path>
+              <path d="M 264,480 L 408,480" fill="none" stroke="black"></path>
+              <path d="M 448,496 L 576,496" fill="none" stroke="black"></path>
+              <path d="M 280,512 L 328,512" fill="none" stroke="black"></path>
+              <path d="M 344,512 L 392,512" fill="none" stroke="black"></path>
+              <path d="M 400,528 L 496,528" fill="none" stroke="black"></path>
+              <path d="M 280,544 L 328,544" fill="none" stroke="black"></path>
+              <path d="M 344,544 L 392,544" fill="none" stroke="black"></path>
+              <path d="M 264,560 L 408,560" fill="none" stroke="black"></path>
+              <path d="M 8,592 L 424,592" fill="none" stroke="black"></path>
+              <path d="M 120,640 L 272,640" fill="none" stroke="black"></path>
+              <path d="M 64,656 L 112,656" fill="none" stroke="black"></path>
+              <path d="M 280,656 L 320,656" fill="none" stroke="black"></path>
+              <path d="M 120,672 L 272,672" fill="none" stroke="black"></path>
+              <path d="M 104,144 L 120,112" fill="none" stroke="black"></path>
+              <path d="M 184,144 L 200,112" fill="none" stroke="black"></path>
+              <path d="M 464,464 L 480,432" fill="none" stroke="black"></path>
+              <path d="M 536,464 L 552,432" fill="none" stroke="black"></path>
+              <path d="M 128,192 C 119.16936,192 112,199.16936 112,208" fill="none" stroke="black"></path>
+              <path d="M 160,192 C 168.83064,192 176,199.16936 176,208" fill="none" stroke="black"></path>
+              <path d="M 80,208 C 71.16936,208 64,200.83064 64,192" fill="none" stroke="black"></path>
+              <path d="M 128,224 C 119.16936,224 112,216.83064 112,208" fill="none" stroke="black"></path>
+              <path d="M 160,224 C 168.83064,224 176,216.83064 176,208" fill="none" stroke="black"></path>
+              <path d="M 304,240 C 295.16936,240 288,247.16936 288,256" fill="none" stroke="black"></path>
+              <path d="M 328,240 C 336.83064,240 344,247.16936 344,256" fill="none" stroke="black"></path>
+              <path d="M 168,256 C 159.16936,256 152,248.83064 152,240" fill="none" stroke="black"></path>
+              <path d="M 304,272 C 295.16936,272 288,264.83064 288,256" fill="none" stroke="black"></path>
+              <path d="M 328,272 C 336.83064,272 344,264.83064 344,256" fill="none" stroke="black"></path>
+              <path d="M 512,272 C 503.16936,272 496,279.16936 496,288" fill="none" stroke="black"></path>
+              <path d="M 512,272 C 520.83064,272 528,279.16936 528,288" fill="none" stroke="black"></path>
+              <path d="M 512,304 C 503.16936,304 496,296.83064 496,288" fill="none" stroke="black"></path>
+              <path d="M 512,304 C 520.83064,304 528,296.83064 528,288" fill="none" stroke="black"></path>
+              <path d="M 480,352 C 471.16936,352 464,359.16936 464,368" fill="none" stroke="black"></path>
+              <path d="M 544,352 C 552.83064,352 560,359.16936 560,368" fill="none" stroke="black"></path>
+              <path d="M 480,384 C 471.16936,384 464,376.83064 464,368" fill="none" stroke="black"></path>
+              <path d="M 544,384 C 552.83064,384 560,376.83064 560,368" fill="none" stroke="black"></path>
+              <path d="M 496,528 C 504.83064,528 512,520.83064 512,512" fill="none" stroke="black"></path>
+              <path d="M 64,656 C 55.16936,656 48,648.83064 48,640" fill="none" stroke="black"></path>
+              <path d="M 320,656 C 328.83064,656 336,648.83064 336,640" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="520,392 508,386.4 508,397.6" fill="black" transform="rotate(270,512,392)"></polygon>
+              <polygon class="arrowhead" points="520,344 508,338.4 508,349.6" fill="black" transform="rotate(90,512,344)"></polygon>
+              <polygon class="arrowhead" points="448,400 436,394.4 436,405.6" fill="black" transform="rotate(0,440,400)"></polygon>
+              <polygon class="arrowhead" points="448,336 436,330.4 436,341.6" fill="black" transform="rotate(0,440,336)"></polygon>
+              <polygon class="arrowhead" points="408,528 396,522.4 396,533.6" fill="black" transform="rotate(180,400,528)"></polygon>
+              <polygon class="arrowhead" points="320,312 308,306.4 308,317.6" fill="black" transform="rotate(90,312,312)"></polygon>
+              <polygon class="arrowhead" points="288,656 276,650.4 276,661.6" fill="black" transform="rotate(180,280,656)"></polygon>
+              <polygon class="arrowhead" points="288,256 276,250.4 276,261.6" fill="black" transform="rotate(0,280,256)"></polygon>
+              <polygon class="arrowhead" points="256,632 244,626.4 244,637.6" fill="black" transform="rotate(90,248,632)"></polygon>
+              <path class="jump" d="M 248,264 C 254,264 254,248 248,248" fill="none" stroke="black"></path>
+              <polygon class="arrowhead" points="192,208 180,202.4 180,213.6" fill="black" transform="rotate(180,184,208)"></polygon>
+              <polygon class="arrowhead" points="152,184 140,178.4 140,189.6" fill="black" transform="rotate(90,144,184)"></polygon>
+              <polygon class="arrowhead" points="144,632 132,626.4 132,637.6" fill="black" transform="rotate(90,136,632)"></polygon>
+              <polygon class="arrowhead" points="120,656 108,650.4 108,661.6" fill="black" transform="rotate(0,112,656)"></polygon>
+              <polygon class="arrowhead" points="112,208 100,202.4 100,213.6" fill="black" transform="rotate(0,104,208)"></polygon>
+              <g class="text">
+                <text x="44" y="52">Signer</text>
+                <text x="268" y="100">phdr</text>
+                <text x="56" y="132">datum</text>
+                <text x="152" y="132">SK_cose</text>
+                <text x="264" y="132">...</text>
+                <text x="144" y="212">Sign1</text>
+                <text x="472" y="244">TSA</text>
+                <text x="316" y="260">hash</text>
+                <text x="512" y="292">L</text>
+                <text x="340" y="340">messageImprint</text>
+                <text x="512" y="372">timestamp</text>
+                <text x="304" y="404">nonce</text>
+                <text x="136" y="452">[signature]</text>
+                <text x="244" y="452">[phdr]</text>
+                <text x="508" y="452">SK_tsa</text>
+                <text x="332" y="500">uhdr</text>
+                <text x="304" y="532">...</text>
+                <text x="368" y="532">TST</text>
+                <text x="48" y="628">[payload]</text>
+                <text x="340" y="628">[uhdr]</text>
+                <text x="176" y="660">rfc3161-ctt</text>
+                <text x="244" y="660">COSE</text>
+              </g>
+            </svg><a href="#appendix-A-4.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-cose-then-timestamp" class="selfRef">COSE then Timestamp</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">The editors would like to thank
+<p id="appendix-B-1">The editors would like to thank
 Carl Wallace,
 Leonard Rosenthol,
 Michael B. Jones,
@@ -1571,11 +1892,11 @@ Michael Prorock,
 Orie Steele,
 and
 Steve Lasker
-for their reviews and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+for their reviews and comments.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-contributors">
 <a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
@@ -1589,7 +1910,7 @@ for their reviews and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
