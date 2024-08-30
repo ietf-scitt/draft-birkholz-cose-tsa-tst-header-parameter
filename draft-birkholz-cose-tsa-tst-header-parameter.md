@@ -87,6 +87,10 @@ This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-
 
 There are two different modes of composing COSE protection and timestamping, motivated by the usage scenarios discussed above.
 
+The diagrams in this section illustrate the processing flow of the specified modes.
+For simplicity, only the `COSE_Sign1` processing is shown.
+Similar diagrams for `COSE_Sign` can be derived by allowing multiple `SK_cose` boxes and replacing the label `[signature]` with `[signatures]`.
+
 ## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
 {{fig-timestamp-then-cose}} shows the case where a datum is first digested and submitted to a TSA to be timestamped.
@@ -98,21 +102,14 @@ A signed COSE message is then built as follows:
 * The obtained timestamp token is added to the protected headers,
 * The original datum becomes the payload of the signed COSE message.
 
+The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+
 ~~~ aasvg
-.---------.              .---------------.     .----------------------.
-| payload +------------->| Sig_structure +---->| COSE_Sign/COSE_Sign1 |
-'----+----'              '---------------'     '----------------------'
-     |                          ^
-     |     .---.                |
-     |    |     |     .-----.   |
-     '--->| TSA +---->| TST +---'
-          |     |     '-----'
-           '---'
+{::include ascii-art/ttc.ascii-art}
+{::include ascii-art/legenda.ascii-art}
 ~~~
 {: #fig-timestamp-then-cose artwork-align="center"
-   title="Timestamp, then COSE (TTC)"}
-
-The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+   title="Timestamp, then COSE (TCC)"}
 
 ## COSE then Timestamp (CTT) {#sec-cose-then-timestamp}
 
@@ -122,19 +119,8 @@ The obtained timestamp token is then added back as an unprotected header into th
 This mode is utilized when a record of the timing of the signature operation is desired.
 
 ~~~ aasvg
-.----------------------.         .-----.
-| COSE_Sign/COSE_Sign1 |<--------+ TST |
-'----+-----------------'         '-----'
-     |                              ^
-     v                              |
-.----------------------.            |
-| signatures/signature |            |
-'----+-----------------'            |
-     |                     .---.    |
-     |                    |     |   |
-     '------------------->| TSA +---'
-                          |     |
-                           '---'
+{::include ascii-art/ctt.ascii-art}
+{::include ascii-art/legenda.ascii-art}
 ~~~
 {: #fig-cose-then-timestamp artwork-align="center"
    title="COSE, then Timestamp (CTT)"}
@@ -208,27 +194,6 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 {: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
-
-# Diagrams
-
-The diagrams in this appendix illustrate the processing flow of the modes specified in {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} respectively.
-
-For simplicity, only the `COSE_Sign1` processing is shown.
-Similar diagrams for `COSE_Sign` can be derived by allowing multiple `SK_cose` boxes and replacing the label `[signature]` with `[signatures]`.
-
-~~~ aasvg
-{::include ascii-art/ttc.ascii-art}
-
-{::include ascii-art/legenda.ascii-art}
-~~~
-{: #fig-ttc artwork-align="left" title="Timestamp then COSE"}
-
-~~~ aasvg
-{::include ascii-art/ctt.ascii-art}
-
-{::include ascii-art/legenda.ascii-art}
-~~~
-{: #fig-ctt artwork-align="left" title="COSE then Timestamp"}
 
 # Acknowledgments
 {:unnumbered}
