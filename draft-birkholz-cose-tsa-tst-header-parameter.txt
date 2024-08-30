@@ -85,9 +85,9 @@ Table of Contents
    RFC 3161 [RFC3161] provides a method to timestamp a message digest to
    prove that it was created before a given time.
 
-   This document defines a new CBOR Object Signing and Encryption (COSE)
-   [STD96] header parameter that carries the TimestampToken (TST) output
-   of RFC 3161, thus allowing existing and widely deployed trust
+   This document defines two new CBOR Object Signing and Encryption
+   (COSE) [STD96] header parameters that carry the TimestampToken (TST)
+   output of RFC 3161, thus allowing existing and widely deployed trust
    infrastructure to be used with COSE structures used for signing
    (COSE_Sign and COSE_Sign1).
 
