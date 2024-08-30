@@ -64,7 +64,7 @@ To motivate the two different modes of use that are specified in this documents,
 
 ## Usage Scenario 1: A TST Included in Signed PDF Documents {#use-one}
 
-In support of legal assurances, the quality of a signed PDF document can be improved by including a trustworthy signed timestamp.
+In support of legal assurances, a signed PDF document can be augmented with a trustworthy timestamp.
 In essence, a PDF signer wants to strengthen the assertion that a PDF was not signed before a certain point in time ("the signature cannot be older than").
 To achieve this goal, the PDF signer acquires a TST from a TSA, includes it in the to-be-signed PDF that becomes the COSE payload and then signs it.
 Using only its local clock instead, a PDF signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.
