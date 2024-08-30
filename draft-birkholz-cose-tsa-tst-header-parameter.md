@@ -79,7 +79,7 @@ In some applications, the registration policy of a transparency service could en
 To achieve this goal, the transparency service acquires a TST from a TSA, includes it in the unprotected header of the COSE-signed statement and then registers it.
 Using only its local clock instead, a transparency service would be able to tamper with its clock an thereby falsify the recentness of the registration procedure.
 
-This usage scenario motivates the "COSE then Timstamp" mode below.
+This usage scenario motivates the "COSE then Timestamp" mode below.
 
 ## Requirements Notation
 
