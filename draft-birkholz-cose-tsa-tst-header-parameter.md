@@ -164,7 +164,7 @@ Also review the Security Considerations section in {{-COSE}}; these consideratio
 The following scenario assumes an attacker can manipulate the clocks on the COSE signer and its relying parties, but not the TSA.
 It is also assumed that the TSA is a trusted third party, so the attacker cannot impersonate the TSA and create valid timestamp tokens.
 In such a setting, any tampering with the COSE signer's clock does not have an impact because, once the timestamp is obtained from the TSA, it becomes the only reliable source of time.
-However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock to a future time.
+However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock to a past time.
 This could disrupt the timestamp validation.
 
 In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
