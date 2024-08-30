@@ -75,7 +75,6 @@ Table of Contents
    5.  Security Considerations
    6.  IANA Considerations
    7.  Normative References
-   Appendix A.   Diagrams
    Acknowledgments
    Contributors
    Authors' Addresses
@@ -104,6 +103,12 @@ Table of Contents
    There are two different modes of composing COSE protection and
    timestamping.
 
+   The diagrams in this section illustrate the processing flow of the
+   specified modes.  For simplicity, only the COSE_Sign1 processing is
+   shown.  Similar diagrams for COSE_Sign can be derived by allowing
+   multiple SK_cose boxes and replacing the label [signature] with
+   [signatures].
+
 2.1.  Timestamp then COSE (TTC)
 
    Figure 1 shows the case where a datum is first digested and submitted
@@ -118,20 +123,57 @@ Table of Contents
 
    *  The original datum becomes the payload of the signed COSE message.
 
- .---------.              .---------------.     .----------------------.
- | payload +------------->| Sig_structure +---->| COSE_Sign/COSE_Sign1 |
- '----+----'              '---------------'     '----------------------'
-      |                          ^
-      |     .---.                |
-      |    |     |     .-----.   |
-      '--->| TSA +---->| TST +---'
-           |     |     '-----'
-            '---'
-
-                  Figure 1: Timestamp, then COSE (TTC)
-
    The message imprint sent to the TSA (Section 2.4 of [RFC3161]) MUST
    be the hash of the payload field of the COSE signed object.
+
+ .--------.                                           .-----.
+ | Signer |                                           | TSA |
+ +--------+----------------------------------------.  +-----+---------.
+ | .-------.               .----.                  |  |      .-.      |
+ | | datum +------------->| hash |                 |  |     | L |     |
+ | '-+---+-'               '-+--'                  |  |      '+'      |
+ |   |   |                   |                     |  |       |       |
+ |   |   |                   |                     |  |       v       |
+ |   |   |                   v                     |  |  .---------.  |
+ |   |   |                 .----------------.      |  | | timestamp | |
+ |   |   |                 | messageImprint +------+->|  '---------'  |
+ |   |   |                 '----------------'      |  |       ^       |
+ |   |   |                                         |  |       |       |
+ |   |   |                 .-------.               |  |   .---+----.  |
+ |   |   |                 | nonce +---------------+->|  / SK_tsa /   |
+ |   |   |                 '-------'               |  | '--------'    |
+ |   |   |                                         |  '-------+-------'
+ |   |   |                 .------------------.    |          |
+ |   |   |                 |       phdr       |    |          |
+ |   |   |     .---------. | .-----.  .-----. |    |          |
+ |   |   |    / SK_cose /  | | ... |  | TST |<-----+---------'
+ |   |   |   '----+----'   | '-----'  '-----' |    |
+ |   |   |        |        '--+--+------------'    |
+ |   |   |        v           |  |                 |
+ |   |   |     .-----.        |  |                 |
+ |   |    '-->| Sign1 |<-----'   |    .---------.  |
+ |   |         '--+--'           |    |  uhdr   |  |
+ |   |            |              |    | .-----. |  |
+ |   |            |              |    | | ... | |  |
+ |   |       [signature]       [phdr] | '-----' |  |
+ |   |            |              |    '----+----'  |
+ |   |            |              |         |       |
+ '---+------------+--------------+---------+-------'
+     |            |              |         |
+  [payload]       v              v       [uhdr]
+     |          .------------------.       |
+      '-------->| rfc3161-ttc COSE |<-----'
+                '------------------'
+                                                             .---------.
+                                                             | Legenda |
+ .-----------------------------------------------------------+---------+
+ |           data       key     operation     label   clock            |
+ |         .------.   .-----.  .---------.             .-.             |
+ |         |      |  /     /  |           |  [     ]  | L |            |
+ |         '------' '-----'    '---------'             '-'             |
+ '---------------------------------------------------------------------'
+
+                  Figure 1: Timestamp, then COSE (TCC)
 
 2.2.  COSE then Timestamp (CTT)
 
@@ -143,21 +185,57 @@ Table of Contents
    This mode is utilized when a record of the timing of the signature
    operation is desired.
 
-                 .----------------------.         .-----.
-                 | COSE_Sign/COSE_Sign1 |<--------+ TST |
-                 '----+-----------------'         '-----'
-                      |                              ^
-                      v                              |
-                 .----------------------.            |
-                 | signatures/signature |            |
-                 '----+-----------------'            |
-                      |                     .---.    |
-                      |                    |     |   |
-                      '------------------->| TSA +---'
-                                           |     |
-                                            '---'
+.--------.
+| Signer |
++--------+------------------------------------------.
+|                         .-----------.             |
+|                         |    phdr   |             |
+| .-------.   .---------. |  .-----.  |             |
+| | datum |  / SK_cose /  |  | ... |  |             |
+| '--+-+--' '----+----'   |  '-----'  |             |
+|    | |         |        '-+-+-------'             |
+|    | |         v          | |                     |
+|    | |      .-----.       | |                     |
+|    |  '--->| Sign1 |<-----' |                     |
+|    |        '-+-+-'         |                     |  .-----.
+|    |          | |           |     .----.          |  | TSA |
+|    |          |  '----------)--->| hash |         |  +-----+---------.
+|    |          |             |     '-+--'          |  |      .-.      |
+|    |          |             |       |             |  |     | L |     |
+|    |          |             |       v             |  |      '+'      |
+|    |          |             |  .----------------. |  |       |       |
+|    |          |             |  | messageImprint +-+->|       v       |
+|    |          |             |  '----------------' |  |  .---------.  |
+|    |          |             |                     |  | | timestamp | |
+|    |          |             |  .-------.          |  |  '---------'  |
+|    |          |             |  | nonce +----------+->|       ^       |
+|    |          |             |  '-------'          |  |       |       |
+|    |          |             |                     |  |   .---+----.  |
+|    |     [signature]     [phdr]                   |  |  / SK_tsa /   |
+|    |          |             |                     |  | '--------'    |
+|    |          |             | .-----------------. |  |               |
+|    |          |             | |      uhdr       | |  '-------+-------'
+|    |          |             | | .-----. .-----. | |          |
+|    |          |             | | | ... | | TST |<--+---------'
+|    |          |             | | '-----' '-----' | |
+|    |          |             | '--------+--------' |
+|    |          |             |          |          |
+'----+----------+-------------+----------+----------'
+     |          |             |          |
+ [payload]      v             v        [uhdr]
+     |        .------------------.       |
+      '------>| rfc3161-ctt COSE |<-----'
+              '------------------'
+                                                            .---------.
+                                                            | Legenda |
+.-----------------------------------------------------------+---------+
+|           data       key     operation     label   clock            |
+|         .------.   .-----.  .---------.             .-.             |
+|         |      |  /     /  |           |  [     ]  | L |            |
+|         '------' '-----'    '---------'             '-'             |
+'---------------------------------------------------------------------'
 
-                    Figure 2: COSE, then Timestamp (CTT)
+                 Figure 2: COSE, then Timestamp (CTT)
 
    In this context, timestamp tokens are similar to a countersignature
    made by the TSA.
@@ -302,112 +380,6 @@ Table of Contents
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
-
-Appendix A.   Diagrams
-
-   The diagrams in this appendix illustrate the processing flow of the
-   modes specified in Section 2.1 and Section 2.2 respectively.
-
-   For simplicity, only the COSE_Sign1 processing is shown.  Similar
-   diagrams for COSE_Sign can be derived by allowing multiple SK_cose
-   boxes and replacing the label [signature] with [signatures].
-
-  .--------.                                           .-----.
-  | Signer |                                           | TSA |
-  +--------+----------------------------------------.  +-----+---------.
-  | .-------.               .----.                  |  |      .-.      |
-  | | datum +------------->| hash |                 |  |     | L |     |
-  | '-+---+-'               '-+--'                  |  |      '+'      |
-  |   |   |                   |                     |  |       |       |
-  |   |   |                   |                     |  |       v       |
-  |   |   |                   v                     |  |  .---------.  |
-  |   |   |                 .----------------.      |  | | timestamp | |
-  |   |   |                 | messageImprint +------+->|  '---------'  |
-  |   |   |                 '----------------'      |  |       ^       |
-  |   |   |                                         |  |       |       |
-  |   |   |                 .-------.               |  |   .---+----.  |
-  |   |   |                 | nonce +---------------+->|  / SK_tsa /   |
-  |   |   |                 '-------'               |  | '--------'    |
-  |   |   |                                         |  '-------+-------'
-  |   |   |                 .------------------.    |          |
-  |   |   |                 |       phdr       |    |          |
-  |   |   |     .---------. | .-----.  .-----. |    |          |
-  |   |   |    / SK_cose /  | | ... |  | TST |<-----+---------'
-  |   |   |   '----+----'   | '-----'  '-----' |    |
-  |   |   |        |        '--+--+------------'    |
-  |   |   |        v           |  |                 |
-  |   |   |     .-----.        |  |                 |
-  |   |    '-->| Sign1 |<-----'   |    .---------.  |
-  |   |         '--+--'           |    |  uhdr   |  |
-  |   |            |              |    | .-----. |  |
-  |   |            |              |    | | ... | |  |
-  |   |       [signature]       [phdr] | '-----' |  |
-  |   |            |              |    '----+----'  |
-  |   |            |              |         |       |
-  '---+------------+--------------+---------+-------'
-      |            |              |         |
-   [payload]       v              v       [uhdr]
-      |          .------------------.       |
-       '-------->| rfc3161-ttc COSE |<-----'
-                 '------------------'
-
-
-              data       key     operation     label   clock
-            .------.   .-----.  .---------.             .-.
-  Legenda   |      |  /     /  |           |  [     ]  | L |
-            '------' '-----'    '---------'             '-'
-
-                      Figure 3: Timestamp then COSE
-
-.--------.
-| Signer |
-+--------+------------------------------------------.
-|                         .-----------.             |
-|                         |    phdr   |             |
-| .-------.   .---------. |  .-----.  |             |
-| | datum |  / SK_cose /  |  | ... |  |             |
-| '--+-+--' '----+----'   |  '-----'  |             |
-|    | |         |        '-+-+-------'             |
-|    | |         v          | |                     |
-|    | |      .-----.       | |                     |
-|    |  '--->| Sign1 |<-----' |                     |
-|    |        '-+-+-'         |                     |  .-----.
-|    |          | |           |     .----.          |  | TSA |
-|    |          |  '----------)--->| hash |         |  +-----+---------.
-|    |          |             |     '-+--'          |  |      .-.      |
-|    |          |             |       |             |  |     | L |     |
-|    |          |             |       v             |  |      '+'      |
-|    |          |             |  .----------------. |  |       |       |
-|    |          |             |  | messageImprint +-+->|       v       |
-|    |          |             |  '----------------' |  |  .---------.  |
-|    |          |             |                     |  | | timestamp | |
-|    |          |             |  .-------.          |  |  '---------'  |
-|    |          |             |  | nonce +----------+->|       ^       |
-|    |          |             |  '-------'          |  |       |       |
-|    |          |             |                     |  |   .---+----.  |
-|    |     [signature]     [phdr]                   |  |  / SK_tsa /   |
-|    |          |             |                     |  | '--------'    |
-|    |          |             | .-----------------. |  |               |
-|    |          |             | |      uhdr       | |  '-------+-------'
-|    |          |             | | .-----. .-----. | |          |
-|    |          |             | | | ... | | TST |<--+---------'
-|    |          |             | | '-----' '-----' | |
-|    |          |             | '--------+--------' |
-|    |          |             |          |          |
-'----+----------+-------------+----------+----------'
-     |          |             |          |
- [payload]      v             v        [uhdr]
-     |        .------------------.       |
-      '------>| rfc3161-ctt COSE |<-----'
-              '------------------'
-
-
-            data       key     operation     label   clock
-          .------.   .-----.  .---------.             .-.
-Legenda   |      |  /     /  |           |  [     ]  | L |
-          '------' '-----'    '---------'             '-'
-
-                    Figure 4: COSE then Timestamp
 
 Acknowledgments
 
