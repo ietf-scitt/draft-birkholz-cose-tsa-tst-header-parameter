@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 1 March 2025                                             Linaro
+Expires: 3 March 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                          28 August 2024
+                                                          30 August 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 March 2025.
+   This Internet-Draft will expire on 3 March 2025.
 
 Copyright Notice
 
@@ -95,8 +95,10 @@ Table of Contents
    infrastructure to be used with COSE structures used for signing
    (COSE_Sign and COSE_Sign1).  To motivate the two different modes of
    use that are specified in this documents, two usage scenarios are
-   illustrated in Section 1.1 and Section 1.2 below.  Section 2.1 and
-   Section 2.2 then define the corresponding modes of use.
+   illustrated in Section 1.1 and Section 1.2 below.
+
+   Section 2.1 and Section 2.2 then define the corresponding modes of
+   use.
 
 1.1.  Usage Scenario 1: A TST Included in Signed PDF Documents
 
