@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 1 March 2025                                             Linaro
+Expires: 3 March 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                          28 August 2024
+                                                          30 August 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 March 2025.
+   This Internet-Draft will expire on 3 March 2025.
 
 Copyright Notice
 
@@ -75,6 +75,7 @@ Table of Contents
    5.  Security Considerations
    6.  IANA Considerations
    7.  Normative References
+   Appendix A.   Diagrams
    Acknowledgments
    Contributors
    Authors' Addresses
@@ -287,6 +288,100 @@ Table of Contents
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
+
+Appendix A.   Diagrams
+
+   The diagrams in this appendix illustrate the processing flow of the
+   modes specified in Section 2.1 and Section 2.2 respectively.
+
+   For simplicity, only the COSE_Sign1 processing is shown.  Similar
+   diagrams for COSE_Sign can be derived by allowing multiple SK_cose
+   boxes and replacing the label [signature] with [signatures].
+
+  .--------.                                           .-----.
+  | Signer |                                           | TSA |
+  +--------+----------------------------------------.  +-----+---------.
+  | .-------.               .----.                  |  |      .-.      |
+  | | datum +------------->| hash |                 |  |     | L |     |
+  | '-+---+-'               '-+--'                  |  |      '+'      |
+  |   |   |                   |                     |  |       |       |
+  |   |   |                   |                     |  |       v       |
+  |   |   |                   v                     |  |  .---------.  |
+  |   |   |                 .----------------.      |  | | timestamp | |
+  |   |   |                 | messageImprint +------+->|  '---------'  |
+  |   |   |                 '----------------'      |  |       ^       |
+  |   |   |                                         |  |       |       |
+  |   |   |                 .-------.               |  |   .---+----.  |
+  |   |   |                 | nonce +---------------+->|  / SK_tsa /   |
+  |   |   |                 '-------'               |  | '--------'    |
+  |   |   |                                         |  '-------+-------'
+  |   |   |                 .------------------.    |          |
+  |   |   |                 |       phdr       |    |          |
+  |   |   |     .---------. | .-----.  .-----. |    |          |
+  |   |   |    / SK_cose /  | | ... |  | TST |<-----+---------'
+  |   |   |   '----+----'   | '-----'  '-----' |    |
+  |   |   |        |        '--+--+------------'    |
+  |   |   |        v           |  |                 |
+  |   |   |     .-----.        |  |                 |
+  |   |    '-->| Sign1 |<-----'   |    .---------.  |
+  |   |         '--+--'           |    |  uhdr   |  |
+  |   |            |              |    | .-----. |  |
+  |   |            |              |    | | ... | |  |
+  |   |       [signature]       [phdr] | '-----' |  |
+  |   |            |              |    '----+----'  |
+  |   |            |              |         |       |
+  '---+------------+--------------+---------+-------'
+      |            |              |         |
+   [payload]       v              v       [uhdr]
+      |          .------------------.       |
+       '-------->| rfc3161-ttc COSE |<-----'
+                 '------------------'
+
+                      Figure 3: Timestamp then COSE
+
+.--------.
+| Signer |
++--------+------------------------------------------.
+|                         .-----------.             |
+|                         |    phdr   |             |
+| .-------.   .---------. |  .-----.  |             |
+| | datum |  / SK_cose /  |  | ... |  |             |
+| '--+-+--' '----+----'   |  '-----'  |             |
+|    | |         |        '-+-+-------'             |
+|    | |         v          | |                     |
+|    | |      .-----.       | |                     |
+|    |  '--->| Sign1 |<-----' |                     |
+|    |        '-+-+-'         |                     |  .-----.
+|    |          | |           |     .----.          |  | TSA |
+|    |          |  '----------)--->| hash |         |  +-----+---------.
+|    |          |             |     '-+--'          |  |      .-.      |
+|    |          |             |       |             |  |     | L |     |
+|    |          |             |       v             |  |      '+'      |
+|    |          |             |  .----------------. |  |       |       |
+|    |          |             |  | messageImprint +-+->|       v       |
+|    |          |             |  '----------------' |  |  .---------.  |
+|    |          |             |                     |  | | timestamp | |
+|    |          |             |  .-------.          |  |  '---------'  |
+|    |          |             |  | nonce +----------+->|       ^       |
+|    |          |             |  '-------'          |  |       |       |
+|    |          |             |                     |  |   .---+----.  |
+|    |     [signature]     [phdr]                   |  |  / SK_tsa /   |
+|    |          |             |                     |  | '--------'    |
+|    |          |             | .-----------------. |  |               |
+|    |          |             | |      uhdr       | |  '-------+-------'
+|    |          |             | | .-----. .-----. | |          |
+|    |          |             | | | ... | | TST |<--+---------'
+|    |          |             | | '-----' '-----' | |
+|    |          |             | '--------+--------' |
+|    |          |             |          |          |
+'----+----------+-------------+----------+----------'
+     |          |             |          |
+ [payload]      v             v        [uhdr]
+     |        .------------------.       |
+      '------>| rfc3161-ctt COSE |<-----'
+              '------------------'
+
+                    Figure 4: COSE then Timestamp
 
 Acknowledgments
 
