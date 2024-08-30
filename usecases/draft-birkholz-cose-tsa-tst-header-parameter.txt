@@ -64,7 +64,7 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Usage Scenario 1: A TST Included in Signed PDF Documents
+     1.1.  Usage Scenario 1: A TST Included in Signed Documents
      1.2.  Usage Scenario 2: Registering a Signed Statement at a
            Transparency Service
      1.3.  Requirements Notation
@@ -100,7 +100,7 @@ Table of Contents
    Section 2.1 and Section 2.2 then define the corresponding modes of
    use.
 
-1.1.  Usage Scenario 1: A TST Included in Signed PDF Documents
+1.1.  Usage Scenario 1: A TST Included in Signed Documents
 
    In support of legal assurances, a signed PDF document can be
    augmented with a trustworthy timestamp.  In essence, a PDF signer
