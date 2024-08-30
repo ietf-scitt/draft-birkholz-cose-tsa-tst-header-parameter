@@ -59,6 +59,7 @@ RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that 
 This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
 
 To motivate the two different modes of use that are specified in this documents, two usage scenarios are illustrated in {{use-one}} and {{use-two}} below.
+
 {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} then define the corresponding modes of use.
 
 ## Usage Scenario 1: A TST Included in Signed PDF Documents {#use-one}
