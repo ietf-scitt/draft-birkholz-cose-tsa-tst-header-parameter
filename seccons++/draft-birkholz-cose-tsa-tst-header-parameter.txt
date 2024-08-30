@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 2 March 2025                                             Linaro
+Expires: 3 March 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                          29 August 2024
+                                                          30 August 2024
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 March 2025.
+   This Internet-Draft will expire on 3 March 2025.
 
 Copyright Notice
 
@@ -236,8 +236,8 @@ Table of Contents
    have an impact because, once the timestamp is obtained from the TSA,
    it becomes the only reliable source of time.  However, in both CTT
    and TTC mode, a denial of service can occur if the attacker can
-   adjust the relying party's clock to a future time.  This could
-   disrupt the timestamp validation.
+   adjust the relying party's clock to a past time.  This could disrupt
+   the timestamp validation.
 
    In CTT mode, an attacker could manipulate the unprotected header by
    removing or replacing the timestamp.  To avoid that, the signed COSE
