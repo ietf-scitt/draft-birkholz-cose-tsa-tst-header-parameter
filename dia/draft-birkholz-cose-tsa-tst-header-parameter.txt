@@ -294,8 +294,8 @@ Appendix A.   Diagrams
    The diagrams in this appendix illustrate the processing flow of the
    modes specified in Section 2.1 and Section 2.2 respectively.
 
-   For simplicity, only the COSE Sign1 processing is shown.  Similar
-   diagrams for COSE Sign can be derived by allowing multiple SK_cose
+   For simplicity, only the COSE_Sign1 processing is shown.  Similar
+   diagrams for COSE_Sign can be derived by allowing multiple SK_cose
    boxes and replacing the label [signature] with [signatures].
 
   .--------.                                           .-----.
