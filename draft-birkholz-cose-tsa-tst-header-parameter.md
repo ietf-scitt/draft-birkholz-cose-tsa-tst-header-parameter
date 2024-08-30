@@ -187,8 +187,8 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 
 The diagrams in this appendix illustrate the processing flow of the modes specified in {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} respectively.
 
-For simplicity, only the COSE Sign1 processing is shown.
-Similar diagrams for COSE Sign can be derived by allowing multiple `SK_cose` boxes and replacing the label `[signature]` with `[signatures]`.
+For simplicity, only the `COSE_Sign1` processing is shown.
+Similar diagrams for `COSE_Sign` can be derived by allowing multiple `SK_cose` boxes and replacing the label `[signature]` with `[signatures]`.
 
 ~~~ aasvg
 {::include ascii-art/ttc.ascii-art}
