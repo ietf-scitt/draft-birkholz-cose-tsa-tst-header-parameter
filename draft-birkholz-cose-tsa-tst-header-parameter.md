@@ -67,7 +67,7 @@ To motivate the two different modes of use that are specified in this documents,
 In support of legal assurances, a signed document can be augmented with a trustworthy timestamp.
 In essence, a document signer wants to strengthen the assertion that a certain document existed at a certain date.
 To achieve this goal, the PDF signer acquires a TST from a TSA, includes it in the to-be-signed PDF that becomes the COSE payload and then signs it.
-Using only its local clock instead, a PDF signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.
+Using only its local clock instead, a document signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.
 
 This usage scenario motivates the "Timestamp then COSE" mode below.
 
