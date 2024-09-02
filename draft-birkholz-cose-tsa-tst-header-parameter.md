@@ -63,7 +63,7 @@ This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}
 
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
 
-A first use case is a document signed alongside a trustworthy timestamp.
+A first use case is a digital document signed alongside a trustworthy timestamp.
 This is a common case in legal contracts.
 In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
 To achieve this, the document signer acquires a fresh TST for the document from a TSA, combines it with the document, and then signs the bundle.
@@ -72,13 +72,13 @@ The relying party does not have to trust the signer's clock, which may have been
 
 This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
 
-A second use case is the registration of a signed statement at a Transparency Service.
-Transparency Services, as described in {{-SCITT}}, notarize COSE-signed statements by registering them in verifiable append-only logs.
-Once a signed statement is registered, it cannot be changed.
-In certain cases, the registration policy of a Transparency Service may require adding a timestamp to the unprotected header of the COSE-signed statement.
+A second use case is the notarization of a signed document by registering it at a Transparency Service.
+This is common for accountability and auditability of issued documents.
+Once a document is registered at a Transparency Service's append-only log, it cannot be changed.
+In certain cases, the registration policy of a Transparency Service may require adding a trustworthy timestamp to the document at the time of registration.
 This is done to enhance confidence in the timing of the registration, ensuring that the registration could not have occurred before a certain point in time.
-To achieve this, the Transparency Service acquires a TST from a TSA, includes it in the unprotected header of the COSE-signed statement and then registers it.
-Again, a relying party that wants to ascertain the time of registration of a given statement does not have to trust the Transparency Service's clock, which may have been maliciously altered or simply inaccurate.
+To achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.
+A relying party that wants to ascertain the time of registration of a given document does not have to trust the Transparency Service's clock, which may have been maliciously altered or can simply be inaccurate.
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
