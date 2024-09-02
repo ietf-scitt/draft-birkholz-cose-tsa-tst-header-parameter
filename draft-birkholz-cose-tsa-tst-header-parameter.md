@@ -40,9 +40,6 @@ normative:
     =: RFC9052
     -: COSE
 
-informative:
-  I-D.ietf-scitt-architecture: SCITT
-
 entity:
   SELF: "RFCthis"
 
