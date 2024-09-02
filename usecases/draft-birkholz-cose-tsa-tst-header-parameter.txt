@@ -75,9 +75,7 @@ Table of Contents
    4.  Timestamp Processing
    5.  Security Considerations
    6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   7.  Normative References
    Appendix A.   Diagrams
    Acknowledgments
    Contributors
@@ -315,9 +313,7 @@ Table of Contents
 
                     Table 1: New COSE Header Parameters
 
-7.  References
-
-7.1.  Normative References
+7.  Normative References
 
    [IANA.cose_header-parameters]
               IANA, "COSE Header Parameters",
@@ -345,16 +341,6 @@ Table of Contents
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
-
-7.2.  Informative References
-
-   [I-D.ietf-scitt-architecture]
-              Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
-              Y., and S. Lasker, "An Architecture for Trustworthy and
-              Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-08, 22 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-08>.
 
 Appendix A.   Diagrams
 
