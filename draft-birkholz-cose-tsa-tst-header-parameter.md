@@ -30,6 +30,10 @@ author:
 contributor:
 - name: Carsten Bormann
   email: cabo@tzi.org
+  contribution: Carsten contributed part of the security considerations.
+- name: Orie Steele
+  email: orie@transmute.industries
+  contribution: Orie contributed an improved version of the diagrams.
 
 normative:
   STD70:
@@ -105,8 +109,7 @@ A signed COSE message is then built as follows:
 The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
 
 ~~~ aasvg
-{::include ascii-art/ttc.ascii-art}
-{::include ascii-art/legenda.ascii-art}
+{::include ascii-art/ttc-alt.ascii-art}
 ~~~
 {: #fig-timestamp-then-cose artwork-align="center"
    title="Timestamp, then COSE (TCC)"}
@@ -119,8 +122,7 @@ The obtained timestamp token is then added back as an unprotected header into th
 This mode is utilized when a record of the timing of the signature operation is desired.
 
 ~~~ aasvg
-{::include ascii-art/ctt.ascii-art}
-{::include ascii-art/legenda.ascii-art}
+{::include ascii-art/ctt-alt.ascii-art}
 ~~~
 {: #fig-cose-then-timestamp artwork-align="center"
    title="COSE, then Timestamp (CTT)"}
