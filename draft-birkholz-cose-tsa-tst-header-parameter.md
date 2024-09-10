@@ -45,7 +45,8 @@ entity:
 
 --- abstract
 
-This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (COSE_Sign and COSE_Sign1). This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
+This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
+This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
 
 --- middle
 
@@ -53,15 +54,38 @@ This document defines a CBOR Signing And Encrypted (COSE) header parameter for i
 
 RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that it was created before a given time.
 
-This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (COSE_Sign and COSE_Sign1).
+This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (`COSE_Sign` and `COSE_Sign1`).
+
+## Use Cases
+
+This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
+
+A first use case is a digital document signed alongside a trustworthy timestamp.
+This is a common case in legal contracts.
+In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
+To achieve this, the document signer acquires a fresh TST for the document from a TSA, combines it with the document, and then signs the bundle.
+Later on, a relying party consuming the signed bundle can be certain that the document existed _at least_ at the time specified by the TSA.
+The relying party does not have to trust the signer's clock, which may have been maliciously altered or simply inaccurate.
+
+This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
+
+A second use case is the notarization of a signed document by registering it at a Transparency Service.
+This is common for accountability and auditability of issued documents.
+Once a document is registered at a Transparency Service's append-only log, its log entry cannot be changed.
+In certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
+This is done to lock the signature to a specific point in time.
+To achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.
+A relying party that wants to ascertain the authenticity of the document after the signing key has been compromised, can do so by making sure that no revocation information has been made public before the time asserted in the TST.
+
+This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
 ## Requirements Notation
 
 {::boilerplate bcp14-tagged}
 
-# Modes of use
+# Modes of Use {#modes}
 
-There are two different modes of composing COSE protection and timestamping.
+There are two different modes of composing COSE protection and timestamping, motivated by the usage scenarios discussed above.
 
 ## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
