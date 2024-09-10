@@ -72,7 +72,7 @@ This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-ti
 A second use case is the notarization of a signed document by registering it at a Transparency Service.
 This is common for accountability and auditability of issued documents.
 Once a document is registered at a Transparency Service's append-only log, its log entry cannot be changed.
-In certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the document to show that the signature could also be validated at the time of registration.
+In certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
 This is done to enhance confidence in the authenticity of the document at the time of registration, enshrining that a signature was successfully validated.
 To achieve this, the Transparency Service acquires a TST from a TSA when its registration policy is met, bundles it alongside the signed document, and then registers it.
 A relying party that wants to ascertain the authenticity of a document at a certain time does not have to trust the Transparency Service's clock, which may have been maliciously altered or can simply be inaccurate.
