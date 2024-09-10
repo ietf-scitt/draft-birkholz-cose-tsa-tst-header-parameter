@@ -75,7 +75,7 @@ Once a document is registered at a Transparency Service's append-only log, its l
 In certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
 This is done to lock the signature to a specific point in time.
 To achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.
-A relying party that wants to ascertain the authenticity of a document at a certain time does not have to trust the Transparency Service's clock, which may have been maliciously altered or can simply be inaccurate.
+A relying party that wants to ascertain the authenticity of the document after the signing key has been compromised, can do so by making sure that no revocation information has been made public before the time asserted in the TST.
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
