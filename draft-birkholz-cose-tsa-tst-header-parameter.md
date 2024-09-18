@@ -60,7 +60,7 @@ RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that 
 
 This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (`COSE_Sign` and `COSE_Sign1`).
 
-## Use Cases
+## Use Cases
 
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
 
@@ -76,10 +76,10 @@ This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-ti
 A second use case is the notarization of a signed document by registering it at a Transparency Service.
 This is common for accountability and auditability of issued documents.
 Once a document is registered at a Transparency Service's append-only log, its log entry cannot be changed.
-In certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
+In certain cases, such as when a short-lived certificate is used for the signature, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
 This is done to lock the signature to a specific point in time.
 To achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.
-A relying party that wants to ascertain the authenticity of the document after the signing key has been compromised, can do so by making sure that no revocation information has been made public before the time asserted in the TST.
+A relying party that wants to ascertain the authenticity of the document after the signing key has expired (or has been compromised), can do so by making sure that no revocation information has been made public before the time asserted in the TST.
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
