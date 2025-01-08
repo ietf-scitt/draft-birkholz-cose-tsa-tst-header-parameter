@@ -146,9 +146,9 @@ To minimize dependencies, the hash algorithm used for signing the COSE message S
 
 The `3161-ctt` COSE _unprotected_ header parameter MUST be used for the mode described in {{sec-cose-then-timestamp}}.
 
-The message imprint sent in the request to the TSA MUST be either:
+The MessageImprint sent in the request to the TSA MUST be:
 
-* the hash of the signature field of the `COSE_Sign1` message.
+* the hash of the signature field of the `COSE_Sign1` message, or
 * the hash of the signatures field of the `COSE_Sign` message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
@@ -160,10 +160,10 @@ The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeS
 
 RFC 3161 timestamp tokens use CMS as signature envelope format.
 {{-CMS}} provides the details about signature verification, and {{-TSA}} provides the details specific to timestamp token validation.
-The payload of the signed timestamp token is the TSTInfo structure defined in {{-TSA}}, which contains the message imprint that was sent to the TSA.
-The hash algorithm is contained in the message imprint structure, together with the hash itself.
+The payload of the signed timestamp token is the TSTInfo structure defined in {{-TSA}}, which contains the MessageImprint that was sent to the TSA.
+The hash algorithm is contained in the MessageImprint structure, together with the hash itself.
 
-As part of the signature verification, the receiver MUST make sure that the message imprint in the embedded timestamp token matches a hash of either the payload, signature, or signature fields, depending on the mode of use and type of COSE structure.
+As part of the signature verification, the receiver MUST make sure that the MessageImprint in the embedded timestamp token matches a hash of either the payload, signature, or signature fields, depending on the mode of use and type of COSE structure.
 
 {{Appendix B of -TSA}} provides an example that illustrates how timestamp tokens can be used to verify signatures of a timestamped message when utilizing X.509 certificates.
 
