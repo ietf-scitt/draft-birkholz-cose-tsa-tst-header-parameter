@@ -106,8 +106,6 @@ A signed COSE message is then built as follows:
 * The obtained timestamp token is added to the protected headers,
 * The original datum becomes the payload of the signed COSE message.
 
-The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
-
 ~~~ aasvg
 {::include ascii-art/ttc-alt.ascii-art}
 ~~~
@@ -139,6 +137,8 @@ To clearly separate their semantics two different COSE header parameters are def
 The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode described in {{sec-timestamp-then-cose}}.
 
 The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
+
+The MessageImprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
 
 To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
 
