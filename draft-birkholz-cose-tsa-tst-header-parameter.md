@@ -146,15 +146,15 @@ To minimize dependencies, the hash algorithm used for signing the COSE message S
 
 The `3161-ctt` COSE _unprotected_ header parameter MUST be used for the mode described in {{sec-cose-then-timestamp}}.
 
-The MessageImprint sent in the request to the TSA MUST be:
+The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
+
+The message imprint sent in the request to the TSA MUST be either:
 
 * the hash of the signature field of the `COSE_Sign1` message, or
 * the hash of the signatures field of the `COSE_Sign` message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
-
-The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
 # Timestamp Processing
 
