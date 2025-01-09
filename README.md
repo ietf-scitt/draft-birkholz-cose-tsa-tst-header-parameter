@@ -1,6 +1,6 @@
-# Header parameter for RFC 3161 Time-Stamp Tokens
+# COSE Header parameter for RFC 3161 Time-Stamp Tokens
 
-This is the working area for the individual Internet-Draft, "Header parameter for RFC 3161 Time-Stamp Tokens".
+This is the working area for the individual Internet-Draft, "COSE Header parameter for RFC 3161 Time-Stamp Tokens".
 
 * [Editor's Copy](https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/#go.draft-birkholz-cose-tsa-tst-header-parameter.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-birkholz-cose-tsa-tst-header-parameter)
