@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 3 March 2025                                             Linaro
+Expires: 13 July 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                          30 August 2024
+                                                          9 January 2025
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -16,8 +16,8 @@ Expires: 3 March 2025                                             Linaro
 
 Abstract
 
-   This document defines a CBOR Signing And Encrypted (COSE) header
-   parameter for incorporating RFC 3161-based timestamping into COSE
+   This document defines two CBOR Signing And Encrypted (COSE) header
+   parameters for incorporating RFC 3161-based timestamping into COSE
    message structures (COSE_Sign and COSE_Sign1).  This enables the use
    of established RFC 3161 timestamping infrastructure to prove the
    creation time of a message.
@@ -45,11 +45,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 March 2025.
+   This Internet-Draft will expire on 13 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -64,8 +64,9 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Requirements Notation
-   2.  Modes of use
+     1.1.  Use Cases
+     1.2.  Requirements Notation
+   2.  Modes of Use
      2.1.  Timestamp then COSE (TTC)
      2.2.  COSE then Timestamp (CTT)
    3.  RFC 3161 Time-Stamp Tokens COSE Header Parameters
@@ -75,7 +76,6 @@ Table of Contents
    5.  Security Considerations
    6.  IANA Considerations
    7.  Normative References
-   Appendix A.   Diagrams
    Acknowledgments
    Contributors
    Authors' Addresses
@@ -91,7 +91,44 @@ Table of Contents
    infrastructure to be used with COSE structures used for signing
    (COSE_Sign and COSE_Sign1).
 
-1.1.  Requirements Notation
+1.1.  Use Cases
+
+   This section discusses two use cases, each representing one of the
+   two modes of use defined in Section 2.
+
+   A first use case is a digital document signed alongside a trustworthy
+   timestamp.  This is a common case in legal contracts.  In such
+   scenario, the document signer wants to reinforce the claim that the
+   document existed on a specific date.  To achieve this, the document
+   signer acquires a fresh TST for the document from a TSA, combines it
+   with the document, and then signs the bundle.  Later on, a relying
+   party consuming the signed bundle can be certain that the document
+   existed _at least_ at the time specified by the TSA.  The relying
+   party does not have to trust the signer's clock, which may have been
+   maliciously altered or simply inaccurate.
+
+   This usage scenario motivates the "Timestamp then COSE" mode defined
+   in Section 2.1.
+
+   A second use case is the notarization of a signed document by
+   registering it at a Transparency Service.  This is common for
+   accountability and auditability of issued documents.  Once a document
+   is registered at a Transparency Service's append-only log, its log
+   entry cannot be changed.  In certain cases, such as when a short-
+   lived certificate is used for the signature, the registration policy
+   of a Transparency Service may add a trustworthy timestamp to the
+   signed document.  This is done to lock the signature to a specific
+   point in time.  To achieve this, the Transparency Service acquires a
+   TST from a TSA, bundles it alongside the signed document, and then
+   registers it.  A relying party that wants to ascertain the
+   authenticity of the document after the signing key has expired (or
+   has been compromised), can do so by making sure that no revocation
+   information has been made public before the time asserted in the TST.
+
+   This usage scenario motivates the "COSE then Timestamp" mode
+   described in Section 2.2.
+
+1.2.  Requirements Notation
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -99,10 +136,16 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Modes of use
+2.  Modes of Use
 
    There are two different modes of composing COSE protection and
-   timestamping.
+   timestamping, motivated by the usage scenarios discussed above.
+
+   The diagrams in this section illustrate the processing flow of the
+   specified modes.  For simplicity, only the COSE_Sign1 processing is
+   shown.  Similar diagrams for COSE_Sign can be derived by allowing
+   multiple private-key boxes and replacing the label [signature] with
+   [signatures].
 
 2.1.  Timestamp then COSE (TTC)
 
@@ -118,20 +161,35 @@ Table of Contents
 
    *  The original datum becomes the payload of the signed COSE message.
 
- .---------.              .---------------.     .----------------------.
- | payload +------------->| Sig_structure +---->| COSE_Sign/COSE_Sign1 |
- '----+----'              '---------------'     '----------------------'
-      |                          ^
-      |     .---.                |
-      |    |     |     .-----.   |
-      '--->| TSA +---->| TST +---'
-           |     |     '-----'
-            '---'
+   .--------.                                     .-----.
+   | Signer |                                     | TSA |
+   +--------+----------------------------------.  +-----+-------------.
+   |   .-------------.          .-------.      |  |   .-------------. |
+   |  / private-key /           | nonce +-------->+  / private-key /  |
+   | '-+-----------'            '-------'      |  | '------+------'   |
+   |   |                       .---------.     |  |        |          |
+   |   |  .-------.   .----.   | Message |     |  |        |          |
+   |   |  + datum +->+ hash +->+ Imprint +------->+       .+.         |
+   |   |  '-+-----'   '----'   '---------'     |  |      | L | Clock  |
+   |   |    |                                  |  |       '+'         |
+   |   |    |               .-------------.    |  |        |          |
+   |   v    v               |  protected  |    |  |        v          |
+   |  .-------.             |   .-----.   |    |  |    .---------.    |
+   | |  Sign1  +<-----------+   | TST |<----------+   | timestamp |   |
+   |  '-+-----'             |   '-----'   |    |  |    '---------'    |
+   |    |                   '-------------'    |  |                   |
+   '----|--------------------------------------'  '-------------------'
+        |                                 .-------------.
+        +-------------+-----------+       | unprotected |
+        |             |            |      |   .-----.   |
+   [protected]    [payload]   [signature] |   | ... |   |
+        |             |            |      |   '-----'   |
+        |             v            v      '------+------'
+        |     .-------+------------+-----.       |
+         '--->+     rfc3161-ttc COSE     +<-----'
+              '--------------------------'
 
-                  Figure 1: Timestamp, then COSE (TTC)
-
-   The message imprint sent to the TSA (Section 2.4 of [RFC3161]) MUST
-   be the hash of the payload field of the COSE signed object.
+                    Figure 1: Timestamp, then COSE (TCC)
 
 2.2.  COSE then Timestamp (CTT)
 
@@ -143,19 +201,32 @@ Table of Contents
    This mode is utilized when a record of the timing of the signature
    operation is desired.
 
-                 .----------------------.         .-----.
-                 | COSE_Sign/COSE_Sign1 |<--------+ TST |
-                 '----+-----------------'         '-----'
-                      |                              ^
-                      v                              |
-                 .----------------------.            |
-                 | signatures/signature |            |
-                 '----+-----------------'            |
-                      |                     .---.    |
-                      |                    |     |   |
-                      '------------------->| TSA +---'
-                                           |     |
-                                            '---'
+   .--------.                                     .-----.
+   | Signer |                                     | TSA |
+   +--------+----------------------------------.  +-----+-------------.
+   |   .-------------. .-----------. .-------. |  |   .-------------. |
+   |  / private-key /  | protected | | datum | |  |  / private-key /  |
+   | '-----+-------'   '---+-------' '---+---' |  | '------+------'   |
+   |       |               |             |     |  |        |          |
+   |       +---------------+------------'      |  |        |          |
+   |       |                                   |  |       .+.         |
+   |       v                  .---------.      |  |      | L | Clock  |
+   |  .---------.    .----.   | Message |      |  |       '+'         |
+   | |   Sign1   +->+ hash +->+ Imprint +-------->|        |          |
+   |  '-+-------'    '----'   '---------'      |  |        v          |
+   |    |                      .-------.       |  |    .---------.    |
+   |    |                      | nonce +--------->|   | timestamp |   |
+   |    |                      '-------'       |  |    '---------'    |
+   '----|--------------------------------------'  '---------+---------'
+        |                                 .-------------.   |
+        +-------------+-----------+       | unprotected |   |
+        |             |            |      |   .-----.   |   |
+   [protected]    [payload]   [signature] |   | TST |<-----'
+        |             |            |      |   '-----'   |
+        |             v            v      '------+------'
+        |     .-------+------------+-----.       |
+         '--->+     rfc3161-ctt COSE     +<-----'
+              '--------------------------'
 
                     Figure 2: COSE, then Timestamp (CTT)
 
@@ -178,6 +249,9 @@ Table of Contents
    The 3161-ttc protected header parameter contains a DER-encoded
    RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
+   The MessageImprint sent to the TSA (Section 2.4 of [RFC3161]) MUST be
+   the hash of the payload field of the COSE signed object.
+
    To minimize dependencies, the hash algorithm used for signing the
    COSE message SHOULD be the same as the algorithm used in the RFC3161
    MessageImprint.
@@ -187,9 +261,12 @@ Table of Contents
    The 3161-ctt COSE _unprotected_ header parameter MUST be used for the
    mode described in Section 2.2.
 
+   The 3161-ctt unprotected header parameter contains a DER-encoded
+   RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
+
    The message imprint sent in the request to the TSA MUST be either:
 
-   *  the hash of the signature field of the COSE_Sign1 message.
+   *  the hash of the signature field of the COSE_Sign1 message, or
 
    *  the hash of the signatures field of the COSE_Sign message.
 
@@ -198,21 +275,18 @@ Table of Contents
    may not be possible if the timestamp token has been obtained outside
    the processing context in which the COSE object is assembled.
 
-   The 3161-ctt unprotected header parameter contains a DER-encoded
-   RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
-
 4.  Timestamp Processing
 
    RFC 3161 timestamp tokens use CMS as signature envelope format.
    [STD70] provides the details about signature verification, and
    [RFC3161] provides the details specific to timestamp token
    validation.  The payload of the signed timestamp token is the TSTInfo
-   structure defined in [RFC3161], which contains the message imprint
+   structure defined in [RFC3161], which contains the MessageImprint
    that was sent to the TSA.  The hash algorithm is contained in the
-   message imprint structure, together with the hash itself.
+   MessageImprint structure, together with the hash itself.
 
    As part of the signature verification, the receiver MUST make sure
-   that the message imprint in the embedded timestamp token matches a
+   that the MessageImprint in the embedded timestamp token matches a
    hash of either the payload, signature, or signature fields, depending
    on the mode of use and type of COSE structure.
 
@@ -263,7 +337,7 @@ Table of Contents
    | Name     | Label | Value | Value    | Description     | Reference |
    |          |       | Type  | Registry |                 |           |
    +==========+=======+=======+==========+=================+===========+
-   | 3161-tcc | TBD1  | bstr  | -        | RFC 3161        | RFCthis,  |
+   | 3161-ttc | TBD1  | bstr  | -        | RFC 3161        | RFCthis,  |
    |          |       |       |          | timestamp       | Section   |
    |          |       |       |          | token           | 3.1       |
    +----------+-------+-------+----------+-----------------+-----------+
@@ -303,100 +377,6 @@ Table of Contents
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
 
-Appendix A.   Diagrams
-
-   The diagrams in this appendix illustrate the processing flow of the
-   modes specified in Section 2.1 and Section 2.2 respectively.
-
-   For simplicity, only the COSE_Sign1 processing is shown.  Similar
-   diagrams for COSE_Sign can be derived by allowing multiple SK_cose
-   boxes and replacing the label [signature] with [signatures].
-
-  .--------.                                           .-----.
-  | Signer |                                           | TSA |
-  +--------+----------------------------------------.  +-----+---------.
-  | .-------.               .----.                  |  |      .-.      |
-  | | datum +------------->| hash |                 |  |     | L |     |
-  | '-+---+-'               '-+--'                  |  |      '+'      |
-  |   |   |                   |                     |  |       |       |
-  |   |   |                   |                     |  |       v       |
-  |   |   |                   v                     |  |  .---------.  |
-  |   |   |                 .----------------.      |  | | timestamp | |
-  |   |   |                 | messageImprint +------+->|  '---------'  |
-  |   |   |                 '----------------'      |  |       ^       |
-  |   |   |                                         |  |       |       |
-  |   |   |                 .-------.               |  |   .---+----.  |
-  |   |   |                 | nonce +---------------+->|  / SK_tsa /   |
-  |   |   |                 '-------'               |  | '--------'    |
-  |   |   |                                         |  '-------+-------'
-  |   |   |                 .------------------.    |          |
-  |   |   |                 |       phdr       |    |          |
-  |   |   |     .---------. | .-----.  .-----. |    |          |
-  |   |   |    / SK_cose /  | | ... |  | TST |<-----+---------'
-  |   |   |   '----+----'   | '-----'  '-----' |    |
-  |   |   |        |        '--+--+------------'    |
-  |   |   |        v           |  |                 |
-  |   |   |     .-----.        |  |                 |
-  |   |    '-->| Sign1 |<-----'   |    .---------.  |
-  |   |         '--+--'           |    |  uhdr   |  |
-  |   |            |              |    | .-----. |  |
-  |   |            |              |    | | ... | |  |
-  |   |       [signature]       [phdr] | '-----' |  |
-  |   |            |              |    '----+----'  |
-  |   |            |              |         |       |
-  '---+------------+--------------+---------+-------'
-      |            |              |         |
-   [payload]       v              v       [uhdr]
-      |          .------------------.       |
-       '-------->| rfc3161-ttc COSE |<-----'
-                 '------------------'
-
-                      Figure 3: Timestamp then COSE
-
-.--------.
-| Signer |
-+--------+------------------------------------------.
-|                         .-----------.             |
-|                         |    phdr   |             |
-| .-------.   .---------. |  .-----.  |             |
-| | datum |  / SK_cose /  |  | ... |  |             |
-| '--+-+--' '----+----'   |  '-----'  |             |
-|    | |         |        '-+-+-------'             |
-|    | |         v          | |                     |
-|    | |      .-----.       | |                     |
-|    |  '--->| Sign1 |<-----' |                     |
-|    |        '-+-+-'         |                     |  .-----.
-|    |          | |           |     .----.          |  | TSA |
-|    |          |  '----------)--->| hash |         |  +-----+---------.
-|    |          |             |     '-+--'          |  |      .-.      |
-|    |          |             |       |             |  |     | L |     |
-|    |          |             |       v             |  |      '+'      |
-|    |          |             |  .----------------. |  |       |       |
-|    |          |             |  | messageImprint +-+->|       v       |
-|    |          |             |  '----------------' |  |  .---------.  |
-|    |          |             |                     |  | | timestamp | |
-|    |          |             |  .-------.          |  |  '---------'  |
-|    |          |             |  | nonce +----------+->|       ^       |
-|    |          |             |  '-------'          |  |       |       |
-|    |          |             |                     |  |   .---+----.  |
-|    |     [signature]     [phdr]                   |  |  / SK_tsa /   |
-|    |          |             |                     |  | '--------'    |
-|    |          |             | .-----------------. |  |               |
-|    |          |             | |      uhdr       | |  '-------+-------'
-|    |          |             | | .-----. .-----. | |          |
-|    |          |             | | | ... | | TST |<--+---------'
-|    |          |             | | '-----' '-----' | |
-|    |          |             | '--------+--------' |
-|    |          |             |          |          |
-'----+----------+-------------+----------+----------'
-     |          |             |          |
- [payload]      v             v        [uhdr]
-     |        .------------------.       |
-      '------>| rfc3161-ctt COSE |<-----'
-              '------------------'
-
-                    Figure 4: COSE then Timestamp
-
 Acknowledgments
 
    The editors would like to thank Carl Wallace, Leonard Rosenthol,
@@ -408,6 +388,14 @@ Contributors
    Carsten Bormann
    Email: cabo@tzi.org
 
+
+   Carsten contributed part of the security considerations.
+
+   Orie Steele
+   Email: orie@transmute.industries
+
+
+   Orie contributed an improved version of the diagrams.
 
 Authors' Addresses
 
