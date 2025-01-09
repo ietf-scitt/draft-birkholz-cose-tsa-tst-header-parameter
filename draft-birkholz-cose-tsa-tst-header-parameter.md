@@ -49,7 +49,7 @@ entity:
 
 --- abstract
 
-This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
+This document defines two CBOR Signing And Encrypted (COSE) header parameters for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
 This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
 
 --- middle
@@ -60,7 +60,7 @@ RFC 3161 {{-TSA}} provides a method to timestamp a message digest to prove that 
 
 This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}} header parameters that carry the TimestampToken (TST) output of RFC 3161, thus allowing existing and widely deployed trust infrastructure to be used with COSE structures used for signing (`COSE_Sign` and `COSE_Sign1`).
 
-## Use Cases
+## Use Cases
 
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
 
@@ -76,10 +76,10 @@ This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-ti
 A second use case is the notarization of a signed document by registering it at a Transparency Service.
 This is common for accountability and auditability of issued documents.
 Once a document is registered at a Transparency Service's append-only log, its log entry cannot be changed.
-In certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
+In certain cases, such as when a short-lived certificate is used for the signature, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
 This is done to lock the signature to a specific point in time.
 To achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.
-A relying party that wants to ascertain the authenticity of the document after the signing key has been compromised, can do so by making sure that no revocation information has been made public before the time asserted in the TST.
+A relying party that wants to ascertain the authenticity of the document after the signing key has expired (or has been compromised), can do so by making sure that no revocation information has been made public before the time asserted in the TST.
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
@@ -105,8 +105,6 @@ A signed COSE message is then built as follows:
 
 * The obtained timestamp token is added to the protected headers,
 * The original datum becomes the payload of the signed COSE message.
-
-The message imprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
 
 ~~~ aasvg
 {::include ascii-art/ttc-alt.ascii-art}
@@ -140,6 +138,8 @@ The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode descr
 
 The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
 
+The MessageImprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+
 To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
 
 ## `3161-ctt` {#sec-tst-hdr-ctt}
@@ -150,7 +150,7 @@ The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeS
 
 The message imprint sent in the request to the TSA MUST be either:
 
-* the hash of the signature field of the `COSE_Sign1` message.
+* the hash of the signature field of the `COSE_Sign1` message, or
 * the hash of the signatures field of the `COSE_Sign` message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
@@ -160,10 +160,10 @@ This may not be possible if the timestamp token has been obtained outside the pr
 
 RFC 3161 timestamp tokens use CMS as signature envelope format.
 {{-CMS}} provides the details about signature verification, and {{-TSA}} provides the details specific to timestamp token validation.
-The payload of the signed timestamp token is the TSTInfo structure defined in {{-TSA}}, which contains the message imprint that was sent to the TSA.
-The hash algorithm is contained in the message imprint structure, together with the hash itself.
+The payload of the signed timestamp token is the TSTInfo structure defined in {{-TSA}}, which contains the MessageImprint that was sent to the TSA.
+The hash algorithm is contained in the MessageImprint structure, together with the hash itself.
 
-As part of the signature verification, the receiver MUST make sure that the message imprint in the embedded timestamp token matches a hash of either the payload, signature, or signature fields, depending on the mode of use and type of COSE structure.
+As part of the signature verification, the receiver MUST make sure that the MessageImprint in the embedded timestamp token matches a hash of either the payload, signature, or signature fields, depending on the mode of use and type of COSE structure.
 
 {{Appendix B of -TSA}} provides an example that illustrates how timestamp tokens can be used to verify signatures of a timestamped message when utilizing X.509 certificates.
 
