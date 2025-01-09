@@ -49,7 +49,7 @@ entity:
 
 --- abstract
 
-This document defines a CBOR Signing And Encrypted (COSE) header parameter for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
+This document defines two CBOR Signing And Encrypted (COSE) header parameters for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
 This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
 
 --- middle
