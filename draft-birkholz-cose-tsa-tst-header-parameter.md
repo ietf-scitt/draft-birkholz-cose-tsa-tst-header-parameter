@@ -9,6 +9,8 @@ wg: COSE
 kw: Internet-Draft
 cat: std
 stream: IETF
+venue:
+  github: ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter
 
 author:
 - name: Henk Birkholz
