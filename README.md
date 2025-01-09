@@ -1,11 +1,11 @@
 # COSE Header parameter for RFC 3161 Time-Stamp Tokens
 
-This is the working area for the individual Internet-Draft, "COSE Header parameter for RFC 3161 Time-Stamp Tokens".
+This is the working area for the IETF [COSE Working Group](https://datatracker.ietf.org/wg/cose/documents/) Internet-Draft, "COSE Header parameter for RFC 3161 Time-Stamp Tokens".
 
-* [Editor's Copy](https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/#go.draft-birkholz-cose-tsa-tst-header-parameter.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-birkholz-cose-tsa-tst-header-parameter)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-birkholz-cose-tsa-tst-header-parameter)
-* [Compare Editor's Copy to Individual Draft](https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/#go.draft-birkholz-cose-tsa-tst-header-parameter.diff)
+* [Editor's Copy](https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/#go.draft-ietf-cose-tsa-tst-header-parameter.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-cose-tsa-tst-header-parameter)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-cose-tsa-tst-header-parameter)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/#go.draft-ietf-cose-tsa-tst-header-parameter.diff)
 
 
 ## Contributing
