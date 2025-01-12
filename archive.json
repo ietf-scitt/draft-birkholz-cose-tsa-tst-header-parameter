@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-03-14T01:02:15.963957+00:00",
+  "timestamp": "2025-01-12T00:42:53.808339+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -47,6 +47,21 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "WGLC",
+      "description": "WGLC",
+      "color": "9D3938"
+    },
+    {
+      "name": "artart",
+      "description": "ARTART review",
+      "color": "5319e7"
+    },
+    {
+      "name": "genart",
+      "description": "GenART review",
+      "color": "bfdadc"
     }
   ],
   "issues": [
@@ -55,7 +70,7 @@
       "id": "I_kwDOH8Js785d9-Bg",
       "title": "Next steps",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "letmaik",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -65,9 +80,395 @@
       ],
       "body": "@henkbirkholz What are the next steps to progress this? COSE WG mailing list? Any content changes?",
       "createdAt": "2023-02-08T17:27:52Z",
-      "updatedAt": "2023-02-08T17:27:52Z",
-      "closedAt": null,
+      "updatedAt": "2023-07-05T13:15:21Z",
+      "closedAt": "2023-07-05T13:15:20Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "Good for CfA request",
+          "createdAt": "2023-07-05T13:15:20Z",
+          "updatedAt": "2023-07-05T13:15:20Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOH8Js785rHjpG",
+      "title": "why not build on countersignatures?",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/3",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I think it's be advantageous to frame this as some kind of COSE countersignature.\r\nThis way we can reuse all the good work that went in to RFC9338 and build on stacks that already implement it.\r\nIn particular, ISTM we can take all of [\u00a73.3](https://www.rfc-editor.org/rfc/rfc9338.html#name-signing-and-verification-pr) in terms of defining the target structures, and just specify how `ToBeSigned` is transformed into a RFC3161 `MessageImprint`.\r\n\r\nSketching the produce path:\r\n\r\n* populate `Countersign_structure` as specified by RFC9338 except using the string `\"RFC3161-TST\"` as `context`\r\n* create the value `ToBeSigned` by encoding the `Countersign_structure` to a byte string as per RFC9338\r\n* use `$your_fav_hash_alg` to hash `ToBeSigned` and create an RFC3161 `MessageImprint`\r\n* do the dance with your trusted TSA as specified in RFC3161\r\n* wrap the returned DER encoded `TimeStampToken` in a CBOR byte string and set it as the value of the unprotected header parameter `TBD-RFC3161-TST`\r\n",
+      "createdAt": "2023-07-10T16:42:27Z",
+      "updatedAt": "2024-08-27T12:12:27Z",
+      "closedAt": "2024-08-27T12:12:27Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "visually:\r\n\r\n```mermaid\r\ngraph TB\r\n  C[\"COSE thing (payload)\"]\r\n  B[\"RFC9338.Countersign_structure\"]\r\n  MI[\"RFC3161.messageImprint\"]\r\n  C --> B\r\n  B -- hash --> MI\r\n  MI -- RFC3161 --> TST\r\n  TST -- unprotected hdr --> C\r\n```",
+          "createdAt": "2023-07-14T10:30:34Z",
+          "updatedAt": "2023-07-14T10:48:33Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is now OBE as we've chosen to go for a simpler model.",
+          "createdAt": "2024-08-27T12:12:27Z",
+          "updatedAt": "2024-08-27T12:12:27Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOH8Js785rkPoN",
+      "title": "a case for the protected header usage",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/4",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed, there may be a use case for \"non-countersignature\" uses of the header:\r\n```mermaid\r\ngraph TB\r\n  C[\"COSE thing\"]\r\n  MI[\"RFC3161.messageImprint\"]\r\n  payload -- hash --> MI \r\n  MI -- RFC3161 --> TST\r\n  TST -- protected hdr --> C\r\n  payload --> C\r\n```",
+      "createdAt": "2023-07-14T10:51:43Z",
+      "updatedAt": "2024-08-27T12:11:50Z",
+      "closedAt": "2024-08-27T12:11:50Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is now incorporated as Timestamp-Then-COSE (TTC) mode.",
+          "createdAt": "2024-08-27T12:11:50Z",
+          "updatedAt": "2024-08-27T12:11:50Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOH8Js786NRre1",
+      "title": "C2PA use case",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/8",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See C2PA spec, the following two sections specifically: [timestamps](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_time_stamps) and [validate the timestamps](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_validate_the_time_stamp).",
+      "createdAt": "2024-06-24T13:10:58Z",
+      "updatedAt": "2024-08-27T13:16:01Z",
+      "closedAt": "2024-08-27T13:16:00Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is now tracked in the wider scope of #17",
+          "createdAt": "2024-08-27T13:16:00Z",
+          "updatedAt": "2024-08-27T13:16:00Z"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOH8Js786UP7g3",
+      "title": "Carl's review",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/13",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "https://mailarchive.ietf.org/arch/msg/cose/QrFj0wP8R0kBjfM3IBITvtC-mSE/\r\n\r\n* [ ] In section 3.2, there is language about minimizing dependencies by using the same hash for the timestamp and the signature. This suggestion does not seem to be unique to CTT, so I\u2019d either repeat the language in 3.1 or move the language to a more general location that covers both use cases.\r\n\r\n* [ ] In section 4, I suggest changing _\u201cthe receiver MUST make sure that the message imprint in the embedded timestamp token matches either the payload or the signature fields, depending on the mode of use\u201d_ to something like _\u201cthe receiver MUST make sure that the message imprint in the embedded timestamp token matches a hash of the payload, signature, or signatures field, depending on the mode of use and type of COSE structure\u201d_",
+      "createdAt": "2024-08-26T16:00:40Z",
+      "updatedAt": "2024-08-28T07:43:20Z",
+      "closedAt": "2024-08-28T07:43:20Z",
       "comments": []
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOH8Js786UQf0n",
+      "title": "improve IANA registration requests",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/14",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "[Mike Prorock](https://mailarchive.ietf.org/arch/msg/cose/ODGg2-CgOqGffy0CL_p0kEx4iFA/) and [Michael Jones](https://mailarchive.ietf.org/arch/msg/cose/ol7SeUqighvpJPVYJ90YSC0SM_I/) have pointed out that the current registration requests are rather informal and could be improved using the templates in [S16.2 of RFC8152](https://datatracker.ietf.org/doc/html/rfc8152#section-16.2).",
+      "createdAt": "2024-08-26T17:13:39Z",
+      "updatedAt": "2024-08-28T07:23:04Z",
+      "closedAt": "2024-08-28T07:23:04Z",
+      "comments": []
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOH8Js786UXh1A",
+      "title": "ack'd people and contributors",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/15",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "ACK += Leonard, the two Michaels, Orie, Carl, Steve\r\nContributors += Carsten",
+      "createdAt": "2024-08-27T12:21:23Z",
+      "updatedAt": "2024-08-28T07:11:51Z",
+      "closedAt": "2024-08-28T07:11:51Z",
+      "comments": []
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOH8Js786UXmNu",
+      "title": "\"heavier\" security considerations",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/16",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "In [his review](https://mailarchive.ietf.org/arch/msg/cose/PzdSsG8GP_S2pguJpPOHyIxdHZY/), Orie commented that: _\"Security considerations seem light.\"_\r\n\r\nWe could add prose that succinctly describes:\r\n1. the attacker model (i.e., a dodgy individual trying to manipulate the COSE signer's or the relying party's local clocks), and\r\n2. the trust model (i.e., local clocks are untrusted, and the TSA clock is trusted by both the COSE signer and its relying parties)\r\n\r\n",
+      "createdAt": "2024-08-27T12:27:52Z",
+      "updatedAt": "2024-08-30T08:10:22Z",
+      "closedAt": "2024-08-30T08:10:22Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The only interesting attack is when the attacker moves the RP's clock in the future.",
+          "createdAt": "2024-08-28T07:52:51Z",
+          "updatedAt": "2024-08-28T11:49:12Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOH8Js786UXvbL",
+      "title": "add use cases",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/17",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "henkbirkholz"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "In [his review](https://mailarchive.ietf.org/arch/msg/cose/PzdSsG8GP_S2pguJpPOHyIxdHZY/), Orie commented that: _\"Some use cases for the 2 modes might improve the document.\"_\r\n\r\nE.g., C2PA, SCITT, PDF timestamping.",
+      "createdAt": "2024-08-27T12:43:04Z",
+      "updatedAt": "2024-09-10T10:52:32Z",
+      "closedAt": "2024-09-10T10:52:32Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Add a paragraph to the Introduction to explain the use cases.\r\n\r\n> _\"This specification is motivated by ...\"_",
+          "createdAt": "2024-08-28T07:54:31Z",
+          "updatedAt": "2024-08-28T07:54:31Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOH8Js786UX0YJ",
+      "title": "9338 reference is confusing",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/18",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [
+        "WGLC"
+      ],
+      "body": "In [his review](https://mailarchive.ietf.org/arch/msg/cose/PzdSsG8GP_S2pguJpPOHyIxdHZY/), Orie commented that:\r\n> IIRC cose counter signatures apply to the protected header, payload and signature, whereas CTT only applies to the signatures.\r\n>\r\n> This means that the TSA does not countersign any protected information in the header?\r\n\r\nThe answer is obviously \"no\", but the fact that the question was raised seems to indicate that the reference to 9338 is potentially confusing.\r\n\r\nNote that if we removed it, nothing would change, which is an incentive to drop.\r\n",
+      "createdAt": "2024-08-27T12:50:42Z",
+      "updatedAt": "2024-08-28T07:27:15Z",
+      "closedAt": "2024-08-28T07:27:15Z",
+      "comments": []
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOH8Js786UYzXT",
+      "title": "allow multiple CTT entries?",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/21",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "henkbirkholz"
+      ],
+      "labels": [
+        "question",
+        "WGLC"
+      ],
+      "body": "C2PA allows multiple timestamps from different TSAs to be added back into the COSE envelope.\r\n\r\nDo we want to do the same and use an array (or the `one-or-more` [construct from RFC9292](https://www.rfc-editor.org/rfc/rfc9393.html#section-2-13))?\r\n\r\nNote that this may slightly complicate processing (and possibly the trust model too) because there would be many \"TSA-time\"s that need to be considered rather than just one.\r\n\r\nCan that aspect of the processing be punted to \"local policy\"?  In the end, if an application decides to ask for $n$ TSTs, it does so because it supposedly knows what to do with them.\r\n\r\nThis probably needs some more discussion. ",
+      "createdAt": "2024-08-27T14:22:10Z",
+      "updatedAt": "2024-09-10T10:24:51Z",
+      "closedAt": "2024-09-10T10:24:51Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**ACTION** @henkbirkholz to ask Leonard on the COSE list.",
+          "createdAt": "2024-08-28T07:58:26Z",
+          "updatedAt": "2024-08-28T11:47:28Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "**ACTION** completed by @thomas-fossati dearest. C2PA's requirement on multiple TSTs in CTT mode of use is rolled back. If there will be no further responses to the contrary to https://mailarchive.ietf.org/arch/msg/cose/KfI7Oo7IIFfpK_b6O35sz7G1_8g this issue will be resolved with no changes.",
+          "createdAt": "2024-09-03T06:22:51Z",
+          "updatedAt": "2024-09-03T06:24:21Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "resolved",
+          "createdAt": "2024-09-10T10:24:48Z",
+          "updatedAt": "2024-09-10T10:24:48Z"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOH8Js786k8Z4m",
+      "title": "A COSE header parameter with two modes or two COSE header parameters for two modes?",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/33",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "artart"
+      ],
+      "body": "From [Shuping's email](https://mailarchive.ietf.org/arch/msg/cose/wumnJiHpaJpQWkE4GgFNWAVRRbM/):\r\n\r\n```\r\nIn the Abstract, it says \"This document defines a CBOR Signing And Encrypted\r\n(COSE) header parameter for ...\". In Section 1, it says \"This document defines\r\ntwo new CBOR Object Signing and Encryption (COSE) [STD96] header parameters\r\nthat ...\" In Section 3, it says \"The two modes described in ... To clearly\r\nseparate their semantics two different COSE header parameters are defined as\r\ndescribed in the following subsections.\"\r\n\r\nSo is it about two COSE header parameters for two modes? Maybe simply changing\r\nthe wording in the Abstract?\r\n```",
+      "createdAt": "2025-01-03T10:02:09Z",
+      "updatedAt": "2025-01-09T12:01:26Z",
+      "closedAt": "2025-01-09T12:01:26Z",
+      "comments": []
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOH8Js786k8alY",
+      "title": "issues with \"message imprint\" (1)",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/34",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "artart"
+      ],
+      "body": "From [Shuping's email](https://mailarchive.ietf.org/arch/msg/cose/wumnJiHpaJpQWkE4GgFNWAVRRbM/):\r\n\r\n```\r\n2. Section 2.1\r\nTo compare through 2.1, 2.2, 3.1, and 3.2, would it be more clear to move this\r\nfollowing sentence to Section 3.1? \"The message imprint sent to the TSA\r\n(Section 2.4 of [RFC3161]) MUST be the hash of the payload field of the COSE\r\nsigned object.\"\r\n```",
+      "createdAt": "2025-01-03T10:04:07Z",
+      "updatedAt": "2025-01-09T12:03:27Z",
+      "closedAt": "2025-01-09T12:03:27Z",
+      "comments": []
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOH8Js786k8a-K",
+      "title": "issues with \"message imprint\" (2)",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/35",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "artart"
+      ],
+      "body": "From [Shuping's email](https://mailarchive.ietf.org/arch/msg/cose/wumnJiHpaJpQWkE4GgFNWAVRRbM/):\r\n\r\n```\r\n3. Section 2.1, 3.2\r\nTo compare against RFC 3161 and the Figures, should \"message imprint\" be\r\n\"messageImprint\"? s/message imprint/messageImprint\r\n```",
+      "createdAt": "2025-01-03T10:05:13Z",
+      "updatedAt": "2025-01-09T12:03:28Z",
+      "closedAt": "2025-01-09T12:03:28Z",
+      "comments": []
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOH8Js786k8bb0",
+      "title": "Better alignment between \u00a73.1 with \u00a73.2",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/36",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "artart"
+      ],
+      "body": "From [Shuping's email](https://mailarchive.ietf.org/arch/msg/cose/wumnJiHpaJpQWkE4GgFNWAVRRbM/):\r\n\r\n```\r\n4. Section 3.1\r\nThis following sentence could be moved to the end of this sub-section, to\r\nbetter align with the similar information in Section 3.2. \"The 3161-ttc\r\nprotected header parameter contains a DER-encoded RFC3161 TimeStampToken\r\nwrapped in a CBOR byte string (Major type 2).\"\r\n```",
+      "createdAt": "2025-01-03T10:06:34Z",
+      "updatedAt": "2025-01-09T12:16:22Z",
+      "closedAt": "2025-01-09T12:16:22Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Note: Moving the equivalent line in \u00a73.2 is probably better, flow-wise.",
+          "createdAt": "2025-01-08T11:50:13Z",
+          "updatedAt": "2025-01-08T11:50:31Z"
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOH8Js786k8b7w",
+      "title": "IANA Considerations, small bug in Table 1",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/37",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "artart"
+      ],
+      "body": "From [Shuping's email](https://mailarchive.ietf.org/arch/msg/cose/wumnJiHpaJpQWkE4GgFNWAVRRbM/):\r\n\r\n```\r\n6. IANA Considerations\r\nIn Table 1.\r\ns/\"3161-tcc\"/\"3161-ttc\"\r\n```",
+      "createdAt": "2025-01-03T10:07:58Z",
+      "updatedAt": "2025-01-09T12:17:07Z",
+      "closedAt": "2025-01-09T12:17:07Z",
+      "comments": []
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOH8Js786l0pjL",
+      "title": "Add examples",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/42",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "genart"
+      ],
+      "body": "[Linda Dunbar's review](https://mailarchive.ietf.org/arch/msg/cose/J9o7A-DXfeRi72h7EOjL13OE3_I/)\r\n\r\n\r\n> _\"The document provides basic diagrams to illustrate the modes but lacks comprehensive examples of the header parameters in action. It would be nicer to add complete example encodings of COSE messages with the proposed parameter.\"_",
+      "createdAt": "2025-01-11T17:52:36Z",
+      "updatedAt": "2025-01-11T18:06:12Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The only problem is that a realistic example can only be crafted once the codepoints are allocated.\r\n\r\nCould pick two from \"private use\" for now and refresh when IANA gives us the real ones.",
+          "createdAt": "2025-01-11T17:53:26Z",
+          "updatedAt": "2025-01-11T18:06:12Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -109,6 +510,1721 @@
           "body": "thx! lgtm",
           "createdAt": "2023-03-13T22:15:37Z",
           "updatedAt": "2023-03-13T22:15:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOH8Js785ey6x2",
+      "title": "Let's start afresh",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/5",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-11-07T11:37:23Z",
+      "updatedAt": "2023-11-07T13:29:03Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "4eebc2684ec6b7683885d69089bb571101fbc056",
+      "headRepository": "thomas-fossati/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "main",
+      "headRefOid": "50a4cdd2907313d94586e1d9fab98b44ddd8f361",
+      "closedAt": "2023-11-07T13:29:03Z",
+      "mergedAt": "2023-11-07T13:29:03Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "50f9349216aa0b5acaca2e949c2c56c6d3b0bc4b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js785mYZIu",
+          "commit": {
+            "abbreviatedOid": "50a4cdd"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-11-07T13:22:12Z",
+          "updatedAt": "2023-11-07T13:22:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOH8Js785nsdrw",
+      "title": "use two separate headers",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/6",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See https://mailarchive.ietf.org/arch/msg/cose/3_gVy4i6CuBeyjxW46js3GgYKj0/",
+      "createdAt": "2024-02-22T21:14:08Z",
+      "updatedAt": "2024-02-24T11:41:30Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "50f9349216aa0b5acaca2e949c2c56c6d3b0bc4b",
+      "headRepository": "thomas-fossati/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "main",
+      "headRefOid": "8f589648c2a32e1f234097a442ace11922e4d763",
+      "closedAt": "2024-02-24T11:41:30Z",
+      "mergedAt": "2024-02-24T11:41:30Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a19b687be98c98503fc7824828623fd5513566a9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js785xNpsZ",
+          "commit": {
+            "abbreviatedOid": "141c4d8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-24T11:35:18Z",
+          "updatedAt": "2024-02-24T11:35:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOH8Js785n0ist",
+      "title": "add a couple of missing IANA refs",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/7",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-24T14:01:56Z",
+      "updatedAt": "2024-02-24T17:32:24Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "a19b687be98c98503fc7824828623fd5513566a9",
+      "headRepository": "thomas-fossati/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "main",
+      "headRefOid": "f0c8fde397a4af0954b7ba408617d3129629c3df",
+      "closedAt": "2024-02-24T17:32:23Z",
+      "mergedAt": "2024-02-24T17:32:23Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "538a4577c02aafe457c1c2a5e21f3edc3665f65f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOH8Js7851__NR",
+      "title": "Clarify disclosure path through payload hashes",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/9",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-20T23:56:34Z",
+      "updatedAt": "2024-07-21T22:32:49Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "00524ed1da844a8d4c338b7a6d286257fba23192",
+      "headRepository": "cabo/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "seccons-disclose",
+      "headRefOid": "f59de8225a2fddc33ec97bdf80dcf19ac83b1e6e",
+      "closedAt": "2024-07-21T22:32:49Z",
+      "mergedAt": "2024-07-21T22:32:49Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "07df6b1ff90e5b8beac013167a42589288e7e2d2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786CivLq",
+          "commit": {
+            "abbreviatedOid": "f59de82"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T00:26:26Z",
+          "updatedAt": "2024-07-21T00:26:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOH8Js786Cjsqa",
+          "commit": {
+            "abbreviatedOid": "f59de82"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T20:39:02Z",
+          "updatedAt": "2024-07-21T20:39:02Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOH8Js786CjtE5",
+          "commit": {
+            "abbreviatedOid": "f59de82"
+          },
+          "author": "letmaik",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T20:54:52Z",
+          "updatedAt": "2024-07-21T20:54:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOH8Js7852Asre",
+      "title": "Nits120",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/10",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "kramdown-rfc housekeeping and IANA terminology",
+      "createdAt": "2024-07-21T11:16:59Z",
+      "updatedAt": "2024-07-21T22:35:06Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "00524ed1da844a8d4c338b7a6d286257fba23192",
+      "headRepository": "cabo/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "nits120",
+      "headRefOid": "9ca15fb61ece8013f4555ac118001d93e356f703",
+      "closedAt": "2024-07-21T22:35:06Z",
+      "mergedAt": "2024-07-21T22:35:06Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "e48f8776996ed38c4d5d038e2c354b4d980b04e9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786CjwDc",
+          "commit": {
+            "abbreviatedOid": "9ca15fb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T22:34:58Z",
+          "updatedAt": "2024-07-21T22:34:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOH8Js7852EWnV",
+      "title": "Make the result publishable.",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/11",
+      "state": "CLOSED",
+      "author": "cabo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This makes IETF -03 publishable.\r\nHowever, this breaks the CI.\r\nThe renaming has to be completed.\r\nBut where is the repo from which IETF -02 was submitted?",
+      "createdAt": "2024-07-22T09:50:33Z",
+      "updatedAt": "2025-01-09T12:29:25Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "e48f8776996ed38c4d5d038e2c354b4d980b04e9",
+      "headRepository": "cabo/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "publishable",
+      "headRefOid": "e6ca8bd026bb4facd4cc29c7eecfd6d4b5c06bb4",
+      "closedAt": "2025-01-09T12:29:25Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> [...] The renaming has to be completed.\r\n\r\nnot sure I understand.  Does that mean this PR should also include a:\r\n```sh\r\ngit mv draft-birkholz-cose-tsa-tst-header-parameter.md draft-ietf-cose-tsa-tst-header-parameter.md\r\n```\r\n?\r\n\r\n> But where is the repo from which IETF -02 was submitted?\r\n\r\nIIRC, for -02 I did a manual submission.\r\n",
+          "createdAt": "2024-07-22T11:55:38Z",
+          "updatedAt": "2024-07-22T11:55:38Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > [...] The renaming has to be completed.\r\n> \r\n> not sure I understand. Does that mean this PR should also include a:\r\n> \r\n> ```shell\r\n> git mv draft-birkholz-cose-tsa-tst-header-parameter.md draft-ietf-cose-tsa-tst-header-parameter.md\r\n> ```\r\n\r\nYes, and some diddling with i-d-template, which has to learn about this change, too.\r\n\r\n> > But where is the repo from which IETF -02 was submitted?\r\n> \r\n> IIRC, for -02 I did a manual submission.\r\n\r\nSo you took the .md from here and changed draft-birkholz into draft-ietf in there before kdrfc'ing manually?\r\n\r\n(Which is what I did for -03 on Henk's request; one of the authors needs to accept that submission.)\r\n",
+          "createdAt": "2024-07-22T12:11:23Z",
+          "updatedAt": "2024-07-22T12:11:23Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "body": "This takes a few more steps. We'll probably butcher that into main (when Thomas is distracted...)",
+          "createdAt": "2025-01-09T12:27:48Z",
+          "updatedAt": "2025-01-09T12:27:48Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOH8Js7855PeT1",
+      "title": "Review on draft-birkholz-cose-tsa-tst-header-parameter.md",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/12",
+      "state": "MERGED",
+      "author": "mprorock",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Very minor feedback for language clarity",
+      "createdAt": "2024-08-23T12:32:16Z",
+      "updatedAt": "2024-08-27T13:47:43Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "e48f8776996ed38c4d5d038e2c354b4d980b04e9",
+      "headRepository": "mprorock/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "patch-1",
+      "headRefOid": "2d5065951519cd7294760ea04d1782004096bb0a",
+      "closedAt": "2024-08-27T13:47:42Z",
+      "mergedAt": "2024-08-27T13:47:42Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "ef102610f95109b40d933780de182cbae9ad79cd"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786Gje9D",
+          "commit": {
+            "abbreviatedOid": "2d50659"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks very much @mprorock, LGTM.",
+          "createdAt": "2024-08-23T14:53:03Z",
+          "updatedAt": "2024-08-23T14:53:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOH8Js7855k23B",
+      "title": "add an ACKs & contributors sections...",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/19",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "...and populate them accordingly.\r\n\r\nFix #15",
+      "createdAt": "2024-08-27T13:38:27Z",
+      "updatedAt": "2024-08-28T07:11:50Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "ef102610f95109b40d933780de182cbae9ad79cd",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "acks-and-contribs",
+      "headRefOid": "a40bf0e7d9d03bde663ffc46b9c26d088a12b62f",
+      "closedAt": "2024-08-28T07:11:50Z",
+      "mergedAt": "2024-08-28T07:11:50Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "8e0f031226a153b03893d1e33a026e60a923f9bc"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786HBpbo",
+          "commit": {
+            "abbreviatedOid": "a40bf0e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T07:10:18Z",
+          "updatedAt": "2024-08-28T07:10:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOH8Js7855k8UJ",
+      "title": "Addressing Carl's WGLC review",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/20",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #13 ",
+      "createdAt": "2024-08-27T13:47:04Z",
+      "updatedAt": "2024-08-28T07:43:19Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "645b4cabb36f848f978380953878d23da8745685",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "issue-13",
+      "headRefOid": "aa2107b34c85d15dcf454862931f51788e5e1d39",
+      "closedAt": "2024-08-28T07:43:19Z",
+      "mergedAt": "2024-08-28T07:43:19Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "cc8c0305a83dbdebe802497c2fdafcbe2ec63e7a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786G6cv5",
+          "commit": {
+            "abbreviatedOid": "79dafb5"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T14:00:38Z",
+          "updatedAt": "2024-08-27T14:00:39Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "this is not the gist of Carl's comment.  He wants us to factor out this paragraph instead, which is not CTT-specific:\r\n\r\n    In either case, to minimize dependencies, the hash algorithm SHOULD\r\n    be the same as the algorithm used for signing the COSE message.  This\r\n    may not be possible if the timestamp token has been obtained outside\r\n    the processing context in which the COSE object is assembled.",
+              "createdAt": "2024-08-27T14:00:39Z",
+              "updatedAt": "2024-08-27T14:01:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HB5sB",
+          "commit": {
+            "abbreviatedOid": "aa2107b"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T07:42:13Z",
+          "updatedAt": "2024-08-28T07:42:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOH8Js7855mfXg",
+      "title": "better IANA registration requests",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/22",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #14",
+      "createdAt": "2024-08-27T16:41:48Z",
+      "updatedAt": "2024-08-28T07:23:03Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "ef102610f95109b40d933780de182cbae9ad79cd",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "iana",
+      "headRefOid": "16fa9cfb2a83a77b4cb4bcb8eb854424faf75ec4",
+      "closedAt": "2024-08-28T07:23:03Z",
+      "mergedAt": "2024-08-28T07:23:03Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "af345133f6ec0efb2757aaab8d6ad2c4014b60f3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786G8a-l",
+          "commit": {
+            "abbreviatedOid": "e97bf05"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T16:50:24Z",
+          "updatedAt": "2024-08-27T16:50:24Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\n| `31610-tcc` | TBD1 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |\r\n| `31610-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |\r\n```",
+              "createdAt": "2024-08-27T16:50:24Z",
+              "updatedAt": "2024-08-27T16:50:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HBrMM",
+          "commit": {
+            "abbreviatedOid": "63c99b7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T07:13:55Z",
+          "updatedAt": "2024-08-28T07:13:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOH8Js786HBs2l",
+          "commit": {
+            "abbreviatedOid": "63c99b7"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T07:17:15Z",
+          "updatedAt": "2024-08-28T07:17:16Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\n| `3161-tcc` | TBD1 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |\r\n| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |\r\n```",
+              "createdAt": "2024-08-28T07:17:16Z",
+              "updatedAt": "2024-08-28T07:17:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HBtKK",
+          "commit": {
+            "abbreviatedOid": "63c99b7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T07:17:54Z",
+          "updatedAt": "2024-08-28T07:17:55Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\n| `31610-tcc` | 31610 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |\r\n| `31610-ctt` | 31611 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |\r\n```",
+              "createdAt": "2024-08-28T07:17:54Z",
+              "updatedAt": "2024-08-28T07:17:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HBvoI",
+          "commit": {
+            "abbreviatedOid": "16fa9cf"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T07:22:55Z",
+          "updatedAt": "2024-08-28T07:22:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOH8Js7855mjuR",
+      "title": "Drop the RFC9338 reference",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/23",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #18",
+      "createdAt": "2024-08-27T16:53:40Z",
+      "updatedAt": "2024-08-28T07:27:14Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "ef102610f95109b40d933780de182cbae9ad79cd",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "drop-9338-ref",
+      "headRefOid": "11f635e86fd50b08d64fd0b32975b045c93eb110",
+      "closedAt": "2024-08-28T07:27:14Z",
+      "mergedAt": "2024-08-28T07:27:14Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "645b4cabb36f848f978380953878d23da8745685"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786HBxyI",
+          "commit": {
+            "abbreviatedOid": "11f635e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T07:27:08Z",
+          "updatedAt": "2024-08-28T07:27:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOH8Js7855s6WK",
+      "title": "more security considerations",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/24",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #16",
+      "createdAt": "2024-08-28T12:17:17Z",
+      "updatedAt": "2024-08-30T08:10:24Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "cc8c0305a83dbdebe802497c2fdafcbe2ec63e7a",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "seccons++",
+      "headRefOid": "2918a381a4432732cb7b51eddc8fcc18416dc7ee",
+      "closedAt": "2024-08-30T08:10:21Z",
+      "mergedAt": "2024-08-30T08:10:21Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "6f0b004647902f555b42310636718b116109ed4a"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> What about \"caching\" a TST before TTC or CTT?\r\n\r\nIn CTT that can't happen unless you can predict the COSE signature, i.e., the content of the datum.\r\n\r\n> The TST basically tells at minimum \"statement not younger than time in TST\". By retrieving a TST and then using it later, you can shift that point \"more into the past\". That is probably is a threat, too?\r\n\r\nSorry, I don't understand this.  You are making a similar point in #25 which I am also failing to grok.  To me, a timestamp asserts the existence of a datum _at least_ at the point in time when the timestamp for that datum is created.  I cannot fathom an attack in which pushing the existence of the datum back in time is an attack on the intended use of the datum.\r\n\r\n",
+          "createdAt": "2024-08-28T21:20:00Z",
+          "updatedAt": "2024-08-29T13:26:30Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786HEcp2",
+          "commit": {
+            "abbreviatedOid": "6ad3420"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T12:17:41Z",
+          "updatedAt": "2024-08-28T12:17:41Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nWe assume an attacker who has the ability to manipulate the clocks on the COSE signer and its relying parties, but not the clock of the TSA.\r\n```",
+              "createdAt": "2024-08-28T12:17:41Z",
+              "updatedAt": "2024-08-28T12:17:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HEm7U",
+          "commit": {
+            "abbreviatedOid": "59ef3da"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "What about \"caching\" a TST before TTC or CTT? The TST basically tells at minimum \"statement not younger than time in TST\". By retrieving a TST and then using it later, you can shift that point \"more into the past\". That is probably is a threat, too?",
+          "createdAt": "2024-08-28T12:36:43Z",
+          "updatedAt": "2024-08-28T12:42:19Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nAttackers could gain the ability to manipulate the local clocks used by the COSE signer or its relying parties, but not the ability to manipulate the clock of the TSA.\r\n```",
+              "createdAt": "2024-08-28T12:36:44Z",
+              "updatedAt": "2024-08-28T12:54:33Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nAdditionally, the TSA is assumed to be a trusted third party, meaning that an attacker cannot impersonate the TSA so that the TSA can only create valid timestamp tokens.\r\n```",
+              "createdAt": "2024-08-28T12:37:37Z",
+              "updatedAt": "2024-08-28T12:55:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HI-46",
+          "commit": {
+            "abbreviatedOid": "59ef3da"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T21:12:41Z",
+          "updatedAt": "2024-08-28T21:12:41Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "the spirit of this suggestion has been captured in [e75174a](https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/24/commits/e75174a9281914f13bbd31b6287ad4e029991169)",
+              "createdAt": "2024-08-28T21:12:41Z",
+              "updatedAt": "2024-08-28T21:12:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HI-_K",
+          "commit": {
+            "abbreviatedOid": "59ef3da"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T21:12:58Z",
+          "updatedAt": "2024-08-28T21:12:59Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "ditto",
+              "createdAt": "2024-08-28T21:12:59Z",
+              "updatedAt": "2024-08-28T21:12:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HI_GU",
+          "commit": {
+            "abbreviatedOid": "e75174a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T21:13:19Z",
+          "updatedAt": "2024-08-28T21:13:19Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-08-28T21:13:19Z",
+              "updatedAt": "2024-08-28T21:13:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZBJ-",
+          "commit": {
+            "abbreviatedOid": "ef88042"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T07:51:14Z",
+          "updatedAt": "2024-08-30T07:51:14Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nHowever, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock to a past time.\r\n```",
+              "createdAt": "2024-08-30T07:51:14Z",
+              "updatedAt": "2024-08-30T07:51:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZBw_",
+          "commit": {
+            "abbreviatedOid": "81a535a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T07:52:23Z",
+          "updatedAt": "2024-08-30T07:52:24Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nHowever, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock to a future time.\r\n```",
+              "createdAt": "2024-08-30T07:52:24Z",
+              "updatedAt": "2024-08-30T07:52:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZDIW",
+          "commit": {
+            "abbreviatedOid": "98ec60f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T07:54:31Z",
+          "updatedAt": "2024-08-30T07:54:31Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nHowever, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock so that the CMS validation fails.\r\n```",
+              "createdAt": "2024-08-30T07:54:31Z",
+              "updatedAt": "2024-08-30T07:54:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZEMu",
+          "commit": {
+            "abbreviatedOid": "d11d5ee"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T07:56:23Z",
+          "updatedAt": "2024-08-30T07:56:24Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\nTo avoid that, the signed COSE object should be integrity protected during transit and at rest.\r\n```",
+              "createdAt": "2024-08-30T07:56:24Z",
+              "updatedAt": "2024-08-30T07:56:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZEyg",
+          "commit": {
+            "abbreviatedOid": "2918a38"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "ltgm",
+          "createdAt": "2024-08-30T07:57:20Z",
+          "updatedAt": "2024-08-30T07:57:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOH8Js7855tBBC",
+      "title": "Adding Usage Scenarios",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/25",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #17 ",
+      "createdAt": "2024-08-28T12:31:19Z",
+      "updatedAt": "2024-09-10T10:52:31Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "6f0b004647902f555b42310636718b116109ed4a",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "usecases",
+      "headRefOid": "d74bec9b735048ac66c71bdda9d1a3f558229160",
+      "closedAt": "2024-09-10T10:52:31Z",
+      "mergedAt": "2024-09-10T10:52:31Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "591f55d29036b47d8aca5811e19a9ea0d85f8ab1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786HFAPX",
+          "commit": {
+            "abbreviatedOid": "1ffd8a8"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T13:17:06Z",
+          "updatedAt": "2024-08-28T13:17:06Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOH8Js786HG6lV",
+          "commit": {
+            "abbreviatedOid": "1ffd8a8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T16:17:33Z",
+          "updatedAt": "2024-08-28T16:24:55Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I'd split this into two and add the respective bits to the last line of the use case sections.",
+              "createdAt": "2024-08-28T16:17:33Z",
+              "updatedAt": "2024-08-28T16:24:55Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "Suggest adding a NL here, they are two separate paragraphs.",
+              "createdAt": "2024-08-28T16:17:59Z",
+              "updatedAt": "2024-08-28T16:24:55Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "`ETITLETOOLONG` :-D",
+              "createdAt": "2024-08-28T16:18:13Z",
+              "updatedAt": "2024-08-28T16:24:55Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "_\"quality\"_ doesn't sound like the right word\r\n",
+              "createdAt": "2024-08-28T16:19:27Z",
+              "updatedAt": "2024-08-28T16:24:55Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "I find this a bit hard to digest.\r\n\r\nYou want to prove that _\"a certain document existed at a certain date\"_ in a way that can't be disputed by a relying party.",
+              "createdAt": "2024-08-28T16:23:42Z",
+              "updatedAt": "2024-08-28T16:24:55Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "ditto",
+              "createdAt": "2024-08-28T16:24:23Z",
+              "updatedAt": "2024-08-28T16:24:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZNyv",
+          "commit": {
+            "abbreviatedOid": "1ffd8a8"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:13:10Z",
+          "updatedAt": "2024-08-30T08:13:10Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nTo motivate the two different modes of use that are specified in this documents, two usage scenarios are illustrated in {{use-one}} and {{use-two}} below.\r\n\r\n```",
+              "createdAt": "2024-08-30T08:13:10Z",
+              "updatedAt": "2024-08-30T08:13:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZP93",
+          "commit": {
+            "abbreviatedOid": "c8e02d2"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:17:05Z",
+          "updatedAt": "2024-08-30T08:17:05Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "Sarcasm aside, I will propose text.",
+              "createdAt": "2024-08-30T08:17:05Z",
+              "updatedAt": "2024-08-30T08:17:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZRBJ",
+          "commit": {
+            "abbreviatedOid": "c8e02d2"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:18:55Z",
+          "updatedAt": "2024-08-30T08:18:56Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": ":heart: ",
+              "createdAt": "2024-08-30T08:18:55Z",
+              "updatedAt": "2024-08-30T08:18:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZSNT",
+          "commit": {
+            "abbreviatedOid": "c8e02d2"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:20:44Z",
+          "updatedAt": "2024-08-30T08:20:44Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nIn support of legal assurances, a signed PDF document can be augmented with a trustworthy timestamp.\r\n```",
+              "createdAt": "2024-08-30T08:20:44Z",
+              "updatedAt": "2024-08-30T08:24:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZWK0",
+          "commit": {
+            "abbreviatedOid": "a9b26e1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:27:03Z",
+          "updatedAt": "2024-08-30T08:27:04Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\nIn essence, a document signer wants to strengthen the assertion that a certain document existed at a certain date.\r\n```",
+              "createdAt": "2024-08-30T08:27:03Z",
+              "updatedAt": "2024-08-30T08:27:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZWTY",
+          "commit": {
+            "abbreviatedOid": "a9b26e1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:27:17Z",
+          "updatedAt": "2024-08-30T08:27:17Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nUsing only its local clock instead, a document signer would be able to tamper with its clock and thereby falsify the recentness of the signing procedure.\r\n```",
+              "createdAt": "2024-08-30T08:27:17Z",
+              "updatedAt": "2024-08-30T08:27:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZWje",
+          "commit": {
+            "abbreviatedOid": "a9b26e1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:27:39Z",
+          "updatedAt": "2024-08-30T08:27:40Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nIn support of legal assurances, a signed document can be augmented with a trustworthy timestamp.\r\n```",
+              "createdAt": "2024-08-30T08:27:39Z",
+              "updatedAt": "2024-08-30T08:27:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZWvL",
+          "commit": {
+            "abbreviatedOid": "a9b26e1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:27:55Z",
+          "updatedAt": "2024-08-30T08:27:55Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n## Usage Scenario 1: A TST Included in Signed Documents {#use-one}\r\n```",
+              "createdAt": "2024-08-30T08:27:55Z",
+              "updatedAt": "2024-08-30T08:27:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZY8i",
+          "commit": {
+            "abbreviatedOid": "134c5f1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:30:46Z",
+          "updatedAt": "2024-08-30T08:30:46Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\nThis usage scenario motivates the \"COSE then Timestamp\" mode below.\r\n```",
+              "createdAt": "2024-08-30T08:30:46Z",
+              "updatedAt": "2024-08-30T08:30:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Hs277",
+          "commit": {
+            "abbreviatedOid": "2eb7db9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-03T07:57:43Z",
+          "updatedAt": "2024-09-03T07:57:44Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nOnce a document is registered at a Transparency Service's append-only log, its log entry cannot be changed.\r\n```",
+              "createdAt": "2024-09-03T07:57:43Z",
+              "updatedAt": "2024-09-03T07:57:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Hs4oX",
+          "commit": {
+            "abbreviatedOid": "2eb7db9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-03T08:00:42Z",
+          "updatedAt": "2024-09-03T08:00:43Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "removing the (redundant) bit that is already explained in L76\r\n\r\n```suggestion\r\nIn certain cases, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.\r\n```",
+              "createdAt": "2024-09-03T08:00:42Z",
+              "updatedAt": "2024-09-03T08:00:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786InfuT",
+          "commit": {
+            "abbreviatedOid": "c737d7f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T10:38:13Z",
+          "updatedAt": "2024-09-10T10:38:13Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\nThis is done to lock the signature to a specific point in time.\r\n```",
+              "createdAt": "2024-09-10T10:38:13Z",
+              "updatedAt": "2024-09-10T10:40:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Inimz",
+          "commit": {
+            "abbreviatedOid": "e8a5392"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T10:43:40Z",
+          "updatedAt": "2024-09-10T10:43:40Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\nTo achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.\r\n```",
+              "createdAt": "2024-09-10T10:43:40Z",
+              "updatedAt": "2024-09-10T10:43:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786InkMQ",
+          "commit": {
+            "abbreviatedOid": "058a908"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-10T10:46:52Z",
+          "updatedAt": "2024-09-10T10:46:52Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\nA relying party that wants to ascertain the authenticity of the document after the signing key has been compromised, can do so by making sure that no revocation information has been made public before the time asserted in the TST.\r\n```",
+              "createdAt": "2024-09-10T10:46:52Z",
+              "updatedAt": "2024-09-10T10:50:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Inmi3",
+          "commit": {
+            "abbreviatedOid": "d74bec9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "given enough guidance you can pass as an artist ;) ",
+          "createdAt": "2024-09-10T10:51:34Z",
+          "updatedAt": "2024-09-10T10:51:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOH8Js785513zQ",
+      "title": "the document defines 2 headers not 1",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/26",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Re-scanning the intro I noticed this remnant from the olden days...",
+      "createdAt": "2024-08-29T14:16:40Z",
+      "updatedAt": "2024-08-30T08:09:53Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "cc8c0305a83dbdebe802497c2fdafcbe2ec63e7a",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "two-headers",
+      "headRefOid": "4adc630cd1723547c58d81c27044de757ec5d3ff",
+      "closedAt": "2024-08-30T08:09:52Z",
+      "mergedAt": "2024-08-30T08:09:52Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "ef85ba783a5f2fb5e49425a0b5f1eabd04c0be72"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786HZLzP",
+          "commit": {
+            "abbreviatedOid": "4adc630"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-30T08:09:44Z",
+          "updatedAt": "2024-08-30T08:09:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOH8Js78553Tbf",
+      "title": "diagrams",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/27",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* [x] CTT diagram\r\n* [x] TTC diagram\r\n* [x] inclusion in appendix",
+      "createdAt": "2024-08-29T16:54:15Z",
+      "updatedAt": "2024-08-30T08:08:45Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "cc8c0305a83dbdebe802497c2fdafcbe2ec63e7a",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "dia",
+      "headRefOid": "3e6d8b4fe4dbcca68b5a15b0ff50501eec7220c0",
+      "closedAt": "2024-08-30T08:08:45Z",
+      "mergedAt": "2024-08-30T08:08:45Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "61356e0c279886bf66737fe3555ef5410d2de281"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786HZJ_0",
+          "commit": {
+            "abbreviatedOid": "0148f84"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T08:06:21Z",
+          "updatedAt": "2024-08-30T08:06:22Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nFor simplicity, only the `COSE_Sign1` processing is shown.\r\nSimilar diagrams for `COSE_Sign` can be derived by allowing multiple `SK_cose` boxes and replacing the label `[signature]` with `[signatures]`.\r\n```",
+              "createdAt": "2024-08-30T08:06:22Z",
+              "updatedAt": "2024-08-30T08:06:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786HZLJF",
+          "commit": {
+            "abbreviatedOid": "3e6d8b4"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "a radiant masterpiece :sparkle: ",
+          "createdAt": "2024-08-30T08:08:34Z",
+          "updatedAt": "2024-08-30T08:08:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOH8Js7855_frV",
+      "title": "One or more in CDDL",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/28",
+      "state": "CLOSED",
+      "author": "OR13",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-30T15:31:11Z",
+      "updatedAt": "2024-09-10T10:27:05Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "6f0b004647902f555b42310636718b116109ed4a",
+      "headRepository": "OR13/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "patch-1",
+      "headRefOid": "de442f336e2f0a40a69bcd051dc2407bdf672874",
+      "closedAt": "2024-09-10T10:27:04Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/21 is closed, closing this accordingly - Thanks @OR13 nevertheless :-)",
+          "createdAt": "2024-09-10T10:27:04Z",
+          "updatedAt": "2024-09-10T10:27:04Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786Hd9ty",
+          "commit": {
+            "abbreviatedOid": "de442f3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T15:32:56Z",
+          "updatedAt": "2024-08-30T15:32:56Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\n| `3161-tcc` | TBD1 | bstr / [ 2* bstr ] | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |\r\n```",
+              "createdAt": "2024-08-30T15:32:56Z",
+              "updatedAt": "2024-08-30T15:32:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Hd92M",
+          "commit": {
+            "abbreviatedOid": "de442f3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-30T15:33:04Z",
+          "updatedAt": "2024-08-30T15:33:05Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n| `3161-ctt` | TBD2 | bstr / [ 2* bstr ] | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |\r\n```",
+              "createdAt": "2024-08-30T15:33:04Z",
+              "updatedAt": "2024-08-30T15:33:05Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOH8Js7855_i24",
+      "title": "One or more in text",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/29",
+      "state": "CLOSED",
+      "author": "OR13",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-30T15:36:08Z",
+      "updatedAt": "2024-09-10T10:26:50Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "6f0b004647902f555b42310636718b116109ed4a",
+      "headRepository": "OR13/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "patch-2",
+      "headRefOid": "1ba13bdc721317e5e15a4a79ebb87d21609ffb0b",
+      "closedAt": "2024-09-10T10:26:50Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "#21 is closed, closing this accordingly - Thanks @OR13 nevertheless :-)",
+          "createdAt": "2024-09-10T10:26:31Z",
+          "updatedAt": "2024-09-10T10:26:31Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOH8Js7855_5NP",
+      "title": "Move detailed diagrams up a level",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/30",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/legenda/draft-birkholz-cose-tsa-tst-header-parameter.html#figure-3",
+      "createdAt": "2024-08-30T16:15:06Z",
+      "updatedAt": "2024-09-10T13:54:00Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "591f55d29036b47d8aca5811e19a9ea0d85f8ab1",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "legenda",
+      "headRefOid": "ecd0748d0d548a13017eb76e089d19aca05ce3a4",
+      "closedAt": "2024-09-10T13:53:56Z",
+      "mergedAt": "2024-09-10T13:53:56Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "3cdeeaa2a61ea4e6fa311acb498f597afbeab5d8"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@henkbirkholz @OR13 please have a look",
+          "createdAt": "2024-09-10T11:42:00Z",
+          "updatedAt": "2024-09-10T11:42:00Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786IpcqQ",
+          "commit": {
+            "abbreviatedOid": "ecd0748"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "TSA is good enough",
+          "createdAt": "2024-09-10T13:40:30Z",
+          "updatedAt": "2024-09-10T13:40:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOH8Js7856Bcc1",
+      "title": "Add alt diagrams",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/31",
+      "state": "CLOSED",
+      "author": "OR13",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "![Screenshot 2024-08-30 at 3 52 10\u202fPM](https://github.com/user-attachments/assets/2e692748-5e49-45b5-9b5e-f82e1538d8a0)\r\n",
+      "createdAt": "2024-08-30T20:52:40Z",
+      "updatedAt": "2024-09-10T11:43:46Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "6f0b004647902f555b42310636718b116109ed4a",
+      "headRepository": "OR13/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "alt-diagrams",
+      "headRefOid": "09a2b6a0b1e9a65c3c5808e16bcd55c7558e8da9",
+      "closedAt": "2024-09-10T11:43:46Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Good start!\r\n\r\nImmediate comments:\r\n\r\n1. `imprint` must be `messageImprint` (from RFC3161)\r\n2. Adding \"Clock\" is like dissecting a frog, innit? :-) (we can add a legenda as in #30)\r\n3. The Signer box in the TTC diagram is a bit too crowded and hard to grasp\r\n4. the fact that `private-key` is repeated is confusing\r\n5. I am not yet sure if I like the stray `unprotected` box, but I could be convinced otherwise",
+          "createdAt": "2024-08-30T23:28:41Z",
+          "updatedAt": "2024-08-30T23:28:41Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Also, maybe rename them to `alt-{ttc,cct}.ascii-art` and tweak the include directive.",
+          "createdAt": "2024-08-30T23:45:09Z",
+          "updatedAt": "2024-08-30T23:45:09Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks @OR13 - I have pulled your nice diagrams into #30\r\n\r\nThis PR is closed as a consequence of the above.",
+          "createdAt": "2024-09-10T11:43:46Z",
+          "updatedAt": "2024-09-10T11:43:46Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOH8Js78574GMM",
+      "title": "\"keyless\" workflow",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/32",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-18T09:58:07Z",
+      "updatedAt": "2025-01-08T12:39:10Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "3cdeeaa2a61ea4e6fa311acb498f597afbeab5d8",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "keyless-workflow",
+      "headRefOid": "cd295c13e18b1fb2c95230f0083df855273c03e9",
+      "closedAt": "2025-01-08T12:39:10Z",
+      "mergedAt": "2025-01-08T12:39:10Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "28ae1196effcad7a554f9759759410ac0c50f724"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786XOC5R",
+          "commit": {
+            "abbreviatedOid": "cd295c1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2025-01-08T12:38:56Z",
+          "updatedAt": "2025-01-08T12:38:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOH8Js786HEOnP",
+      "title": "fix abstract",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/38",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #33 ",
+      "createdAt": "2025-01-08T11:55:36Z",
+      "updatedAt": "2025-01-09T12:01:25Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "3cdeeaa2a61ea4e6fa311acb498f597afbeab5d8",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "artart-33",
+      "headRefOid": "4f7a0d957f9c32c5fbf498e428e3de152b278ebd",
+      "closedAt": "2025-01-09T12:01:25Z",
+      "mergedAt": "2025-01-09T12:01:25Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "dfa812a5f2a05c45542b89777eef0feb962f6268"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786XYU1x",
+          "commit": {
+            "abbreviatedOid": "4f7a0d9"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": ":+1: abstract consistency",
+          "createdAt": "2025-01-09T12:01:13Z",
+          "updatedAt": "2025-01-09T12:01:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOH8Js786HEPUY",
+      "title": "\"message imprint\" coherency",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/39",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #34 \r\nFix #35 \r\n\r\n",
+      "createdAt": "2025-01-08T11:57:18Z",
+      "updatedAt": "2025-01-09T12:03:26Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "3cdeeaa2a61ea4e6fa311acb498f597afbeab5d8",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "artart-34",
+      "headRefOid": "e57dac27b3e7e91953379783b8b680cbebc1490a",
+      "closedAt": "2025-01-09T12:03:26Z",
+      "mergedAt": "2025-01-09T12:03:26Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "48121c67eee59402b2ff4bdb8d61189aa656df8b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786XYWMj",
+          "commit": {
+            "abbreviatedOid": "e57dac2"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "named word consistency :+1:",
+          "createdAt": "2025-01-09T12:03:17Z",
+          "updatedAt": "2025-01-09T12:03:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "id": "PR_kwDOH8Js786HEPpE",
+      "title": "slight reflow of \u00a73.1",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/40",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #36 ",
+      "createdAt": "2025-01-08T11:58:01Z",
+      "updatedAt": "2025-01-09T12:16:21Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "48121c67eee59402b2ff4bdb8d61189aa656df8b",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "artart-36",
+      "headRefOid": "d3c036113f3e90ce25aa2f7d06c4fc405d690691",
+      "closedAt": "2025-01-09T12:16:21Z",
+      "mergedAt": "2025-01-09T12:16:21Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f2d45716f5e132c0689bada648cfd577d236655f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786XYc6_",
+          "commit": {
+            "abbreviatedOid": "d3c0361"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "verbosity :+1:",
+          "createdAt": "2025-01-09T12:16:12Z",
+          "updatedAt": "2025-01-09T12:16:12Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOH8Js786HEP5-",
+      "title": "fix typo in IANA table",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/41",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #37 ",
+      "createdAt": "2025-01-08T11:58:35Z",
+      "updatedAt": "2025-01-09T12:17:05Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "3cdeeaa2a61ea4e6fa311acb498f597afbeab5d8",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "artart-37",
+      "headRefOid": "2bb71fa6ca254b0c2efa3a51ca492f71b855759e",
+      "closedAt": "2025-01-09T12:17:05Z",
+      "mergedAt": "2025-01-09T12:17:05Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "375088b2b917cb8b098a8a81d7ebf979a190658c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786XYdO4",
+          "commit": {
+            "abbreviatedOid": "2bb71fa"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "nice catch :+1:",
+          "createdAt": "2025-01-09T12:16:53Z",
+          "updatedAt": "2025-01-09T12:16:53Z",
           "comments": []
         }
       ]
