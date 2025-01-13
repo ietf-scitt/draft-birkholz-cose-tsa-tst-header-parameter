@@ -112,7 +112,7 @@ A signed COSE message is then built as follows:
 {::include ascii-art/ttc-alt.ascii-art}
 ~~~
 {: #fig-timestamp-then-cose artwork-align="center"
-   title="Timestamp, then COSE (TCC)"}
+   title="Timestamp, then COSE (TTC)"}
 
 ## COSE then Timestamp (CTT) {#sec-cose-then-timestamp}
 
