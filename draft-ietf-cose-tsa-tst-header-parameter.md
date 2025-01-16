@@ -199,6 +199,37 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 
 --- back
 
+# Examples
+
+## CTT
+
+Starting with the following Sign1 COSE object
+
+~~~ cbor-diag
+{::include-fold example/ctt/in.diag}
+~~~
+
+The signature field is hashed using SHA-256 to create the following `TimeStampReq` object
+
+~~~ asn1
+{::include-fold example/ctt/ctt-req.asn1}
+~~~
+
+which is sent to the Time Stamping Authority.
+
+A `TimeStampResp` is returned which contains the following `TimeStampToken`
+
+~~~ asn1
+{::include-fold example/ctt/ctt-tst.asn1}
+[...]
+~~~
+
+The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following
+
+~~~ cbor-diag
+{::include-fold example/ctt/out.diag}
+~~~
+
 # Acknowledgments
 {:unnumbered}
 
