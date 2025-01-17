@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 17 July 2025</td>
+<td class="center">Expires 21 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cose-tsa-tst-header-parameter-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-13" class="published">13 January 2025</time>
+<time datetime="2025-01-17" class="published">17 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-17">17 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-21">21 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ This enables the use of established RFC 3161 timestamping infrastructure to prov
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1197,13 +1197,21 @@ This enables the use of established RFC 3161 timestamping infrastructure to prov
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-ctt" class="internal xref">CTT</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1616,10 +1624,10 @@ To clearly separate their semantics two different COSE header parameters are def
 <p id="section-3.2-3">The message imprint sent in the request to the TSA <span class="bcp14">MUST</span> be either:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-4.1">
-            <p id="section-3.2-4.1.1">the hash of the signature field of the <code>COSE_Sign1</code> message, or<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-4.1.1">the hash of the CBOR-encoded signature field of the <code>COSE_Sign1</code> message, or<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-4.2">
-            <p id="section-3.2-4.2.1">the hash of the signatures field of the <code>COSE_Sign</code> message.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-4.2.1">the hash of the CBOR-encoded signatures field of the <code>COSE_Sign</code> message.<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.2-5">In either case, to minimize dependencies, the hash algorithm <span class="bcp14">SHOULD</span> be the same as the algorithm used for signing the COSE message.
@@ -1743,12 +1751,290 @@ Such a mechanism can be employed inside the ones described in this specification
 </dl>
 </section>
 </div>
-<div id="acknowledgments">
+<div id="examples">
 <section id="appendix-A">
+      <h2 id="name-examples">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
+      </h2>
+<div id="ctt">
+<section id="appendix-A.1">
+        <h3 id="name-ctt">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-ctt" class="section-name selfRef">CTT</a>
+        </h3>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="appendix-A.1-1.1">
+            <p id="appendix-A.1-1.1.1">RFCed Note: The following example uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-A.1-2">Starting with the following Sign1 COSE object<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="appendix-A.1-3">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+18(
+  [
+    / protected h'a10126' / &lt;&lt; {
+        / alg / 1:-7 / ECDSA 256 /
+      } &gt;&gt;,
+    / unprotected / {
+      / kid / 4:'11'
+    },
+    / payload / 'This is the content.',
+    / signature / h'\
+8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4d25a91aef0b0117e2af9\
+        a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5a4c345cacb36'
+  ]
+)
+</pre><a href="#appendix-A.1-3" class="pilcrow">¶</a>
+</div>
+<p id="appendix-A.1-4">The CBOR-encoded signature field is hashed using SHA-256 to create the following <code>TimeStampReq</code> object<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="appendix-A.1-5">
+<pre>
+SEQUENCE {
+  INTEGER 1
+  SEQUENCE {
+    SEQUENCE {
+      OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+      NULL
+      }
+    OCTET STRING
+      44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
+      4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
+    }
+  BOOLEAN TRUE
+  }
+</pre><a href="#appendix-A.1-5" class="pilcrow">¶</a>
+</div>
+<p id="appendix-A.1-6">which is sent to the Time Stamping Authority.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-7">A <code>TimeStampResp</code> is returned which contains the following <code>TimeStampToken</code><a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="appendix-A.1-8">
+<pre>
+SEQUENCE {
+  OBJECT IDENTIFIER signedData (1 2 840 113549 1 7 2)
+  [0] {
+    SEQUENCE {
+      INTEGER 3
+      SET {
+        SEQUENCE {
+          OBJECT IDENTIFIER sha-512 (2 16 840 1 101 3 4 2 3)
+          NULL
+          }
+        }
+      SEQUENCE {
+        OBJECT IDENTIFIER tSTInfo (1 2 840 113549 1 9 16 1 4)
+        [0] {
+          OCTET STRING, encapsulates {
+            SEQUENCE {
+              INTEGER 1
+              OBJECT IDENTIFIER '1 2 3 4 1'
+              SEQUENCE {
+                SEQUENCE {
+                  OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+                  NULL
+                  }
+                OCTET STRING
+                  44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
+                  4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
+                }
+              INTEGER 84606360
+              GeneralizedTime 16/01/2025 18:20:32 GMT
+              BOOLEAN TRUE
+[...]
+</pre><a href="#appendix-A.1-8" class="pilcrow">¶</a>
+</div>
+<p id="appendix-A.1-9">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
+<div class="breakable lang-cbor-diag sourcecode" id="appendix-A.1-10">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+18(
+  [
+    / protected h'a10126' / &lt;&lt; {
+        / alg / 1:-7 / ECDSA 256 /
+      } &gt;&gt;,
+    / unprotected / {
+      / 3161-ctt / / TBD2 (50) / 50 : h'\
+3082154906092a864886f70d010702a082153a30821536020103310f300d06096086\
+48016503040203050030820184060b2a864886f70d0109100104a08201730482016f\
+3082016b02010106042a0304013031300d06096086480165030402010500042044c2\
+419d131d53d55584b5dd33b788c24e551c6d44b1afc8b2b85e6954763b4e0204050a\
+fd98180f32303235303131363138323033325a0101ffa0820111a482010d30820109\
+3111300f060355040a13084672656520545341310c300a060355040b130354534131\
+763074060355040d136d54686973206365727469666963617465206469676974616c\
+6c79207369676e7320646f63756d656e747320616e642074696d65207374616d7020\
+7265717565737473206d616465207573696e672074686520667265657473612e6f72\
+67206f6e6c696e65207365727669636573311830160603550403130f7777772e6672\
+65657473612e6f72673122302006092a864886f70d0109011613627573696c657a61\
+7340676d61696c2e636f6d3112301006035504071309577565727a62757267310b30\
+09060355040613024445310f300d0603550408130642617965726ea0821008308208\
+01308205e9a003020102020900c1e986160da8e982300d06092a864886f70d01010d\
+05003081953111300f060355040a130846726565205453413110300e060355040b13\
+07526f6f74204341311830160603550403130f7777772e667265657473612e6f7267\
+3122302006092a864886f70d0109011613627573696c657a617340676d61696c2e63\
+6f6d3112301006035504071309577565727a62757267310f300d0603550408130642\
+617965726e310b3009060355040613024445301e170d313630333133303135373339\
+5a170d3236303331313031353733395a308201093111300f060355040a1308467265\
+6520545341310c300a060355040b130354534131763074060355040d136d54686973\
+206365727469666963617465206469676974616c6c79207369676e7320646f63756d\
+656e747320616e642074696d65207374616d70207265717565737473206d61646520\
+7573696e672074686520667265657473612e6f7267206f6e6c696e65207365727669\
+636573311830160603550403130f7777772e667265657473612e6f72673122302006\
+092a864886f70d0109011613627573696c657a617340676d61696c2e636f6d311230\
+1006035504071309577565727a62757267310b3009060355040613024445310f300d\
+0603550408130642617965726e30820222300d06092a864886f70d01010105000382\
+020f003082020a0282020100b591048c4e486f34e9dc08627fc2375162236984b82c\
+b130beff517cfc38f84bce5c65a874dab2621ae0bce7e33563e0ede934fd5f882315\
+9f07848808227460c1ed88261706f4281334359dfbb81bd1353fc179610af1a8c8c8\
+65dc00ea23b3a89be6bd03ba85a9ec827d60565905e22d6a584ed1380ae150280cee\
+397e98a012f380464007862443bc077cb95f421af31712d9683cdb6dffbaf3c8ba5b\
+a566ae523d459d6177346d4d840e27886b7c01c5b890d78a2e27bba8dd2f9a2812e1\
+57d62f921c65962548069dcdb7d06de181de0e9570d66f87220ce28b628ab55906f3\
+ee0c210f7051e8f4858af8b9a92d09e46af2d9cba5bfcfad168cdf604491a4b06603\
+b114caf7031f065e7eeefa53c575f3490c059d2e32ddc76ac4d4c4c710683b97fd1b\
+e591bc61055186d88f9a0391b307b6f91ed954daa36f9acd6a1e14aa2e4adf17464b\
+54db18dbb6ffe30080246547370436ce4e77bae5de6fe0f3f9d6e7ffbeb461e794e9\
+2fb0951f8aae61a412cce9b21074635c8be327ae1a0f6b4a646eb0f8463bc63bf845\
+530435d19e802511ec9f66c3496952d8becb69b0aa4d4c41f60515fe7dcbb89319cd\
+da59ba6aea4be3ceae718e6fcb6ccd7db9fc50bb15b12f3665b0aa307289c2e6dd4b\
+111ce48ba2d9efdb5a6b9a506069334fb34f6fc7ae330f0b34208aac80df3266fdd9\
+0465876ba2cb898d9505315b6e7b0203010001a38201db308201d730090603551d13\
+04023000301d0603551d0e041604146e760b7b4e4f9ce160ca6d2ce927a2a294b377\
+37301f0603551d23041830168014fa550d8c346651434cf7e7b3a76c95af7ae6a497\
+300b0603551d0f0404030206c030160603551d250101ff040c300a06082b06010505\
+070308306306082b0601050507010104573055302a06082b06010505073002861e68\
+7474703a2f2f7777772e667265657473612e6f72672f7473612e637274302706082b\
+06010505073001861b687474703a2f2f7777772e667265657473612e6f72673a3235\
+363030370603551d1f0430302e302ca02aa0288626687474703a2f2f7777772e6672\
+65657473612e6f72672f63726c2f726f6f745f63612e63726c3081c60603551d2004\
+81be3081bb3081b80601003081b2303306082b060105050702011627687474703a2f\
+2f7777772e667265657473612e6f72672f667265657473615f6370732e68746d6c30\
+3206082b060105050702011626687474703a2f2f7777772e667265657473612e6f72\
+672f667265657473615f6370732e706466304706082b06010505070202303b1a3946\
+72656554534120747275737465642074696d657374616d70696e6720536f66747761\
+72652061732061205365727669636520285361615329300d06092a864886f70d0101\
+0d05000382020100a5c944e2c6fac0a14d930a7fd0a0b172b41fc1483c3e957c68a2\
+bcd9b9764f1a950161fd72472d41a5eed277786203b5422240fb3a26cde176087b6f\
+b1011df4cc19e2571aa4a051109665e94c46f50bd2adee6ac4137e251b25a39dabda\
+451515d8ff9e07209e8ec20b7874f7e1a0ede7c00937fe84a334f8b3265ced2d8ed9\
+df61396583677feb382c1ee3b23e6ea5f05df30de7b9f89005d25266f612f39c8b4f\
+6daba6d7bfbac19632b90637329f52a6f066a10e43eaa81f849a6c5fe3fe8b5ea232\
+75f687f2052e502ea6c30762a668cce07871dd8e97e315bba929e25589977a0a312c\
+e96c5106b1437c779f2b361b182888f3ee8a234374fa063e956192627f7c43107396\
+5d1260928eba009e803429ae324cf96f042354f37bca5afddc79f79346ab388bfc79\
+f01dc9861254ea6cc129941076b83d20556f3be51326837f2876f7833b370e7c3d41\
+0523827d4f53400c72218d75229ff10c6f8893a9a3a1c0c42bb4c898c13df41c7f65\
+73b4fc56515971a610a7b0d2857c8225a9fb204eaceca2e8971aa1af87886a2ae3c7\
+2fe0a0aae842980a77bef16b92115458090d982b5946603764e75a0ad3d11454b998\
+6f678b9ab6afe8497033ae3abfd4eb43b7bc9dee68815949e6481582a82e785277f2\
+282107efe390200e0508acb8ea82ea2505276f3c9da2a3d3b4ad38bbf8842bda36fc\
+2448291f558dc02dd1e0308207ff308205e7a003020102020900c1e986160da8e980\
+300d06092a864886f70d01010d05003081953111300f060355040a13084672656520\
+5453413110300e060355040b1307526f6f74204341311830160603550403130f7777\
+772e667265657473612e6f72673122302006092a864886f70d010901161362757369\
+6c657a617340676d61696c2e636f6d3112301006035504071309577565727a627572\
+67310f300d0603550408130642617965726e310b3009060355040613024445301e17\
+0d3136303331333031353231335a170d3431303330373031353231335a3081953111\
+300f060355040a130846726565205453413110300e060355040b1307526f6f742043\
+41311830160603550403130f7777772e667265657473612e6f72673122302006092a\
+864886f70d0109011613627573696c657a617340676d61696c2e636f6d3112301006\
+035504071309577565727a62757267310f300d0603550408130642617965726e310b\
+300906035504061302444530820222300d06092a864886f70d01010105000382020f\
+003082020a0282020100b6028e0e3032f11110d964cda94b9d0278e1942ae913aaa5\
+9907cda69793995bd9ac7e33bad9fe3704da1c01a98d21afe3f591a59d7067705167\
+998f5016722e0ab462b21f439171d2cfcc4593f3735af794a5ab311f6c010c7898de\
+33d75c4510ee76f4bd1d1498cf17d303f06a5dd9f796cc6ca9b657a56fe3ea4fefbe\
+7ce6b6a18d3e35a30cee5ff170d1cf39a333d3fda8964d22db685b29e561be890f0a\
+a845873b2e84ab26ab839ffe8fade9d23bb31e61d273cc9b880649185fabecfa0534\
+600aba901b614e2e854582dea2226fc19cd7df52bed50d8777cd9988c053a3fc7dc3\
+287a068a4ff12b713cd9803666e955385456ff38f80298cf6b93856e9224774a66cf\
+1cdd11c2f8efd85203d7458b25664b13ed639cded4ff8113d6cc5353d2729473c3c3\
+07157c722aa5b5dd0bfb2d6c38b1b93749c881ec60026d08951b3824bd71bacbce47\
+3aebd636f0b918b4a2c8ff4694f07457af2d6f1cf82554d1770fd79ff5d314dcd104\
+cddcabc94138056dfcf017e7eb8572fd52f70144f188da05f5823f58dd06297e7387\
+bed2d772c13da8266601045fe412dd70986c0c987ba7344b9037387516d258e7885b\
+51f8968b7f2601213bc4cb4c85f8ff0b84af6a988337cdfb81868f7ecf31dca6716d\
+7ec2dd802c1672629e5c0052cb357dd29aafc43f615b3b1ff9d4e1ce08c71c73e1fe\
+bb7dc56a33621329e9ed6c230203010001a382024e3082024a300c0603551d130405\
+30030101ff300e0603551d0f0101ff0404030201c6301d0603551d0e04160414fa55\
+0d8c346651434cf7e7b3a76c95af7ae6a4973081ca0603551d230481c23081bf8014\
+fa550d8c346651434cf7e7b3a76c95af7ae6a497a1819ba481983081953111300f06\
+0355040a130846726565205453413110300e060355040b1307526f6f742043413118\
+30160603550403130f7777772e667265657473612e6f72673122302006092a864886\
+f70d0109011613627573696c657a617340676d61696c2e636f6d3112301006035504\
+071309577565727a62757267310f300d0603550408130642617965726e310b300906\
+0355040613024445820900c1e986160da8e98030330603551d1f042c302a3028a026\
+a0248622687474703a2f2f7777772e667265657473612e6f72672f726f6f745f6361\
+2e63726c3081cf0603551d200481c73081c43081c1060a2b0601040181f224010130\
+81b2303306082b060105050702011627687474703a2f2f7777772e66726565747361\
+2e6f72672f667265657473615f6370732e68746d6c303206082b0601050507020116\
+26687474703a2f2f7777772e667265657473612e6f72672f667265657473615f6370\
+732e706466304706082b06010505070202303b1a3946726565545341207472757374\
+65642074696d657374616d70696e6720536f66747761726520617320612053657276\
+69636520285361615329303706082b06010505070101042b3029302706082b060105\
+05073001861b687474703a2f2f7777772e667265657473612e6f72673a3235363030\
+0d06092a864886f70d01010d0500038202010068af7ebf938562ef4ceb3b580be2fa\
+f6cc35a26772962f3d95901fa5630c87d09198984ce8a06a33f8a9c282ed9f1cb11a\
+c6c23e17108ee4efce6fb294de95c133262255725522ca61971d4a3b7f78250dfb8d\
+4aeec0fb1959b164100520b9c10e64c62662e4ad4d0abae2298fc948fc4e99e8d9e6\
+b8fdbe4404121ec7c1422eacb2c9d7328e07396e60b4f3bb803ad4a555c80fefb53f\
+85e7764a0a9fb4afc399f4cd2f5fbf587105c6081cf3d05337b6bb7d1b010b749f48\
+88c912f3696ba1b6902d77b7dfc046c04a0cc1ec4f8d185e2da55dfb7bc2a2036c62\
+19246a4f99ddbb6f1f829398f3b803dc0ad90dcb59bef4c27c77404b99043b782718\
+67991152c399f12cbfc4c625adc096355ae44e342100ec517a502e2f06f940b8d435\
+99bbc1154f8ae761a0b0d555fb4a1391d4f3420af8dbf12f2d7ddb9d77dce1537804\
+074af175e4f2d6d55b34b5d6f7dcbdd31730af56480d4c0cff143f9e83bc151866d0\
+ba0f0bbdc47fe27864176bbd6c1ab85df325edf777889bc4471bf3fa73e56cc591e8\
+b160cda7b0786a1ec04ac3b24fa2e28d5d19e5e48004d5e166a83c82ec6fd54fb385\
+ebaf7133a85b52de46db5244e1c34ae8d36e712f9fce0d493d7d3edd586c6198e3ec\
+3e6e96346f417ac9f221e0aff33a8f6a0b1ef4c023630b76adaa8d91433825ecc41c\
+49a5b98b181c7da30e997ab954c73c2cd805afda993182038a308203860201013081\
+a33081953111300f060355040a130846726565205453413110300e060355040b1307\
+526f6f74204341311830160603550403130f7777772e667265657473612e6f726731\
+22302006092a864886f70d0109011613627573696c657a617340676d61696c2e636f\
+6d3112301006035504071309577565727a62757267310f300d060355040813064261\
+7965726e310b3009060355040613024445020900c1e986160da8e982300d06096086\
+480165030402030500a081b8301a06092a864886f70d010903310d060b2a864886f7\
+0d0109100104301c06092a864886f70d010905310f170d3235303131363138323033\
+325a302b060b2a864886f70d010910020c311c301a301830160414916da3d860ecca\
+82e34bc59d1793e7e968875f14304f06092a864886f70d010904314204401d40643c\
+956b78f7d39a8cd1a1d6f704cfc8392c33f8a3d62fef1ff30dc704d5f95a5803d231\
+53793da91b5b1eed07b6200019674c2f64f74034db72dbbd27a1300d06092a864886\
+f70d01010105000482020022f90997aab2d2c00d5d3ec02fa04a2374013a1dcca090\
+69f0569cb0aa94fb3e5ee056a955eef97bef35eafefeb6aac75e8512422556b3a8c7\
+563ea6ab1e70d64feaae1b1759af36e13ef59b4db5ca2fe1f2779c46b7df03154335\
+9e235976ac99f77f7ac2e8d6d28219278aa05cff7cc177207c08c7df8d125f7805e5\
+510fc1d683951e2b9811b57e5ebc244bc2e3f3bf8aadf80b396bc7765084855a75ad\
+6c078bf077480d5b1a80f03dcbcacf6d24553c1759890bea0880e4647f06343212f4\
+4a70a8a8c246531a06ba29ce94bd86ee07ae38ec44cec715e79107955dce934636a0\
+f795f5af49138c1d2fc285f8a99f9d43b6f0ef13bb969f4945c8ad6828f2ea0fefb4\
+686af561dfcd62c8915e0c9cc9d1ffecb344220720e49df1500387e8fc29e7f02e06\
+e6036954f57e8f01610cbf3056adf712f062a95ae2b4bbe1f8314b43350c94476736\
+498a7c4c5117e0954f9c9ae56fa5227b7e5e977f42aeea46977d11a40f8d546920a3\
+9fd049d9f12fc28c32f35664d7443efc7c4e8a634c0bdb1a746a2b795030cf0b5d18\
+bef431ba82e95a949464791c3c9f06b33f428b19fb2bed32bd5fd0f465b3bb4533e5\
+763c13002d469e4f0fe8fdbfd7c1479be13bb8870d21dac6b6cae0b618ee42992849\
+5a0335ebc01a0ba62860c9b54c9acc2f0868339229060fef6faa64188da7b7b05626\
+                                         c2dd12657ceac8fecc40348664',
+      / kid / 4:'11'
+    },
+    / payload / 'This is the content.',
+    / signature / h'8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4
+d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5
+a4c345cacb36'
+  ]
+)
+</pre><a href="#appendix-A.1-10" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">The editors would like to thank
+<p id="appendix-B-1">The editors would like to thank
 Carl Wallace,
 Leonard Rosenthol,
 Michael B. Jones,
@@ -1757,11 +2043,11 @@ Orie Steele,
 Shuping Peng,
 and
 Steve Lasker
-for their reviews and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+for their reviews and comments.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contributors">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-contributors">
 <a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
@@ -1772,7 +2058,7 @@ for their reviews and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p
 <a href="mailto:cabo@tzi.org" class="email">cabo@tzi.org</a>
 </div>
 </address>
-<p id="appendix-B-1">Carsten contributed part of the security considerations.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">Carsten contributed part of the security considerations.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Orie Steele</span></div>
 <div class="email">
@@ -1780,11 +2066,11 @@ for their reviews and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p
 <a href="mailto:orie@transmute.industries" class="email">orie@transmute.industries</a>
 </div>
 </address>
-<p id="appendix-B-2">Orie contributed an improved version of the diagrams.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">Orie contributed an improved version of the diagrams.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
