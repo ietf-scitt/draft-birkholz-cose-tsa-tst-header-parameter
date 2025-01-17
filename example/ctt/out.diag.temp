@@ -4,7 +4,7 @@
         / alg / 1:-7 / ECDSA 256 /
       } >>,
     / unprotected / {
-      / 3161-ctt / / TBD2 (50) / 50 : h'__CTT__',
+      / 3161-ctt / 259 : h'__CTT__',
       / kid / 4:'11'
     },
     / payload / 'This is the content.',

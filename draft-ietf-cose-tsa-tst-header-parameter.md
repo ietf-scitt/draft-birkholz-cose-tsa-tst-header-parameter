@@ -335,7 +335,7 @@ A `TimeStampResp` is returned which contains the `TimeStampToken`
 [...]
 ~~~
 
-The contents of the `TimeStampToken` are `bstr`-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the Sign1 COSE object
+The contents of the `TimeStampToken` are `bstr`-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the `COSE_Sign1` object
 
 ~~~ cbor-diag
 {::include-fold example/ttc/out.diag}
@@ -343,9 +343,7 @@ The contents of the `TimeStampToken` are `bstr`-wrapped and added to the protect
 
 ## CTT
 
-> RFCed Note: The following example uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.
-
-Starting with the following Sign1 COSE object
+Starting with the following `COSE_Sign1` object
 
 ~~~ cbor-diag
 {::include-fold example/ctt/in.diag}
@@ -366,7 +364,7 @@ A `TimeStampResp` is returned which contains the following `TimeStampToken`
 [...]
 ~~~
 
-The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following
+The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprotected headers bucket in the original `COSE_Sign1` object to obtain the following
 
 ~~~ cbor-diag
 {::include-fold example/ctt/out.diag}
