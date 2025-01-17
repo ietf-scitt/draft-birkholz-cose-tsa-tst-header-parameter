@@ -203,6 +203,8 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 
 ## CTT
 
+> NOTE: The following uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.
+
 Starting with the following Sign1 COSE object
 
 ~~~ cbor-diag
