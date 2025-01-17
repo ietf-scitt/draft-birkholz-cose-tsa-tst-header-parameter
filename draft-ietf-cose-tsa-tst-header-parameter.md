@@ -152,8 +152,8 @@ The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeS
 
 The message imprint sent in the request to the TSA MUST be either:
 
-* the hash of the signature field of the `COSE_Sign1` message, or
-* the hash of the signatures field of the `COSE_Sign` message.
+* the hash of the CBOR-encoded signature field of the `COSE_Sign1` message, or
+* the hash of the CBOR-encoded signatures field of the `COSE_Sign` message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
@@ -209,7 +209,7 @@ Starting with the following Sign1 COSE object
 {::include-fold example/ctt/in.diag}
 ~~~
 
-The signature field is hashed using SHA-256 to create the following `TimeStampReq` object
+The CBOR-encoded signature field is hashed using SHA-256 to create the following `TimeStampReq` object
 
 ~~~ asn1
 {::include-fold example/ctt/ctt-req.asn1}
