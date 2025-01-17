@@ -26,7 +26,7 @@ dumpasn1 -w72 -p ${CTT_REQ} > ${CTT_REQ_ASN1}
 
 curl \
   -H "Content-Type: application/timestamp-query" \
-  --data-binary '@ctt-req.tsq' \
+  --data-binary "@${CTT_REQ}" \
   https://freetsa.org/tsr \
   > ${CTT_RES}
 
