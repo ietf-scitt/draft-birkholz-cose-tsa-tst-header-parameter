@@ -892,9 +892,10 @@ A.2.  CTT
 
 Acknowledgments
 
-   The editors would like to thank Carl Wallace, Leonard Rosenthol,
-   Michael B.  Jones, Michael Prorock, Orie Steele, Shuping Peng, and
-   Steve Lasker for their reviews and comments.
+   The editors would like to thank Carl Wallace, Carsten Bormann,
+   Francesca Palombini, Leonard Rosenthol, Linda Dunbar, Michael B.
+   Jones, Michael Prorock, Orie Steele, Shuping Peng, Steve Lasker, and
+   Yingzhen Qu for their reviews and comments.
 
 Contributors
 
