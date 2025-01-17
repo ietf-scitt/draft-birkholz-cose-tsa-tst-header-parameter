@@ -152,8 +152,8 @@ The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeS
 
 The message imprint sent in the request to the TSA MUST be either:
 
-* the hash of the signature field of the `COSE_Sign1` message, or
-* the hash of the signatures field of the `COSE_Sign` message.
+* the hash of the CBOR-encoded signature field of the `COSE_Sign1` message, or
+* the hash of the CBOR-encoded signatures field of the `COSE_Sign` message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
@@ -198,6 +198,39 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 {: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
+
+# Examples
+
+## CTT
+
+> RFCed Note: The following example uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.
+
+Starting with the following Sign1 COSE object
+
+~~~ cbor-diag
+{::include-fold example/ctt/in.diag}
+~~~
+
+The CBOR-encoded signature field is hashed using SHA-256 to create the following `TimeStampReq` object
+
+~~~ asn1
+{::include-fold example/ctt/ctt-req.asn1}
+~~~
+
+which is sent to the Time Stamping Authority.
+
+A `TimeStampResp` is returned which contains the following `TimeStampToken`
+
+~~~ asn1
+{::include-fold example/ctt/ctt-tst.asn1}
+[...]
+~~~
+
+The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following
+
+~~~ cbor-diag
+{::include-fold example/ctt/out.diag}
+~~~
 
 # Acknowledgments
 {:unnumbered}

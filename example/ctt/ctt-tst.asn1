@@ -1,0 +1,30 @@
+SEQUENCE {
+  OBJECT IDENTIFIER signedData (1 2 840 113549 1 7 2)
+  [0] {
+    SEQUENCE {
+      INTEGER 3
+      SET {
+        SEQUENCE {
+          OBJECT IDENTIFIER sha-512 (2 16 840 1 101 3 4 2 3)
+          NULL
+          }
+        }
+      SEQUENCE {
+        OBJECT IDENTIFIER tSTInfo (1 2 840 113549 1 9 16 1 4)
+        [0] {
+          OCTET STRING, encapsulates {
+            SEQUENCE {
+              INTEGER 1
+              OBJECT IDENTIFIER '1 2 3 4 1'
+              SEQUENCE {
+                SEQUENCE {
+                  OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+                  NULL
+                  }
+                OCTET STRING
+                  44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
+                  4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
+                }
+              INTEGER 84606360
+              GeneralizedTime 16/01/2025 18:20:32 GMT
+              BOOLEAN TRUE
