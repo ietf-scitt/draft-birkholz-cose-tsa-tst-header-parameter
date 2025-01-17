@@ -342,20 +342,24 @@ Table of Contents
    Table 1 to the "COSE Header Parameters" registry
    [IANA.cose_header-parameters].
 
-   +==========+=======+=======+==========+=================+===========+
-   | Name     | Label | Value | Value    | Description     | Reference |
-   |          |       | Type  | Registry |                 |           |
-   +==========+=======+=======+==========+=================+===========+
-   | 3161-ttc | TBD1  | bstr  | -        | RFC 3161        | RFCthis,  |
-   |          |       |       |          | timestamp       | Section   |
-   |          |       |       |          | token           | 3.1       |
-   +----------+-------+-------+----------+-----------------+-----------+
-   | 3161-ctt | TBD2  | bstr  | -        | RFC 3161        | RFCthis,  |
-   |          |       |       |          | timestamp       | Section   |
-   |          |       |       |          | token           | 3.2       |
-   +----------+-------+-------+----------+-----------------+-----------+
+   +==========+=======+=======+==========+=============+===========+
+   | Name     | Label | Value | Value    | Description | Reference |
+   |          |       | Type  | Registry |             |           |
+   +==========+=======+=======+==========+=============+===========+
+   | 3161-ttc | TBD1  | bstr  | -        | RFC 3161    | RFCthis,  |
+   |          |       |       |          | timestamp   | Section   |
+   |          |       |       |          | token:      | 3.1       |
+   |          |       |       |          | Timestamp   |           |
+   |          |       |       |          | then COSE   |           |
+   +----------+-------+-------+----------+-------------+-----------+
+   | 3161-ctt | TBD2  | bstr  | -        | RFC 3161    | RFCthis,  |
+   |          |       |       |          | timestamp   | Section   |
+   |          |       |       |          | token: COSE | 3.2       |
+   |          |       |       |          | then        |           |
+   |          |       |       |          | Timestamp   |           |
+   +----------+-------+-------+----------+-------------+-----------+
 
-                    Table 1: New COSE Header Parameters
+                  Table 1: New COSE Header Parameters
 
 7.  Normative References
 
