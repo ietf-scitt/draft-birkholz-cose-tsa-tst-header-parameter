@@ -389,6 +389,9 @@ Appendix A.  Examples
 
 A.1.  CTT
 
+      NOTE: This example uses the currently unassigned 50 as TBD2.  This
+      example must be regenerated once IANA has allocated the codepoint.
+
    Starting with the following Sign1 COSE object
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================

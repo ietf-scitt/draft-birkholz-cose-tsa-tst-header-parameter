@@ -1761,8 +1761,13 @@ Such a mechanism can be employed inside the ones described in this specification
         <h3 id="name-ctt">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-ctt" class="section-name selfRef">CTT</a>
         </h3>
-<p id="appendix-A.1-1">Starting with the following Sign1 COSE object<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="appendix-A.1-2">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="appendix-A.1-1.1">
+            <p id="appendix-A.1-1.1.1">NOTE: This example uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-A.1-2">Starting with the following Sign1 COSE object<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="appendix-A.1-3">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -1780,10 +1785,10 @@ Such a mechanism can be employed inside the ones described in this specification
         a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5a4c345cacb36'
   ]
 )
-</pre><a href="#appendix-A.1-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-3" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-3">The CBOR-encoded signature field is hashed using SHA-256 to create the following <code>TimeStampReq</code> object<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
-<div class="lang-asn1 sourcecode" id="appendix-A.1-4">
+<p id="appendix-A.1-4">The CBOR-encoded signature field is hashed using SHA-256 to create the following <code>TimeStampReq</code> object<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="appendix-A.1-5">
 <pre>
 SEQUENCE {
   INTEGER 1
@@ -1798,11 +1803,11 @@ SEQUENCE {
     }
   BOOLEAN TRUE
   }
-</pre><a href="#appendix-A.1-4" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-5" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-5">which is sent to the Time Stamping Authority.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-6">A <code>TimeStampResp</code> is returned which contains the following <code>TimeStampToken</code><a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
-<div class="lang-asn1 sourcecode" id="appendix-A.1-7">
+<p id="appendix-A.1-6">which is sent to the Time Stamping Authority.<a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-7">A <code>TimeStampResp</code> is returned which contains the following <code>TimeStampToken</code><a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="appendix-A.1-8">
 <pre>
 SEQUENCE {
   OBJECT IDENTIFIER signedData (1 2 840 113549 1 7 2)
@@ -1835,10 +1840,10 @@ SEQUENCE {
               GeneralizedTime 16/01/2025 18:20:32 GMT
               BOOLEAN TRUE
 [...]
-</pre><a href="#appendix-A.1-7" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-8" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following<a href="#appendix-A.1-8" class="pilcrow">¶</a></p>
-<div class="breakable lang-cbor-diag sourcecode" id="appendix-A.1-9">
+<p id="appendix-A.1-9">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
+<div class="breakable lang-cbor-diag sourcecode" id="appendix-A.1-10">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2018,7 +2023,7 @@ d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5
 a4c345cacb36'
   ]
 )
-</pre><a href="#appendix-A.1-9" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1-10" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
