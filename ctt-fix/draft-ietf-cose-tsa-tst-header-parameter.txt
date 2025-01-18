@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 21 July 2025                                             Linaro
+Expires: 22 July 2025                                             Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                         17 January 2025
+                                                         18 January 2025
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 July 2025.
+   This Internet-Draft will expire on 22 July 2025.
 
 Copyright Notice
 
