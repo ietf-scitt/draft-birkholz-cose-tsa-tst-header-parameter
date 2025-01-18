@@ -395,11 +395,11 @@ Appendix A.  Examples
 
 A.1.  TTC
 
-   The following payload
+   The payload
 
    This is the content.
 
-   is hashed using SHA-256 to create the following TimeStampReq object
+   is hashed using SHA-256 to create the TimeStampReq object
 
    SEQUENCE {
      INTEGER 1
@@ -417,8 +417,7 @@ A.1.  TTC
 
    which is sent to the Time Stamping Authority.
 
-   A TimeStampResp is returned which contains the following
-   TimeStampToken
+   A TimeStampResp is returned which contains the TimeStampToken
 
    SEQUENCE {
      OBJECT IDENTIFIER signedData (1 2 840 113549 1 7 2)
@@ -454,7 +453,7 @@ A.1.  TTC
 
    The contents of the TimeStampToken are bstr-wrapped and added to the
    protected headers bucket which is then signed alongside the original
-   payload to obtain the following Sign1 COSE object
+   payload to obtain the Sign1 COSE object
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 

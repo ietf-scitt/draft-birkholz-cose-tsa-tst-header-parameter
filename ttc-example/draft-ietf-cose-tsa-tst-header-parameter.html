@@ -1614,7 +1614,7 @@ To clearly separate their semantics two different COSE header parameters are def
 <p id="section-3.1-1">The <code>3161-ttc</code> COSE <em>protected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">The MessageImprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload of the COSE signed object.
-This does not include the bstr-wrapping, only the payload bytes.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+This does not include the <code>bstr</code>-wrapping, only the payload bytes.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">To minimize dependencies, the hash algorithm used for signing the COSE message <span class="bcp14">SHOULD</span> be the same as the algorithm used in the RFC3161 MessageImprint.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1765,13 +1765,13 @@ Such a mechanism can be employed inside the ones described in this specification
         <h3 id="name-ttc">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-ttc" class="section-name selfRef">TTC</a>
         </h3>
-<p id="appendix-A.1-1">The following payload<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="appendix-A.1-2">
+<p id="appendix-A.1-1">The payload<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1-2">
 <pre>
 This is the content.
 </pre><a href="#appendix-A.1-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-3">is hashed using SHA-256 to create the following <code>TimeStampReq</code> object<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">is hashed using SHA-256 to create the <code>TimeStampReq</code> object<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 <div class="lang-asn1 sourcecode" id="appendix-A.1-4">
 <pre>
 SEQUENCE {
@@ -1790,7 +1790,7 @@ SEQUENCE {
 </pre><a href="#appendix-A.1-4" class="pilcrow">¶</a>
 </div>
 <p id="appendix-A.1-5">which is sent to the Time Stamping Authority.<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-6">A <code>TimeStampResp</code> is returned which contains the following <code>TimeStampToken</code><a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-6">A <code>TimeStampResp</code> is returned which contains the <code>TimeStampToken</code><a href="#appendix-A.1-6" class="pilcrow">¶</a></p>
 <div class="lang-asn1 sourcecode" id="appendix-A.1-7">
 <pre>
 SEQUENCE {
@@ -1826,7 +1826,7 @@ SEQUENCE {
 [...]
 </pre><a href="#appendix-A.1-7" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the following Sign1 COSE object<a href="#appendix-A.1-8" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the Sign1 COSE object<a href="#appendix-A.1-8" class="pilcrow">¶</a></p>
 <div class="breakable lang-cbor-diag sourcecode" id="appendix-A.1-9">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
