@@ -1181,6 +1181,14 @@ This enables the use of established RFC 3161 timestamping infrastructure to prov
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-3161-ctt" class="internal xref"><code>3161-ctt</code></a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-messageimprint-computation-" class="internal xref"><code>MessageImprint</code> Computation for <code>COSE_Sign1</code></a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-messageimprint-computation-f" class="internal xref"><code>MessageImprint</code> Computation for <code>COSE_Sign</code></a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1612,8 +1620,8 @@ To clearly separate their semantics two different COSE header parameters are def
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-3161-ttc" class="section-name selfRef"><code>3161-ttc</code></a>
         </h3>
 <p id="section-3.1-1">The <code>3161-ttc</code> COSE <em>protected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1-3">The MessageImprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload of the COSE signed object.
+<p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 <code>TimeStampToken</code> wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">The <code>MessageImprint</code> sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload of the COSE signed object.
 This does not include the <code>bstr</code>-wrapping, only the payload bytes.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">To minimize dependencies, the hash algorithm used for signing the COSE message <span class="bcp14">SHOULD</span> be the same as the algorithm used in the RFC3161 MessageImprint.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -1624,8 +1632,8 @@ This does not include the <code>bstr</code>-wrapping, only the payload bytes.<a 
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-3161-ctt" class="section-name selfRef"><code>3161-ctt</code></a>
         </h3>
 <p id="section-3.2-1">The <code>3161-ctt</code> COSE <em>unprotected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-cose-then-timestamp" class="auto internal xref">Section 2.2</a>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">The <code>3161-ctt</code> unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The message imprint sent in the request to the TSA <span class="bcp14">MUST</span> be either:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">The <code>3161-ctt</code> unprotected header parameter contains a DER-encoded RFC3161 <code>TimeStampToken</code> wrapped in a CBOR byte string (Major type 2).<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The <code>MessageImprint</code> sent in the request to the TSA <span class="bcp14">MUST</span> be:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-4.1">
             <p id="section-3.2-4.1.1">the hash of the CBOR-encoded signature field of the <code>COSE_Sign1</code> message, or<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
@@ -1636,6 +1644,123 @@ This does not include the <code>bstr</code>-wrapping, only the payload bytes.<a 
         </ul>
 <p id="section-3.2-5">In either case, to minimize dependencies, the hash algorithm <span class="bcp14">SHOULD</span> be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.2-6">Refer to <a href="#ctt-sign1" class="auto internal xref">Section 3.2.1</a> and <a href="#ctt-sign" class="auto internal xref">Section 3.2.2</a> for concrete examples of <code>MessageImprint</code> computation.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<div id="ctt-sign1">
+<section id="section-3.2.1">
+          <h4 id="name-messageimprint-computation-">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-messageimprint-computation-" class="section-name selfRef"><code>MessageImprint</code> Computation for <code>COSE_Sign1</code></a>
+          </h4>
+<p id="section-3.2.1-1">Using as an example the <code>COSE_Sign1</code> message<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-3.2.1-2">
+<pre>
+18(
+  [
+    / protected h'a10126' / &lt;&lt; {
+        / alg / 1:-7 / ECDSA 256 /
+      } &gt;&gt;,
+    / unprotected / {
+      / kid / 4:'11'
+    },
+    / payload / 'This is the content.',
+    / signature / h'8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4
+d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5
+a4c345cacb36'
+  ]
+)
+</pre><a href="#section-3.2.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.1-3">then the <code>bstr</code>-wrapped <code>signature</code><a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
+<div class="lang-cbor-pretty sourcecode" id="section-3.2.1-4">
+<pre>
+58 40                                     # bytes(64)
+   8eb33e4ca31d1c465ab05aac34cc6b23
+   d58fef5c083106c4d25a91aef0b0117e
+   2af9a291aa32e14ab834dc56ed2a2234
+   44547e01f11d3b0916e5a4c345cacb36
+</pre><a href="#section-3.2.1-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.1-5">(including the heading bytes <code>0x5840</code>) is used as input for computing the <code>MessageImprint</code>.<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-6">When using SHA-256, the resulting <code>MessageImprint</code> is<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="section-3.2.1-7">
+<pre>
+SEQUENCE {
+  SEQUENCE {
+    OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+    NULL
+    }
+  OCTET STRING
+    44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
+    4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
+  }
+</pre><a href="#section-3.2.1-7" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="ctt-sign">
+<section id="section-3.2.2">
+          <h4 id="name-messageimprint-computation-f">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-messageimprint-computation-f" class="section-name selfRef"><code>MessageImprint</code> Computation for <code>COSE_Sign</code></a>
+          </h4>
+<p id="section-3.2.2-1">Using as an example the <code>COSE_Sign</code> message<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-3.2.2-2">
+<pre>
+98(
+  [
+    / protected / h'',
+    / unprotected / {},
+    / payload / 'This is the content.',
+    / signatures / [
+      [
+        / protected h'a10126' / &lt;&lt; {
+            / alg / 1:-7 / ECDSA 256 /
+          } &gt;&gt;,
+        / unprotected / {
+          / kid / 4:'11'
+        },
+        / signature / h'e2aeafd40d69d19dfe6e52077c5d7ff4e408282cbefb
+5d06cbf414af2e19d982ac45ac98b8544c908b4507de1e90b717c3d34816fe926a2b
+98f53afd2fa0f30a'
+      ]
+    ]
+  ]
+)
+</pre><a href="#section-3.2.2-2" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.2-3">then the <code>signatures</code> array<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
+<div class="lang-cbor-pretty sourcecode" id="section-3.2.2-4">
+<pre>
+81                                        # array(1)
+   83                                     # array(3)
+      43                                  # bytes(3)
+         a10126
+      a1                                  # map(1)
+         04                               # unsigned(4)
+         42                               # bytes(2)
+            3131                          # "11"
+      58 40                               # bytes(64)
+         e2aeafd40d69d19dfe6e52077c5d7ff4
+         e408282cbefb5d06cbf414af2e19d982
+         ac45ac98b8544c908b4507de1e90b717
+         c3d34816fe926a2b98f53afd2fa0f30a
+</pre><a href="#section-3.2.2-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.2.2-5">is used as input for computing the <code>MessageImprint</code>.<a href="#section-3.2.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-6">When using SHA-256, the resulting <code>MessageImprint</code> is<a href="#section-3.2.2-6" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="section-3.2.2-7">
+<pre>
+SEQUENCE {
+  SEQUENCE {
+    OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+    NULL
+    }
+  OCTET STRING
+    80 3F AD A2 91 2D 6B 7A 83 3A 27 BD 96 1C C0 5B
+    C1 CC 16 47 59 B1 C5 6F 7A A7 71 E4 E2 15 26 F7
+  }
+</pre><a href="#section-3.2.2-7" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 </section>
