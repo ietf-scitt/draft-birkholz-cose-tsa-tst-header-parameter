@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 21 July 2025</td>
+<td class="center">Expires 22 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cose-tsa-tst-header-parameter-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-17" class="published">17 January 2025</time>
+<time datetime="2025-01-18" class="published">18 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-21">21 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-22">22 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ This enables the use of established RFC 3161 timestamping infrastructure to prov
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1613,7 +1613,8 @@ To clearly separate their semantics two different COSE header parameters are def
         </h3>
 <p id="section-3.1-1">The <code>3161-ttc</code> COSE <em>protected</em> header parameter <span class="bcp14">MUST</span> be used for the mode described in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The <code>3161-ttc</code> protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<p id="section-3.1-3">The MessageImprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the CBOR-encoded payload field of the COSE signed object.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">The MessageImprint sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload of the COSE signed object.
+This does not include the bstr-wrapping, only the payload bytes.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">To minimize dependencies, the hash algorithm used for signing the COSE message <span class="bcp14">SHOULD</span> be the same as the algorithm used in the RFC3161 MessageImprint.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1764,13 +1765,13 @@ Such a mechanism can be employed inside the ones described in this specification
         <h3 id="name-ttc">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-ttc" class="section-name selfRef">TTC</a>
         </h3>
-<p id="appendix-A.1-1">The following payload:<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-1">The following payload<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <div class="lang-cbor-diag sourcecode" id="appendix-A.1-2">
 <pre>
-'This is the content.'
+This is the content.
 </pre><a href="#appendix-A.1-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-3">is bstr-wrapped and hashed using SHA-256 to create the following <code>TimeStampReq</code> object<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">is hashed using SHA-256 to create the following <code>TimeStampReq</code> object<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 <div class="lang-asn1 sourcecode" id="appendix-A.1-4">
 <pre>
 SEQUENCE {
@@ -1781,8 +1782,8 @@ SEQUENCE {
       NULL
       }
     OCTET STRING
-      C4 38 43 DE D1 C7 71 44 61 97 6F 14 46 DD 11 70
-      C3 E5 C6 93 9D 57 8F 3A 59 87 64 03 9C D2 51 B8
+      09 E6 38 D4 AA 95 FD 72 71 86 62 03 59 53 03 BC
+      E2 32 F4 62 A9 4D 38 E3 93 77 3C D3 AA E3 F6 B0
     }
   BOOLEAN TRUE
   }
@@ -1816,11 +1817,11 @@ SEQUENCE {
                   NULL
                   }
                 OCTET STRING
-                  C4 38 43 DE D1 C7 71 44 61 97 6F 14 46 DD 11 70
-                  C3 E5 C6 93 9D 57 8F 3A 59 87 64 03 9C D2 51 B8
+                  09 E6 38 D4 AA 95 FD 72 71 86 62 03 59 53 03 BC
+                  E2 32 F4 62 A9 4D 38 E3 93 77 3C D3 AA E3 F6 B0
                 }
-              INTEGER 84896268
-              GeneralizedTime 17/01/2025 18:34:36 GMT
+              INTEGER 85048992
+              GeneralizedTime 18/01/2025 11:20:06 GMT
               BOOLEAN TRUE
 [...]
 </pre><a href="#appendix-A.1-7" class="pilcrow">¶</a>
@@ -1834,9 +1835,9 @@ SEQUENCE {
         &lt;&lt;{1: -7, 258: h'\
 3082154906092a864886f70d010702a082153a30821536020103310f300d06096086\
 48016503040203050030820184060b2a864886f70d0109100104a08201730482016f\
-3082016b02010106042a0304013031300d060960864801650304020105000420c438\
-43ded1c7714461976f1446dd1170c3e5c6939d578f3a598764039cd251b80204050f\
-6a0c180f32303235303131373138333433365a0101ffa0820111a482010d30820109\
+3082016b02010106042a0304013031300d06096086480165030402010500042009e6\
+38d4aa95fd7271866203595303bce232f462a94d38e393773cd3aae3f6b002040511\
+bea0180f32303235303131383131323030365a0101ffa0820111a482010d30820109\
 3111300f060355040a13084672656520545341310c300a060355040b130354534131\
 763074060355040d136d54686973206365727469666963617465206469676974616c\
 6c79207369676e7320646f63756d656e747320616e642074696d65207374616d7020\
@@ -1972,32 +1973,32 @@ a33081953111300f060355040a130846726565205453413110300e060355040b1307\
 6d3112301006035504071309577565727a62757267310f300d060355040813064261\
 7965726e310b3009060355040613024445020900c1e986160da8e982300d06096086\
 480165030402030500a081b8301a06092a864886f70d010903310d060b2a864886f7\
-0d0109100104301c06092a864886f70d010905310f170d3235303131373138333433\
+0d0109100104301c06092a864886f70d010905310f170d3235303131383131323030\
 365a302b060b2a864886f70d010910020c311c301a301830160414916da3d860ecca\
-82e34bc59d1793e7e968875f14304f06092a864886f70d0109043142044080c1c697\
-8f1f80a38f3eb8e7a9750520c8e27ad8079b3cfe7d42f7e4855e51454181dbf8502b\
-55648dc2f89cfac3074d5b989793c270aa8a11f65fa9bebf1987300d06092a864886\
-f70d01010105000482020009dafc0fe8e689b967263689a15e07fdd8ca750f8831e3\
-9ab766ff659c933e9b5544e412444c2b05cc0e70264707a2d233d1df7589a5f2707c\
-bebcd7c5e4f3dc0c4122e4ceebfd939aef3a1c9f008315189d71a3493d45b4344ae5\
-1db7b39df3bfe033141a5a0fe347832f23e9e4e5a3bb80e46bd0ba58408496ba6870\
-086c226481d09f725985d4794a1ba095fcefc81fbfd2f5e806c700e3c09ba16d00c3\
-e2e2ed822d40a81f331467640f0ccd2e97dc2b30571dc97d42f1a87e7c3338b69440\
-1c42640551d0d79ac4f7250bb7205d91981f836e9c1b2fa71dff4dd7cea754f0d4bb\
-2b089345ffcb21de06600b72af25d152a71a4feaa2597114517c8c50ca8caf03c86a\
-b6f0d56f62ec84d6c4e952bfe096c6476228bb0a3a618e197a477a67883cb2b21e2b\
-afa653dbd967e8423235e35a4cbfd5a42d63c45b8a25ab29a76d5c9924884c14ce92\
-a883d314d2b6e5b2f20f70f473cebc1cec5bcf48669a3ecaad146b58de137db31485\
-2c3e82610851757cfaabee9d21bc7e3da7c2f4afa87dd2c6a441eced7756d2ed5a70\
-9c549ca85132c7ddafa85c967d3b7fef2bb5a45959bb92a1e85c27f4cc4bd8e9ec22\
-1f9447f8d46a43994350922a776940c9b0026d76cfb1b8683a3984d3e689280804d5\
-52945dc4419260c3a55e0007f52aef20366dcc2adfcd56cb0e241ba318736bb39be3\
-                                      da2cb438b13214d542ae4907d8'}&gt;&gt;,
+82e34bc59d1793e7e968875f14304f06092a864886f70d01090431420440d26c8a6d\
+b748885b0cd9c4ff636cb5d3c7f81308ea3c0bd8f76ab2112b21c1ec762c8f0318ca\
+477472ab2bfde5c9d25129a2b144734b1766c094d66d3aa24d19300d06092a864886\
+f70d0101010500048202009808366698a20227b3a03017317dbcd3813c7ec8f29693\
+9ef20082bcdb95e8ed0495f299c2c6484b2246ab81092c73d039b0e33647a9241df1\
+35fd44b9860c26cc784463d292e79ce39d04c0cffb0f2fb7cc9220ca3cbe43b088e4\
+355dd7fc38a22ef9ad80629b15cd82e861b57df8797a3968f760b0175151aa3dd2c3\
+7aaf8361571441295157c063af57ee66031870d80f30696da7b130a0d07e8753d517\
+3e773713e28eec29b6999e17e65de2b20a0d2a4c33bf0734d7463da3c67da1c76353\
+028761f0f2eaab1525bc489525d6ed34b34ae00a7ce34ceefaa6df08026047e470e3\
+09d0507832b65dad717287dcef8c250d7d7ddf677dd3a6c267c2d29c86e04653ce84\
+f7376c2434e2e85ec0eeaf2031a5f8cb4025f13b67c3ed4062af46000dbb1e3b5699\
+d14cb309c8cdabb736651b76957cb4392f9e2452a88233936e39bd23dae37eeee3de\
+4733a1ce2545324deb8a2203eed8264e3d657e60479cc08fa93916c266dcd1027daa\
+1afd091bde8bea923d92b6e17615eb9f83210c4f2b6fcecb918cfa638a75679aa3df\
+b5f959edc50923ff70c0d45a647a714f01ea48d803f68bb5081c97a57dcbd00c15d9\
+44ba3a89e126bec18b9f49c0225cab0c9e9a9b24de43e5e767b7512a525d909a52e5\
+cb2d79f5221d4f056e60dafb1dcc6e46f6dd1bb553d8caa37ee6add7c1dc70796766\
+                                      d126e88b37d69fec915aa3dd65'}&gt;&gt;,
         {4: '11'},
         'This is the content.',
         h'\
-27ce59a1491a8b534b0ceec8e185f272966c719b1de6c98b2e8c3c2dd092c8258a94\
-        3cbcf4f9247e8cd662cbce9959ea1e61a44c53cf9b0e3c8cecc45b290f1c'
+1b512caa05005b7a2329c1b92cc5447de3a387acc2537ec579d26d38c5be8740ed85\
+        b8d3888630cc080b5eaaad12c029cde6117599565e63ca8485e927958682'
     ])
 </pre><a href="#appendix-A.1-9" class="pilcrow">¶</a>
 </div>
