@@ -555,7 +555,7 @@ A.1.  TTC
 
    The contents of the TimeStampToken are bstr-wrapped and added to the
    protected headers bucket which is then signed alongside the original
-   payload to obtain the Sign1 COSE object
+   payload to obtain the COSE_Sign1 object
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -731,7 +731,7 @@ A.1.  TTC
 
 A.2.  CTT
 
-   Starting with the following Sign1 COSE object
+   Starting with the following COSE_Sign1 object
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -805,7 +805,7 @@ A.2.  CTT
    [...]
 
    The contents of the TimeStampToken are bstr-wrapped and added to the
-   unprotected headers bucket in the original Sign1 COSE object to
+   unprotected headers bucket in the original COSE_Sign1 object to
    obtain the following
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================

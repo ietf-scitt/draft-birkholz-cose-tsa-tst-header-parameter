@@ -1951,7 +1951,7 @@ SEQUENCE {
 [...]
 </pre><a href="#appendix-A.1-7" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.1-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the Sign1 COSE object<a href="#appendix-A.1-8" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the <code>COSE_Sign1</code> object<a href="#appendix-A.1-8" class="pilcrow">¶</a></p>
 <div class="breakable lang-cbor-diag sourcecode" id="appendix-A.1-9">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2134,7 +2134,7 @@ cb2d79f5221d4f056e60dafb1dcc6e46f6dd1bb553d8caa37ee6add7c1dc70796766\
         <h3 id="name-ctt">
 <a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-ctt" class="section-name selfRef">CTT</a>
         </h3>
-<p id="appendix-A.2-1">Starting with the following Sign1 COSE object<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-1">Starting with the following <code>COSE_Sign1</code> object<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <div class="lang-cbor-diag sourcecode" id="appendix-A.2-2">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2210,7 +2210,7 @@ SEQUENCE {
 [...]
 </pre><a href="#appendix-A.2-7" class="pilcrow">¶</a>
 </div>
-<p id="appendix-A.2-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following<a href="#appendix-A.2-8" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-8">The contents of the <code>TimeStampToken</code> are <code>bstr</code>-wrapped and added to the unprotected headers bucket in the original <code>COSE_Sign1</code> object to obtain the following<a href="#appendix-A.2-8" class="pilcrow">¶</a></p>
 <div class="breakable lang-cbor-diag sourcecode" id="appendix-A.2-9">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
