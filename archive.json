@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-16T00:37:42.807264+00:00",
+  "timestamp": "2025-01-19T00:40:55.622999+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -469,6 +469,38 @@
           "updatedAt": "2025-01-11T18:06:12Z"
         }
       ]
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOH8Js786mgZcd",
+      "title": "CTT example",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/44",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a CTT example",
+      "createdAt": "2025-01-16T18:50:20Z",
+      "updatedAt": "2025-01-17T15:25:12Z",
+      "closedAt": "2025-01-17T15:25:12Z",
+      "comments": []
+    },
+    {
+      "number": 45,
+      "id": "I_kwDOH8Js786mpVC-",
+      "title": "TTC example",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/45",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-17T16:25:23Z",
+      "updatedAt": "2025-01-17T16:25:23Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2228,6 +2260,168 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOH8Js786IDJgx",
+      "title": "add CTT example",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/43",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #44\r\n\r\nRendered at https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/ctt-example/draft-ietf-cose-tsa-tst-header-parameter.html#appendix-A.1",
+      "createdAt": "2025-01-16T18:49:33Z",
+      "updatedAt": "2025-01-17T15:25:15Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "39230800f33e2d60ccf88eb4324d5fe1d69cad00",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "ctt-example",
+      "headRefOid": "a2e540380796896179e595336f71c675ab036c96",
+      "closedAt": "2025-01-17T15:25:11Z",
+      "mergedAt": "2025-01-17T15:25:11Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "b689393dc685628c6d1e90f44e617115036e3a73"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786Yii4I",
+          "commit": {
+            "abbreviatedOid": "9f34e4c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-17T14:41:41Z",
+          "updatedAt": "2025-01-17T14:41:41Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n> RFCed Note: The following example uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.\r\n```",
+              "createdAt": "2025-01-17T14:41:41Z",
+              "updatedAt": "2025-01-17T15:23:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Yiser",
+          "commit": {
+            "abbreviatedOid": "9f34e4c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-17T14:58:04Z",
+          "updatedAt": "2025-01-17T14:58:04Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": ":-( sad face emoji",
+              "createdAt": "2025-01-17T14:58:04Z",
+              "updatedAt": "2025-01-17T14:58:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Yiu5N",
+          "commit": {
+            "abbreviatedOid": "9f34e4c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-17T15:02:00Z",
+          "updatedAt": "2025-01-17T15:02:00Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "if IANA agrees on 50/51 for TBD2/TBD1 we might get away without having to recompute the examples...",
+              "createdAt": "2025-01-17T15:02:00Z",
+              "updatedAt": "2025-01-17T15:02:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786Yi7Fc",
+          "commit": {
+            "abbreviatedOid": "a2e5403"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-17T15:23:46Z",
+          "updatedAt": "2025-01-17T15:23:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOH8Js786ILxzp",
+      "title": "TTC example",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/46",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #45 \r\n\r\nRendered at https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/ttc-example/draft-ietf-cose-tsa-tst-header-parameter.html#appendix-A.1",
+      "createdAt": "2025-01-17T17:48:03Z",
+      "updatedAt": "2025-01-18T18:48:29Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "b689393dc685628c6d1e90f44e617115036e3a73",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "ttc-example",
+      "headRefOid": "a91989bc7602fcc8006f983770c28e327481e83f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOH8Js786IL1d6",
+      "title": "fix CTT example (remove hardcoded TS req)",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/47",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I had an hardcoded value for the tsreq file.",
+      "createdAt": "2025-01-17T17:57:49Z",
+      "updatedAt": "2025-01-18T18:51:00Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "b689393dc685628c6d1e90f44e617115036e3a73",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "ctt-fix",
+      "headRefOid": "e36936393c545830bc437ffb53dacc8b756cd86f",
+      "closedAt": "2025-01-18T18:50:59Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This has been merged into #46 ",
+          "createdAt": "2025-01-18T18:50:59Z",
+          "updatedAt": "2025-01-18T18:50:59Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
