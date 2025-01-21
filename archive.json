@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-19T00:40:55.622999+00:00",
+  "timestamp": "2025-01-21T00:37:23.092293+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -452,13 +452,15 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [
         "genart"
       ],
       "body": "[Linda Dunbar's review](https://mailarchive.ietf.org/arch/msg/cose/J9o7A-DXfeRi72h7EOjL13OE3_I/)\r\n\r\n\r\n> _\"The document provides basic diagrams to illustrate the modes but lacks comprehensive examples of the header parameters in action. It would be nicer to add complete example encodings of COSE messages with the proposed parameter.\"_",
       "createdAt": "2025-01-11T17:52:36Z",
-      "updatedAt": "2025-01-11T18:06:12Z",
+      "updatedAt": "2025-01-19T17:15:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -478,11 +480,13 @@
       "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "Add a CTT example",
       "createdAt": "2025-01-16T18:50:20Z",
-      "updatedAt": "2025-01-17T15:25:12Z",
+      "updatedAt": "2025-01-19T17:14:48Z",
       "closedAt": "2025-01-17T15:25:12Z",
       "comments": []
     },
@@ -494,11 +498,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "",
       "createdAt": "2025-01-17T16:25:23Z",
-      "updatedAt": "2025-01-17T16:25:23Z",
+      "updatedAt": "2025-01-19T17:14:56Z",
       "closedAt": null,
       "comments": []
     }
