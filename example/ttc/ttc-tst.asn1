@@ -22,9 +22,9 @@ SEQUENCE {
                   NULL
                   }
                 OCTET STRING
-                  44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
-                  4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
+                  09 E6 38 D4 AA 95 FD 72 71 86 62 03 59 53 03 BC
+                  E2 32 F4 62 A9 4D 38 E3 93 77 3C D3 AA E3 F6 B0
                 }
-              INTEGER 84895155
-              GeneralizedTime 17/01/2025 18:29:13 GMT
+              INTEGER 85048992
+              GeneralizedTime 18/01/2025 11:20:06 GMT
               BOOLEAN TRUE

@@ -138,9 +138,10 @@ To clearly separate their semantics two different COSE header parameters are def
 
 The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode described in {{sec-timestamp-then-cose}}.
 
-The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
+The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 `TimeStampToken` wrapped in a CBOR byte string (Major type 2).
 
-The MessageImprint sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload field of the COSE signed object.
+The `MessageImprint` sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload of the COSE signed object.
+This does not include the `bstr`-wrapping, only the payload bytes.
 
 To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
 
@@ -148,15 +149,125 @@ To minimize dependencies, the hash algorithm used for signing the COSE message S
 
 The `3161-ctt` COSE _unprotected_ header parameter MUST be used for the mode described in {{sec-cose-then-timestamp}}.
 
-The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 TimeStampToken wrapped in a CBOR byte string (Major type 2).
+The `3161-ctt` unprotected header parameter contains a DER-encoded RFC3161 `TimeStampToken` wrapped in a CBOR byte string (Major type 2).
 
-The message imprint sent in the request to the TSA MUST be either:
+The `MessageImprint` sent in the request to the TSA MUST be:
 
 * the hash of the CBOR-encoded signature field of the `COSE_Sign1` message, or
 * the hash of the CBOR-encoded signatures field of the `COSE_Sign` message.
 
 In either case, to minimize dependencies, the hash algorithm SHOULD be the same as the algorithm used for signing the COSE message.
 This may not be possible if the timestamp token has been obtained outside the processing context in which the COSE object is assembled.
+
+Refer to {{ctt-sign1}} and {{ctt-sign}} for concrete examples of `MessageImprint` computation.
+
+### `MessageImprint` Computation for `COSE_Sign1` {#ctt-sign1}
+
+Using as an example the `COSE_Sign1` message
+
+~~~ cbor-diag
+18(
+  [
+    / protected h'a10126' / << {
+        / alg / 1:-7 / ECDSA 256 /
+      } >>,
+    / unprotected / {
+      / kid / 4:'11'
+    },
+    / payload / 'This is the content.',
+    / signature / h'8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4
+d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5
+a4c345cacb36'
+  ]
+)
+~~~
+
+then the `bstr`-wrapped `signature`
+
+~~~ cbor-pretty
+58 40                                     # bytes(64)
+   8eb33e4ca31d1c465ab05aac34cc6b23
+   d58fef5c083106c4d25a91aef0b0117e
+   2af9a291aa32e14ab834dc56ed2a2234
+   44547e01f11d3b0916e5a4c345cacb36
+~~~
+
+(including the heading bytes `0x5840`) is used as input for computing the `MessageImprint`.
+
+When using SHA-256, the resulting `MessageImprint` is
+
+~~~ asn1
+SEQUENCE {
+  SEQUENCE {
+    OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+    NULL
+    }
+  OCTET STRING
+    44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
+    4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
+  }
+~~~
+
+### `MessageImprint` Computation for `COSE_Sign` {#ctt-sign}
+
+Using as an example the `COSE_Sign` message
+
+~~~ cbor-diag
+98(
+  [
+    / protected / h'',
+    / unprotected / {},
+    / payload / 'This is the content.',
+    / signatures / [
+      [
+        / protected h'a10126' / << {
+            / alg / 1:-7 / ECDSA 256 /
+          } >>,
+        / unprotected / {
+          / kid / 4:'11'
+        },
+        / signature / h'e2aeafd40d69d19dfe6e52077c5d7ff4e408282cbefb
+5d06cbf414af2e19d982ac45ac98b8544c908b4507de1e90b717c3d34816fe926a2b
+98f53afd2fa0f30a'
+      ]
+    ]
+  ]
+)
+~~~
+
+then the `signatures` array
+
+~~~ cbor-pretty
+81                                        # array(1)
+   83                                     # array(3)
+      43                                  # bytes(3)
+         a10126
+      a1                                  # map(1)
+         04                               # unsigned(4)
+         42                               # bytes(2)
+            3131                          # "11"
+      58 40                               # bytes(64)
+         e2aeafd40d69d19dfe6e52077c5d7ff4
+         e408282cbefb5d06cbf414af2e19d982
+         ac45ac98b8544c908b4507de1e90b717
+         c3d34816fe926a2b98f53afd2fa0f30a
+~~~
+
+is used as input for computing the `MessageImprint`.
+
+When using SHA-256, the resulting `MessageImprint` is
+
+~~~ asn1
+SEQUENCE {
+  SEQUENCE {
+    OBJECT IDENTIFIER sha-256 (2 16 840 1 101 3 4 2 1)
+    NULL
+    }
+  OCTET STRING
+    80 3F AD A2 91 2D 6B 7A 83 3A 27 BD 96 1C C0 5B
+    C1 CC 16 47 59 B1 C5 6F 7A A7 71 E4 E2 15 26 F7
+  }
+~~~
 
 # Timestamp Processing
 
@@ -193,19 +304,46 @@ Such a mechanism can be employed inside the ones described in this specification
 IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} to the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
 
 | Name | Label | Value Type | Value Registry | Description | Reference |
-| `3161-ttc` | TBD1 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ttc}} |
-| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token | {{&SELF}}, {{sec-tst-hdr-ctt}} |
+| `3161-ttc` | TBD1 | bstr | - | RFC 3161 timestamp token: Timestamp then COSE | {{&SELF}}, {{sec-tst-hdr-ttc}} |
+| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token: COSE then Timestamp | {{&SELF}}, {{sec-tst-hdr-ctt}} |
 {: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
 
 # Examples
 
+## TTC
+
+The payload
+
+~~~
+This is the content.
+~~~
+
+is hashed using SHA-256 to create the `TimeStampReq` object
+
+~~~ asn1
+{::include-fold example/ttc/ttc-req.asn1}
+~~~
+
+which is sent to the Time Stamping Authority.
+
+A `TimeStampResp` is returned which contains the `TimeStampToken`
+
+~~~ asn1
+{::include-fold example/ttc/ttc-tst.asn1}
+[...]
+~~~
+
+The contents of the `TimeStampToken` are `bstr`-wrapped and added to the protected headers bucket which is then signed alongside the original payload to obtain the `COSE_Sign1` object
+
+~~~ cbor-diag
+{::include-fold example/ttc/out.diag}
+~~~
+
 ## CTT
 
-> RFCed Note: The following example uses the currently unassigned 50 as TBD2.  This example must be regenerated once IANA has allocated the codepoint.
-
-Starting with the following Sign1 COSE object
+Starting with the following `COSE_Sign1` object
 
 ~~~ cbor-diag
 {::include-fold example/ctt/in.diag}
@@ -226,7 +364,7 @@ A `TimeStampResp` is returned which contains the following `TimeStampToken`
 [...]
 ~~~
 
-The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprotected headers bucket in the original Sign1 COSE object to obtain the following
+The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprotected headers bucket in the original `COSE_Sign1` object to obtain the following
 
 ~~~ cbor-diag
 {::include-fold example/ctt/out.diag}
@@ -237,11 +375,15 @@ The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprote
 
 The editors would like to thank
 Carl Wallace,
+Carsten Bormann,
+Francesca Palombini,
 Leonard Rosenthol,
+Linda Dunbar,
 Michael B. Jones,
 Michael Prorock,
 Orie Steele,
 Shuping Peng,
+Steve Lasker,
 and
-Steve Lasker
+Yingzhen Qu
 for their reviews and comments.
