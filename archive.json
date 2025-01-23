@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-21T00:37:23.092293+00:00",
+  "timestamp": "2025-01-23T00:37:50.773063+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -449,7 +449,7 @@
       "id": "I_kwDOH8Js786l0pjL",
       "title": "Add examples",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -460,8 +460,8 @@
       ],
       "body": "[Linda Dunbar's review](https://mailarchive.ietf.org/arch/msg/cose/J9o7A-DXfeRi72h7EOjL13OE3_I/)\r\n\r\n\r\n> _\"The document provides basic diagrams to illustrate the modes but lacks comprehensive examples of the header parameters in action. It would be nicer to add complete example encodings of COSE messages with the proposed parameter.\"_",
       "createdAt": "2025-01-11T17:52:36Z",
-      "updatedAt": "2025-01-19T17:15:07Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-22T14:17:46Z",
+      "closedAt": "2025-01-22T14:17:46Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -495,7 +495,7 @@
       "id": "I_kwDOH8Js786mpVC-",
       "title": "TTC example",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/45",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -504,8 +504,8 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-01-17T16:25:23Z",
-      "updatedAt": "2025-01-19T17:14:56Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-22T14:10:20Z",
+      "closedAt": "2025-01-22T14:10:20Z",
       "comments": []
     }
   ],
@@ -2374,26 +2374,42 @@
       "id": "PR_kwDOH8Js786ILxzp",
       "title": "TTC example",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/46",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #45 \r\n\r\nRendered at https://ietf-scitt.github.io/draft-birkholz-cose-tsa-tst-header-parameter/ttc-example/draft-ietf-cose-tsa-tst-header-parameter.html#appendix-A.1",
       "createdAt": "2025-01-17T17:48:03Z",
-      "updatedAt": "2025-01-18T18:48:29Z",
+      "updatedAt": "2025-01-22T14:10:23Z",
       "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "baseRefName": "main",
       "baseRefOid": "b689393dc685628c6d1e90f44e617115036e3a73",
       "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "headRefName": "ttc-example",
       "headRefOid": "a91989bc7602fcc8006f983770c28e327481e83f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-22T14:10:19Z",
+      "mergedAt": "2025-01-22T14:10:19Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "557e9284cd03486a23fd552c145d7dc548dbe0df"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786ZBiAx",
+          "commit": {
+            "abbreviatedOid": "a91989b"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-22T14:07:24Z",
+          "updatedAt": "2025-01-22T14:07:24Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 47,
