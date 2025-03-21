@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 18 September 2025                                        Linaro
+Expires: 22 September 2025                                        Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                           17 March 2025
+                                                           21 March 2025
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 September 2025.
+   This Internet-Draft will expire on 22 September 2025.
 
 Copyright Notice
 
@@ -161,8 +161,8 @@ Table of Contents
    Figure 1 shows the case where a datum is first digested and submitted
    to a TSA to be timestamped.
 
-   This mode is utilized when the signature should also be performed
-   over the timestamp to provide an immutable timestamp.
+   This mode is used to wrap the signed document and its timestamp
+   together in an immutable payload.
 
    A signed COSE message is then built as follows:
 
