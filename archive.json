@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T00:40:16.275990+00:00",
+  "timestamp": "2025-03-23T00:44:25.068646+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -2457,13 +2457,13 @@
       "labels": [],
       "body": "Address issues identified by Stefan\u2019s secdir review.",
       "createdAt": "2025-03-17T17:09:11Z",
-      "updatedAt": "2025-03-17T17:10:10Z",
+      "updatedAt": "2025-03-21T17:09:01Z",
       "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "baseRefName": "main",
       "baseRefOid": "557e9284cd03486a23fd552c145d7dc548dbe0df",
       "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "headRefName": "secdir",
-      "headRefOid": "31685afc0ac7dfd2ee3e891e0b544e4c7607a38a",
+      "headRefOid": "525702d8a644cf95c5d56911ccc3d7acb1d94e46",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
