@@ -301,7 +301,7 @@ While this means that the content of the payload is not directly revealed, to pr
 Such a mechanism can be employed inside the ones described in this specification, but is out of scope for this document.
 
 CTT and TTC modes have different semantic meanings.
-An implementation must ensure that they are interpreted according to their specific semantics.
+An implementation must ensure that the contents of the CTT and TCC headers are interpreted according to their specific semantics.
 In particular, symmetric to the signature and assembly mechanics, each mode has its own separate verification algorithm.
 
 # IANA Considerations
