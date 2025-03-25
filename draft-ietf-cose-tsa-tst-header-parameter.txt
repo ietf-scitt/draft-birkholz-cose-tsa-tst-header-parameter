@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 26 July 2025                                             Linaro
+Expires: 26 September 2025                                        Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                         22 January 2025
+                                                           25 March 2025
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2025.
+   This Internet-Draft will expire on 26 September 2025.
 
 Copyright Notice
 
@@ -161,8 +161,8 @@ Table of Contents
    Figure 1 shows the case where a datum is first digested and submitted
    to a TSA to be timestamped.
 
-   This mode is utilized when the signature should also be performed
-   over the timestamp to provide an immutable timestamp.
+   This mode is used to wrap the signed document and its timestamp
+   together in an immutable payload.
 
    A signed COSE message is then built as follows:
 
@@ -264,7 +264,8 @@ Table of Contents
 
    To minimize dependencies, the hash algorithm used for signing the
    COSE message SHOULD be the same as the algorithm used in the RFC3161
-   MessageImprint.
+   MessageImprint.  However, this may not be possible if the timestamp
+   requester and the COSE message signer are different entities.
 
 3.2.  3161-ctt
 
@@ -438,6 +439,12 @@ Table of Contents
    is shared with the recipient of the header parameter but not the TSA.
    Such a mechanism can be employed inside the ones described in this
    specification, but is out of scope for this document.
+
+   CTT and TTC modes have different semantic meanings.  An
+   implementation must ensure that the contents of the CTT and TCC
+   headers are interpreted according to their specific semantics.  In
+   particular, symmetric to the signature and assembly mechanics, each
+   mode has its own separate verification algorithm.
 
 6.  IANA Considerations
 
@@ -991,8 +998,8 @@ Acknowledgments
 
    The editors would like to thank Carl Wallace, Carsten Bormann,
    Francesca Palombini, Leonard Rosenthol, Linda Dunbar, Michael B.
-   Jones, Michael Prorock, Orie Steele, Shuping Peng, Steve Lasker, and
-   Yingzhen Qu for their reviews and comments.
+   Jones, Michael Prorock, Orie Steele, Shuping Peng, Stefan Santesson,
+   Steve Lasker, and Yingzhen Qu for their reviews and comments.
 
 Contributors
 
