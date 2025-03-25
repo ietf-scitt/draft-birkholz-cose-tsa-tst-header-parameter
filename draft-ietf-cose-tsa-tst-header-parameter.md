@@ -144,7 +144,7 @@ The `MessageImprint` sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash 
 This does not include the `bstr`-wrapping, only the payload bytes.
 
 To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
-However, this may not be possible if the timestamp requestor and the COSE message signer are different entities.
+However, this may not be possible if the timestamp requester and the COSE message signer are different entities.
 
 ## `3161-ctt` {#sec-tst-hdr-ctt}
 
