@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 22 September 2025                                        Linaro
+Expires: 26 September 2025                                        Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                           21 March 2025
+                                                           25 March 2025
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 September 2025.
+   This Internet-Draft will expire on 26 September 2025.
 
 Copyright Notice
 
@@ -441,10 +441,10 @@ Table of Contents
    specification, but is out of scope for this document.
 
    CTT and TTC modes have different semantic meanings.  An
-   implementation must ensure that they are interpreted according to
-   their specific semantics.  In particular, symmetric to the signature
-   and assembly mechanics, each mode has its own separate verification
-   algorithm.
+   implementation must ensure that the contents of the CTT and TCC
+   headers are interpreted according to their specific semantics.  In
+   particular, symmetric to the signature and assembly mechanics, each
+   mode has its own separate verification algorithm.
 
 6.  IANA Considerations
 
