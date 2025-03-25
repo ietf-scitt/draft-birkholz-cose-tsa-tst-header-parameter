@@ -1624,7 +1624,7 @@ To clearly separate their semantics two different COSE header parameters are def
 <p id="section-3.1-3">The <code>MessageImprint</code> sent to the TSA (<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>) <span class="bcp14">MUST</span> be the hash of the payload of the COSE signed object.
 This does not include the <code>bstr</code>-wrapping, only the payload bytes.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">To minimize dependencies, the hash algorithm used for signing the COSE message <span class="bcp14">SHOULD</span> be the same as the algorithm used in the RFC3161 MessageImprint.
-However, this may not be possible if the timestamp requestor and the COSE message signer are different entities.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+However, this may not be possible if the timestamp requester and the COSE message signer are different entities.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-tst-hdr-ctt">

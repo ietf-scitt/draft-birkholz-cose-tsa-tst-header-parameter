@@ -265,7 +265,7 @@ Table of Contents
    To minimize dependencies, the hash algorithm used for signing the
    COSE message SHOULD be the same as the algorithm used in the RFC3161
    MessageImprint.  However, this may not be possible if the timestamp
-   requestor and the COSE message signer are different entities.
+   requester and the COSE message signer are different entities.
 
 3.2.  3161-ctt
 
