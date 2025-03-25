@@ -101,7 +101,7 @@ Similar diagrams for `COSE_Sign` can be derived by allowing multiple `private-ke
 
 {{fig-timestamp-then-cose}} shows the case where a datum is first digested and submitted to a TSA to be timestamped.
 
-This mode is utilized when the signature should also be performed over the timestamp to provide an immutable timestamp.
+This mode is used to wrap the signed document and its timestamp together in an immutable payload.
 
 A signed COSE message is then built as follows:
 
@@ -144,6 +144,7 @@ The `MessageImprint` sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash 
 This does not include the `bstr`-wrapping, only the payload bytes.
 
 To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
+However, this may not be possible if the timestamp requester and the COSE message signer are different entities.
 
 ## `3161-ctt` {#sec-tst-hdr-ctt}
 
@@ -299,6 +300,10 @@ In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) 
 While this means that the content of the payload is not directly revealed, to prevent comparison with known payloads or disclosure of identical payloads being used over time, the payload would need to be armored, e.g., with a nonce that is shared with the recipient of the header parameter but not the TSA.
 Such a mechanism can be employed inside the ones described in this specification, but is out of scope for this document.
 
+CTT and TTC modes have different semantic meanings.
+An implementation must ensure that the contents of the CTT and TCC headers are interpreted according to their specific semantics.
+In particular, symmetric to the signature and assembly mechanics, each mode has its own separate verification algorithm.
+
 # IANA Considerations
 
 IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} to the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
@@ -383,6 +388,7 @@ Michael B. Jones,
 Michael Prorock,
 Orie Steele,
 Shuping Peng,
+Stefan Santesson,
 Steve Lasker,
 and
 Yingzhen Qu
