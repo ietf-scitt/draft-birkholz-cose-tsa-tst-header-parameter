@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T00:41:38.087160+00:00",
+  "timestamp": "2025-03-27T00:41:16.964984+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -2450,26 +2450,82 @@
       "id": "PR_kwDOH8Js786O92Zh",
       "title": "secdir review by Stefan Santesson",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Address issues identified by Stefan\u2019s secdir review.",
       "createdAt": "2025-03-17T17:09:11Z",
-      "updatedAt": "2025-03-21T17:09:01Z",
+      "updatedAt": "2025-03-25T18:34:06Z",
       "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "baseRefName": "main",
       "baseRefOid": "557e9284cd03486a23fd552c145d7dc548dbe0df",
       "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "headRefName": "secdir",
-      "headRefOid": "525702d8a644cf95c5d56911ccc3d7acb1d94e46",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "edf56c91056b5ac3fd1ef3bade56aa4a89efe431",
+      "closedAt": "2025-03-25T18:34:06Z",
+      "mergedAt": "2025-03-25T18:34:06Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "fa50771988841a32581dc1f1fde8e6ca8a7632ea"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786hvcqi",
+          "commit": {
+            "abbreviatedOid": "525702d"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T12:35:24Z",
+          "updatedAt": "2025-03-25T12:35:25Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\nAn implementation must ensure that the contents of the CTT and TCC headers are interpreted according to their specific semantics.\r\n```",
+              "createdAt": "2025-03-25T12:35:24Z",
+              "updatedAt": "2025-03-25T12:35:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786h0Otm",
+          "commit": {
+            "abbreviatedOid": "f8fcefd"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-25T18:32:57Z",
+          "updatedAt": "2025-03-25T18:32:57Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nHowever, this may not be possible if the timestamp requester and the COSE message signer are different entities.\r\n```\r\nGoing with the popular choice",
+              "createdAt": "2025-03-25T18:32:57Z",
+              "updatedAt": "2025-03-25T18:32:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786h0PM8",
+          "commit": {
+            "abbreviatedOid": "f8fcefd"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "with tiny dictionary nit",
+          "createdAt": "2025-03-25T18:33:49Z",
+          "updatedAt": "2025-03-25T18:33:49Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
