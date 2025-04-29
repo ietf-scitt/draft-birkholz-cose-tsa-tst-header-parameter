@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T00:48:22.612708+00:00",
+  "timestamp": "2025-04-29T00:43:01.210205+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -506,6 +506,46 @@
       "createdAt": "2025-01-17T16:25:23Z",
       "updatedAt": "2025-01-22T14:10:20Z",
       "closedAt": "2025-01-22T14:10:20Z",
+      "comments": []
+    },
+    {
+      "number": 49,
+      "id": "I_kwDOH8Js7860RQ9w",
+      "title": "Line folding",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/49",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From [Med\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/0tuE2XZhTwxZ2aArZCyzGYyFRzo/):\n\n```\n# Add a normative reference to RFC 8792 as that is required for unfolding\n\n# The use of folding is not consistent\n\nFor example, this is not used in 3.2.1, while it is used in other examples.\n\n# Check/fix some uses of folding in the last example, in particular:\n\nCURRENT:\n       / signature / h'8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4\n   d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5\n   a4c345cacb36'\n```",
+      "createdAt": "2025-04-28T10:08:56Z",
+      "updatedAt": "2025-04-28T10:11:15Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This will be addressed when IANA assigns the codepoints, at which point the examples need to be recomputed.\n\nMy suggestion is to call `fold -w69` before saving the computed EDN files, which will remove the mention of RFC 8792.",
+          "createdAt": "2025-04-28T10:10:32Z",
+          "updatedAt": "2025-04-28T10:11:14Z"
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "id": "I_kwDOH8Js7860RUiX",
+      "title": "hash computation details",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/50",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From [Med\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/0tuE2XZhTwxZ2aArZCyzGYyFRzo/):\n\n```\n# Hash details: can we have an authoritative reference to zoom more about how\nthe hash is computed/validated?\n\nCURRENT:\n   The MessageImprint sent to the TSA (Section 2.4 of [RFC3161]) MUST be\n   the hash of the payload of the COSE signed object.\n```",
+      "createdAt": "2025-04-28T10:15:07Z",
+      "updatedAt": "2025-04-28T10:15:07Z",
+      "closedAt": null,
       "comments": []
     }
   ],
