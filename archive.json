@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-29T00:43:01.210205+00:00",
+  "timestamp": "2025-05-04T00:49:44.684401+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -545,6 +545,22 @@
       "body": "From [Med\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/0tuE2XZhTwxZ2aArZCyzGYyFRzo/):\n\n```\n# Hash details: can we have an authoritative reference to zoom more about how\nthe hash is computed/validated?\n\nCURRENT:\n   The MessageImprint sent to the TSA (Section 2.4 of [RFC3161]) MUST be\n   the hash of the payload of the COSE signed object.\n```",
       "createdAt": "2025-04-28T10:15:07Z",
       "updatedAt": "2025-04-28T10:15:07Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 51,
+      "id": "I_kwDOH8Js78608ISX",
+      "title": "ACKs",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/51",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Alexey\n* Med\n",
+      "createdAt": "2025-05-02T10:11:37Z",
+      "updatedAt": "2025-05-02T10:11:37Z",
       "closedAt": null,
       "comments": []
     }
