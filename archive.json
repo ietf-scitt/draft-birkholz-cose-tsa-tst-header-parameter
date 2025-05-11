@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-04T00:49:44.684401+00:00",
+  "timestamp": "2025-05-11T00:48:10.317531+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -544,9 +544,17 @@
       "labels": [],
       "body": "From [Med\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/0tuE2XZhTwxZ2aArZCyzGYyFRzo/):\n\n```\n# Hash details: can we have an authoritative reference to zoom more about how\nthe hash is computed/validated?\n\nCURRENT:\n   The MessageImprint sent to the TSA (Section 2.4 of [RFC3161]) MUST be\n   the hash of the payload of the COSE signed object.\n```",
       "createdAt": "2025-04-28T10:15:07Z",
-      "updatedAt": "2025-04-28T10:15:07Z",
+      "updatedAt": "2025-05-09T14:47:57Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We can add a forward reference to the relevant \u201cMessage Imprint Computation\u201d section.",
+          "createdAt": "2025-05-09T14:47:56Z",
+          "updatedAt": "2025-05-09T14:47:56Z"
+        }
+      ]
     },
     {
       "number": 51,
@@ -558,11 +566,91 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "* Alexey\n* Med\n",
+      "body": "* Alexey\n* Med\n* Mike Bishop\n* \u00c9ric",
       "createdAt": "2025-05-02T10:11:37Z",
-      "updatedAt": "2025-05-02T10:11:37Z",
+      "updatedAt": "2025-05-08T08:33:47Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 52,
+      "id": "I_kwDOH8Js7861sHqt",
+      "title": "Mike B\u2019s COMMENTS",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/52",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[Mike\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/ocuvOCB-N-BnaKZu3jhizqm8aCs/)\n \n* [ ] The 2119 MUST in the first sentence of 3.x is unnecessary -- if a different field were used, it wouldn't be what's defined in this specification. You can simply say that these headers are used for the corresponding purposes.\n\n* [ ] However, a more useful 2119 keyword might be in mandating that the header be protected/unprotected as appropriate; if this header appears in the wrong section then the security properties won't apply.\n\n> The current wording collapses requirements for both header parameter name (ttc) and bucket (protected).\n> If we remove the MUST, there is no normative language left that specifies where the header parameter needs to go.\n\n* [ ] The examples in 3.2.x don't specify behavior; they might be better placed in Appendix A, which already contains examples. (Do the two sets of examples illustrate different things?)\n\n> \u00a73.2.x are not examples.  They are illustrations of the computation of the MessageImprint using a sample input.\n",
+      "createdAt": "2025-05-08T08:36:07Z",
+      "updatedAt": "2025-05-09T14:46:53Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 53,
+      "id": "I_kwDOH8Js7861sJRr",
+      "title": "\u00c9ric\u2019s COMMENT",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/53",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[\u00c9ric\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/-8uwDOpINeFdoHbZEurpmyyrDas/)\n\n### Section 1.1\n\n* [ ] Please expand \"TSA\" at first use.\n\n* [ ] Add reference(s) for TSA ([RFC 3161](https://datatracker.ietf.org/doc/rfc3161/) ?) & \"Transparency Service\u201d.\n \n### Section 2\n\n* [ ] Isn't 'boxes' unclear in `by allowing multiple private-key boxes` ?\n\n### Section 2.1\n\n* [ ] Should clock also be considered as input in the TSA box in figure 1 ? The graphics seems to indicate that the private key is feeded in the clock\u2026\n\n-----\n\nCC @evyncke\n",
+      "createdAt": "2025-05-08T08:38:55Z",
+      "updatedAt": "2025-05-08T08:38:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 54,
+      "id": "I_kwDOH8Js7861vkGa",
+      "title": "Deb\u2019s DISCUSS points",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/54",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[Deb\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/8LCvRl0aVZ5ovTF1eulzEGJFlsc/)\n\n\n* [ ] I agree with Stefan Santesson's review:  https://mailarchive.ietf.org/arch/msg/secdir/yiKmZx9ivRJZfUdj5g8W1HPB5xM/  (many thanks for that secdir review)\n\n* [ ] Section 5:  These types of systems rely on accurate time, and prompt reporting of compromised keys.  [STD96](https://datatracker.ietf.org/doc/std96/) discusses the necessity of keeping private keys private, but does not discuss the prompt reporting when those keys are disclosed.  I think two short warnings (one on the necessity for the accuracy of time, and one on the prompt reporting of compromised keys) would be useful for someone using/implementing this document.  (I'm happy to help with the words for these two warnings)",
+      "createdAt": "2025-05-08T14:14:23Z",
+      "updatedAt": "2025-05-08T14:16:10Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Stefan\u2019s suggested addition to the Security Considerations:\n\n```\nImplementers MUST clearly differentiate between RFC 3161 TSA timestamps\nproving the existence of payload data at an earlier point in time and\ntimestamps explicitly providing evidence of the existence of the cryptographic\nsignature. Failure to clearly distinguish between these timestamp semantics\ncould result in vulnerabilities, such as incorrectly accepting signatures\ncreated after key revocation based on older payload-only timestamps. Validators\nMUST NOT interpret protected-header payload timestamps as proof of signature\ncreation time and SHOULD rely exclusively on RFC 3161 TSA timestamps explicitly\ncovering signature data for determining signature validity timing.\n```",
+          "createdAt": "2025-05-08T14:16:09Z",
+          "updatedAt": "2025-05-08T14:16:09Z"
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "I_kwDOH8Js78617ngI",
+      "title": "Orie\u2019s DISCUSSes",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/55",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[Orie\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/mb587DfKupYv4zqn0XR_-YExOn8/)\n\n\n* [ ] Transparency Service\n```\nThe term is capitalized, but no definition is provided.\nGiven the origin of the draft in scitt, its implied that this is the same TS\nthat the SCITT Architecture describes. However, SCITT architecture does not\nsupport registering anything in the unprotected header (can't support CTT).\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-11#section-6.2-6\n```\n\n* [ ] CTT\n\n```\n122        entry cannot be changed.  In certain cases, such as when a short-\n123        lived certificate is used for the signature, the registration policy\n124        of a Transparency Service may add a trustworthy timestamp to the\n125        signed document.  This is done to lock the signature to a specific\n126        point in time.  To achieve this, the Transparency Service acquires a\n127        TST from a TSA, bundles it alongside the signed document, and then\n128        registers it.  A relying party that wants to ascertain the\n129        authenticity of the document after the signing key has expired (or\n130        has been compromised), can do so by making sure that no revocation\n131        information has been made public before the time asserted in the TST.\n\nMUST the TSA be a separate entity from the Transparency Service?\n\nIs it possible for the document signer to supply the TST instead of the\nTransparency Service?\n\nWhat happens if there is already a TST present, when the Transparency Service\nreceives the cose object?\n```",
+      "createdAt": "2025-05-09T14:12:00Z",
+      "updatedAt": "2025-05-09T14:32:06Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ACTION:\n\nReplace the transparency service thing with more generic wording (e.g., see [C2PA](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_time_stamps)) that describes a \u201cSealed Signature\u201d.",
+          "createdAt": "2025-05-09T14:32:05Z",
+          "updatedAt": "2025-05-09T14:32:05Z"
+        }
+      ]
     }
   ],
   "pulls": [
