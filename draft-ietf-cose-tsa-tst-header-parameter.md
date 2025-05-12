@@ -95,7 +95,7 @@ There are two different modes of composing COSE protection and timestamping, mot
 
 The diagrams in this section illustrate the processing flow of the specified modes.
 For simplicity, only the `COSE_Sign1` processing is shown.
-Similar diagrams for `COSE_Sign` can be derived by allowing multiple `private-key` boxes and replacing the label `[signature]` with `[signatures]`.
+Similar diagrams for `COSE_Sign` can be derived by allowing multiple `private-key` parallelogram boxes and replacing the label `[signature]` with `[signatures]`.
 
 ## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
