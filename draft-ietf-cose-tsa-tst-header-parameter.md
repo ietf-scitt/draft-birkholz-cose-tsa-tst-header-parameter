@@ -69,7 +69,7 @@ This section discusses two use cases, each representing one of the two modes of 
 A first use case is a digital document signed alongside a trustworthy timestamp.
 This is a common case in legal contracts.
 In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
-To achieve this, the document signer acquires a fresh TST for the document from a TSA, combines it with the document, and then signs the bundle.
+To achieve this, the document signer acquires a fresh TST for the document from a Time Stamping Authority (TSA), combines it with the document, and then signs the bundle.
 Later on, a relying party consuming the signed bundle can be certain that the document existed _at least_ at the time specified by the TSA.
 The relying party does not have to trust the signer's clock, which may have been maliciously altered or simply inaccurate.
 
