@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-11T00:48:10.317531+00:00",
+  "timestamp": "2025-05-13T00:44:31.357477+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -516,11 +516,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "From [Med\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/0tuE2XZhTwxZ2aArZCyzGYyFRzo/):\n\n```\n# Add a normative reference to RFC 8792 as that is required for unfolding\n\n# The use of folding is not consistent\n\nFor example, this is not used in 3.2.1, while it is used in other examples.\n\n# Check/fix some uses of folding in the last example, in particular:\n\nCURRENT:\n       / signature / h'8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4\n   d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5\n   a4c345cacb36'\n```",
       "createdAt": "2025-04-28T10:08:56Z",
-      "updatedAt": "2025-04-28T10:11:15Z",
+      "updatedAt": "2025-05-12T09:51:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -540,11 +542,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "From [Med\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/0tuE2XZhTwxZ2aArZCyzGYyFRzo/):\n\n```\n# Hash details: can we have an authoritative reference to zoom more about how\nthe hash is computed/validated?\n\nCURRENT:\n   The MessageImprint sent to the TSA (Section 2.4 of [RFC3161]) MUST be\n   the hash of the payload of the COSE signed object.\n```",
       "createdAt": "2025-04-28T10:15:07Z",
-      "updatedAt": "2025-05-09T14:47:57Z",
+      "updatedAt": "2025-05-12T09:26:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -566,9 +570,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "* Alexey\n* Med\n* Mike Bishop\n* \u00c9ric",
+      "body": "* Alexey\n* Med\n* Mike Bishop\n* \u00c9ric\n* Deb",
       "createdAt": "2025-05-02T10:11:37Z",
-      "updatedAt": "2025-05-08T08:33:47Z",
+      "updatedAt": "2025-05-12T10:29:59Z",
       "closedAt": null,
       "comments": []
     },
@@ -580,11 +584,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
       "body": "[Mike\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/ocuvOCB-N-BnaKZu3jhizqm8aCs/)\n \n* [ ] The 2119 MUST in the first sentence of 3.x is unnecessary -- if a different field were used, it wouldn't be what's defined in this specification. You can simply say that these headers are used for the corresponding purposes.\n\n* [ ] However, a more useful 2119 keyword might be in mandating that the header be protected/unprotected as appropriate; if this header appears in the wrong section then the security properties won't apply.\n\n> The current wording collapses requirements for both header parameter name (ttc) and bucket (protected).\n> If we remove the MUST, there is no normative language left that specifies where the header parameter needs to go.\n\n* [ ] The examples in 3.2.x don't specify behavior; they might be better placed in Appendix A, which already contains examples. (Do the two sets of examples illustrate different things?)\n\n> \u00a73.2.x are not examples.  They are illustrations of the computation of the MessageImprint using a sample input.\n",
       "createdAt": "2025-05-08T08:36:07Z",
-      "updatedAt": "2025-05-09T14:46:53Z",
+      "updatedAt": "2025-05-12T10:43:31Z",
       "closedAt": null,
       "comments": []
     },
@@ -596,11 +602,13 @@
       "state": "OPEN",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "thomas-fossati"
+      ],
       "labels": [],
-      "body": "[\u00c9ric\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/-8uwDOpINeFdoHbZEurpmyyrDas/)\n\n### Section 1.1\n\n* [ ] Please expand \"TSA\" at first use.\n\n* [ ] Add reference(s) for TSA ([RFC 3161](https://datatracker.ietf.org/doc/rfc3161/) ?) & \"Transparency Service\u201d.\n \n### Section 2\n\n* [ ] Isn't 'boxes' unclear in `by allowing multiple private-key boxes` ?\n\n### Section 2.1\n\n* [ ] Should clock also be considered as input in the TSA box in figure 1 ? The graphics seems to indicate that the private key is feeded in the clock\u2026\n\n-----\n\nCC @evyncke\n",
+      "body": "[\u00c9ric\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/-8uwDOpINeFdoHbZEurpmyyrDas/)\n\n### Section 1.1\n\n* [x] Please expand \"TSA\" at first use.\n\n* [ ] Add reference(s) for TSA ([RFC 3161](https://datatracker.ietf.org/doc/rfc3161/) ?) & \"Transparency Service\u201d.\n\nThe former is very prominent in the intro.\nThe latter will be replaced as part of #55. \n \n### Section 2\n\n* [x] Isn't 'boxes' unclear in `by allowing multiple private-key boxes` ?\n\n### Section 2.1\n\n* [ ] Should clock also be considered as input in the TSA box in figure 1 ? The graphics seems to indicate that the private key is feeded in the clock\u2026\n\nNo, because the clock is an \"internal\u201d input (i.e., it\u2019s under control of the TSA)\n\n-----\n\nCC @evyncke\n",
       "createdAt": "2025-05-08T08:38:55Z",
-      "updatedAt": "2025-05-08T08:38:55Z",
+      "updatedAt": "2025-05-12T10:29:38Z",
       "closedAt": null,
       "comments": []
     },
@@ -2670,6 +2678,110 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOH8Js786Vzbbl",
+      "title": "add fwd pointer to TTC hash computation",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/56",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #50 ",
+      "createdAt": "2025-05-12T09:34:31Z",
+      "updatedAt": "2025-05-12T09:34:32Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "fa50771988841a32581dc1f1fde8e6ca8a7632ea",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "issue-50",
+      "headRefOid": "a6012544422ebbb3c0254731f1e0f46f9ec91bd3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOH8Js786VzmyU",
+      "title": "apply line folding on synthesis",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/57",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #49 ",
+      "createdAt": "2025-05-12T09:51:48Z",
+      "updatedAt": "2025-05-12T09:53:33Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "fa50771988841a32581dc1f1fde8e6ca8a7632ea",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "issue-49",
+      "headRefOid": "58407a7b19205f5870fc01eb5e8b6fc11273a8fb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOH8Js786Vz_da",
+      "title": "Two comments from \u00c9ric",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/58",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #53 ",
+      "createdAt": "2025-05-12T10:29:28Z",
+      "updatedAt": "2025-05-12T10:29:29Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "fa50771988841a32581dc1f1fde8e6ca8a7632ea",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "issue-53",
+      "headRefOid": "0cb61bba1be2629edf028c987f89a69953877fae",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOH8Js786V0Hkz",
+      "title": "clarify 3.2.x are illustrations, not examples",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/59",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #52 ",
+      "createdAt": "2025-05-12T10:44:19Z",
+      "updatedAt": "2025-05-12T10:44:20Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "fa50771988841a32581dc1f1fde8e6ca8a7632ea",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "issue-52",
+      "headRefOid": "1854e9f57c59de4a326448d3e32a8bf6a9bf014a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
