@@ -165,7 +165,9 @@ Refer to {{ctt-sign1}} and {{ctt-sign}} for concrete examples of `MessageImprint
 
 ### `MessageImprint` Computation for `COSE_Sign1` {#ctt-sign1}
 
-Using as an example the `COSE_Sign1` message
+The following illustrates how `MessageImprint` is computed using a sample `COSE_Sign1` message.
+
+Given the `COSE_Sign1` message
 
 ~~~ cbor-diag
 18(
@@ -184,7 +186,7 @@ a4c345cacb36'
 )
 ~~~
 
-then the `bstr`-wrapped `signature`
+the `bstr`-wrapped `signature`
 
 ~~~ cbor-pretty
 58 40                                     # bytes(64)
@@ -212,7 +214,9 @@ SEQUENCE {
 
 ### `MessageImprint` Computation for `COSE_Sign` {#ctt-sign}
 
-Using as an example the `COSE_Sign` message
+The following illustrates how `MessageImprint` is computed using a sample `COSE_Sign` message.
+
+Given the `COSE_Sign` message
 
 ~~~ cbor-diag
 98(
@@ -237,7 +241,7 @@ Using as an example the `COSE_Sign` message
 )
 ~~~
 
-then the `signatures` array
+the `signatures` array
 
 ~~~ cbor-pretty
 81                                        # array(1)
