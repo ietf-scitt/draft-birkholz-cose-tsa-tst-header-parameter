@@ -42,6 +42,7 @@ set -e
 
 CTT="$(xxd -p -c0 ${CTT_TST})"
 
-cat ${CTT_DIAG_OUT_TMPL} | \
-  sed "s/__CTT__/${CTT}/g" \
+cat ${CTT_DIAG_OUT_TMPL} \
+  | sed "s/__CTT__/${CTT}/g" \
+  | fold -w69 \
   > "${CTT_DIAG_OUT}"

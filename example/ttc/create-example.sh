@@ -38,4 +38,4 @@ set +e
 dumpasn1 -w72 -p ${TTC_TST} | head -30 > ${TTC_TST_ASN1}
 set -e
 
-go-cose3161 ${TTC_TST} | cbor-edn diag2diag > ${TTC_DIAG_OUT}
+go-cose3161 ${TTC_TST} | cbor-edn diag2diag | fold -w69 > ${TTC_DIAG_OUT}
