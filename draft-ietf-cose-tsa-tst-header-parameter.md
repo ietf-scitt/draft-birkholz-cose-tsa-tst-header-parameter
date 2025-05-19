@@ -142,6 +142,7 @@ The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 `TimeSt
 
 The `MessageImprint` sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload of the COSE signed object.
 This does not include the `bstr`-wrapping, only the payload bytes.
+(For an example, see {{ex-ttc}}.)
 
 To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
 However, this may not be possible if the timestamp requester and the COSE message signer are different entities.
@@ -317,7 +318,7 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 
 # Examples
 
-## TTC
+## TTC {#ex-ttc}
 
 The payload
 
