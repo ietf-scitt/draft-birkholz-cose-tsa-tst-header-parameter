@@ -5,10 +5,10 @@
 COSE                                                         H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 26 September 2025                                        Linaro
+Expires: 20 November 2025                                         Linaro
                                                              M. Riechert
                                                                Microsoft
-                                                           25 March 2025
+                                                             19 May 2025
 
 
           COSE Header parameter for RFC 3161 Time-Stamp Tokens
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 September 2025.
+   This Internet-Draft will expire on 20 November 2025.
 
 Copyright Notice
 
@@ -260,7 +260,8 @@ Table of Contents
 
    The MessageImprint sent to the TSA (Section 2.4 of [RFC3161]) MUST be
    the hash of the payload of the COSE signed object.  This does not
-   include the bstr-wrapping, only the payload bytes.
+   include the bstr-wrapping, only the payload bytes.  (For an example,
+   see Appendix A.1.)
 
    To minimize dependencies, the hash algorithm used for signing the
    COSE message SHOULD be the same as the algorithm used in the RFC3161
