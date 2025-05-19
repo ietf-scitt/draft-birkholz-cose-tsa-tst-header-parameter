@@ -109,12 +109,12 @@ Table of Contents
    timestamp.  This is a common case in legal contracts.  In such
    scenario, the document signer wants to reinforce the claim that the
    document existed on a specific date.  To achieve this, the document
-   signer acquires a fresh TST for the document from a TSA, combines it
-   with the document, and then signs the bundle.  Later on, a relying
-   party consuming the signed bundle can be certain that the document
-   existed _at least_ at the time specified by the TSA.  The relying
-   party does not have to trust the signer's clock, which may have been
-   maliciously altered or simply inaccurate.
+   signer acquires a fresh TST for the document from a Time Stamping
+   Authority (TSA), combines it with the document, and then signs the
+   bundle.  Later on, a relying party consuming the signed bundle can be
+   certain that the document existed _at least_ at the time specified by
+   the TSA.  The relying party does not have to trust the signer's
+   clock, which may have been maliciously altered or simply inaccurate.
 
    This usage scenario motivates the "Timestamp then COSE" mode defined
    in Section 2.1.
@@ -153,8 +153,8 @@ Table of Contents
    The diagrams in this section illustrate the processing flow of the
    specified modes.  For simplicity, only the COSE_Sign1 processing is
    shown.  Similar diagrams for COSE_Sign can be derived by allowing
-   multiple private-key boxes and replacing the label [signature] with
-   [signatures].
+   multiple private-key parallelogram boxes and replacing the label
+   [signature] with [signatures].
 
 2.1.  Timestamp then COSE (TTC)
 

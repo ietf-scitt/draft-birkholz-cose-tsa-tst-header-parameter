@@ -1244,7 +1244,7 @@ This enables the use of established RFC 3161 timestamping infrastructure to prov
 <p id="section-1.1-2">A first use case is a digital document signed alongside a trustworthy timestamp.
 This is a common case in legal contracts.
 In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
-To achieve this, the document signer acquires a fresh TST for the document from a TSA, combines it with the document, and then signs the bundle.
+To achieve this, the document signer acquires a fresh TST for the document from a Time Stamping Authority (TSA), combines it with the document, and then signs the bundle.
 Later on, a relying party consuming the signed bundle can be certain that the document existed <em>at least</em> at the time specified by the TSA.
 The relying party does not have to trust the signer's clock, which may have been maliciously altered or simply inaccurate.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">This usage scenario motivates the "Timestamp then COSE" mode defined in <a href="#sec-timestamp-then-cose" class="auto internal xref">Section 2.1</a>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
@@ -1279,7 +1279,7 @@ appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">�
 <p id="section-2-1">There are two different modes of composing COSE protection and timestamping, motivated by the usage scenarios discussed above.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">The diagrams in this section illustrate the processing flow of the specified modes.
 For simplicity, only the <code>COSE_Sign1</code> processing is shown.
-Similar diagrams for <code>COSE_Sign</code> can be derived by allowing multiple <code>private-key</code> boxes and replacing the label <code>[signature]</code> with <code>[signatures]</code>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+Similar diagrams for <code>COSE_Sign</code> can be derived by allowing multiple <code>private-key</code> parallelogram boxes and replacing the label <code>[signature]</code> with <code>[signatures]</code>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <div id="sec-timestamp-then-cose">
 <section id="section-2.1">
         <h3 id="name-timestamp-then-cose-ttc">
