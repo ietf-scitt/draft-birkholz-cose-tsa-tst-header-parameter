@@ -294,7 +294,10 @@ Table of Contents
 
 3.2.1.   MessageImprint Computation for COSE_Sign1
 
-   Using as an example the COSE_Sign1 message
+   The following illustrates how MessageImprint is computed using a
+   sample COSE_Sign1 message.
+
+   Given the COSE_Sign1 message
 
    18(
      [
@@ -311,7 +314,7 @@ Table of Contents
      ]
    )
 
-   then the bstr-wrapped signature
+   the bstr-wrapped signature
 
    58 40                                     # bytes(64)
       8eb33e4ca31d1c465ab05aac34cc6b23
@@ -336,7 +339,10 @@ Table of Contents
 
 3.2.2.   MessageImprint Computation for COSE_Sign
 
-   Using as an example the COSE_Sign message
+   The following illustrates how MessageImprint is computed using a
+   sample COSE_Sign message.
+
+   Given the COSE_Sign message
 
    98(
      [
@@ -359,7 +365,7 @@ Table of Contents
      ]
    )
 
-   then the signatures array
+   the signatures array
 
    81                                        # array(1)
       83                                     # array(3)

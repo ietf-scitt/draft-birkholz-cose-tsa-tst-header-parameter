@@ -1652,8 +1652,9 @@ This may not be possible if the timestamp token has been obtained outside the pr
           <h4 id="name-messageimprint-computation-">
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-messageimprint-computation-" class="section-name selfRef"><code>MessageImprint</code> Computation for <code>COSE_Sign1</code></a>
           </h4>
-<p id="section-3.2.1-1">Using as an example the <code>COSE_Sign1</code> message<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="section-3.2.1-2">
+<p id="section-3.2.1-1">The following illustrates how <code>MessageImprint</code> is computed using a sample <code>COSE_Sign1</code> message.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-2">Given the <code>COSE_Sign1</code> message<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-3.2.1-3">
 <pre>
 18(
   [
@@ -1669,21 +1670,21 @@ d25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5
 a4c345cacb36'
   ]
 )
-</pre><a href="#section-3.2.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.1-3">then the <code>bstr</code>-wrapped <code>signature</code><a href="#section-3.2.1-3" class="pilcrow">¶</a></p>
-<div class="lang-cbor-pretty sourcecode" id="section-3.2.1-4">
+<p id="section-3.2.1-4">the <code>bstr</code>-wrapped <code>signature</code><a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
+<div class="lang-cbor-pretty sourcecode" id="section-3.2.1-5">
 <pre>
 58 40                                     # bytes(64)
    8eb33e4ca31d1c465ab05aac34cc6b23
    d58fef5c083106c4d25a91aef0b0117e
    2af9a291aa32e14ab834dc56ed2a2234
    44547e01f11d3b0916e5a4c345cacb36
-</pre><a href="#section-3.2.1-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.1-5">(including the heading bytes <code>0x5840</code>) is used as input for computing the <code>MessageImprint</code>.<a href="#section-3.2.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-6">When using SHA-256, the resulting <code>MessageImprint</code> is<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
-<div class="lang-asn1 sourcecode" id="section-3.2.1-7">
+<p id="section-3.2.1-6">(including the heading bytes <code>0x5840</code>) is used as input for computing the <code>MessageImprint</code>.<a href="#section-3.2.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-7">When using SHA-256, the resulting <code>MessageImprint</code> is<a href="#section-3.2.1-7" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="section-3.2.1-8">
 <pre>
 SEQUENCE {
   SEQUENCE {
@@ -1694,7 +1695,7 @@ SEQUENCE {
     44 C2 41 9D 13 1D 53 D5 55 84 B5 DD 33 B7 88 C2
     4E 55 1C 6D 44 B1 AF C8 B2 B8 5E 69 54 76 3B 4E
   }
-</pre><a href="#section-3.2.1-7" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.1-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1703,8 +1704,9 @@ SEQUENCE {
           <h4 id="name-messageimprint-computation-f">
 <a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-messageimprint-computation-f" class="section-name selfRef"><code>MessageImprint</code> Computation for <code>COSE_Sign</code></a>
           </h4>
-<p id="section-3.2.2-1">Using as an example the <code>COSE_Sign</code> message<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
-<div class="lang-cbor-diag sourcecode" id="section-3.2.2-2">
+<p id="section-3.2.2-1">The following illustrates how <code>MessageImprint</code> is computed using a sample <code>COSE_Sign</code> message.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-2">Given the <code>COSE_Sign</code> message<a href="#section-3.2.2-2" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="section-3.2.2-3">
 <pre>
 98(
   [
@@ -1726,10 +1728,10 @@ SEQUENCE {
     ]
   ]
 )
-</pre><a href="#section-3.2.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.2-3" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.2-3">then the <code>signatures</code> array<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
-<div class="lang-cbor-pretty sourcecode" id="section-3.2.2-4">
+<p id="section-3.2.2-4">the <code>signatures</code> array<a href="#section-3.2.2-4" class="pilcrow">¶</a></p>
+<div class="lang-cbor-pretty sourcecode" id="section-3.2.2-5">
 <pre>
 81                                        # array(1)
    83                                     # array(3)
@@ -1744,11 +1746,11 @@ SEQUENCE {
          e408282cbefb5d06cbf414af2e19d982
          ac45ac98b8544c908b4507de1e90b717
          c3d34816fe926a2b98f53afd2fa0f30a
-</pre><a href="#section-3.2.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.2-5">is used as input for computing the <code>MessageImprint</code>.<a href="#section-3.2.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-6">When using SHA-256, the resulting <code>MessageImprint</code> is<a href="#section-3.2.2-6" class="pilcrow">¶</a></p>
-<div class="lang-asn1 sourcecode" id="section-3.2.2-7">
+<p id="section-3.2.2-6">is used as input for computing the <code>MessageImprint</code>.<a href="#section-3.2.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-7">When using SHA-256, the resulting <code>MessageImprint</code> is<a href="#section-3.2.2-7" class="pilcrow">¶</a></p>
+<div class="lang-asn1 sourcecode" id="section-3.2.2-8">
 <pre>
 SEQUENCE {
   SEQUENCE {
@@ -1759,7 +1761,7 @@ SEQUENCE {
     80 3F AD A2 91 2D 6B 7A 83 3A 27 BD 96 1C C0 5B
     C1 CC 16 47 59 B1 C5 6F 7A A7 71 E4 E2 15 26 F7
   }
-</pre><a href="#section-3.2.2-7" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.2-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
