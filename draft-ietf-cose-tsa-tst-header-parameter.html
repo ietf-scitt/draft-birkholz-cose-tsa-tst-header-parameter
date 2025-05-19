@@ -2142,8 +2142,6 @@ cb2d79f5221d4f056e60dafb1dcc6e46f6dd1bb553d8caa37ee6add7c1dc70796766\
 <p id="appendix-A.2-1">Starting with the following <code>COSE_Sign1</code> object<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <div class="lang-cbor-diag sourcecode" id="appendix-A.2-2">
 <pre>
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
 18(
   [
     / protected h'a10126' / &lt;&lt; {
@@ -2153,9 +2151,9 @@ cb2d79f5221d4f056e60dafb1dcc6e46f6dd1bb553d8caa37ee6add7c1dc70796766\
       / kid / 4:'11'
     },
     / payload / 'This is the content.',
-    / signature / h'\
-8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4d25a91aef0b0117e2af9\
-        a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5a4c345cacb36'
+    / signature / h'8eb33e4ca31d1c465ab05aac34cc6b23d58fef5c083106c4d
+25a91aef0b0117e2af9a291aa32e14ab834dc56ed2a223444547e01f11d3b0916e5a4
+c345cacb36'
   ]
 )
 </pre><a href="#appendix-A.2-2" class="pilcrow">¶</a>
