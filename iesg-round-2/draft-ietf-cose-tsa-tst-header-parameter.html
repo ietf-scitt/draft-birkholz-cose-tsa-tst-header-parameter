@@ -10,7 +10,7 @@
 <meta content="Maik Riechert" name="author">
 <meta content="
        This document defines two CBOR Signing And Encrypted (COSE) header parameters for incorporating RFC 3161-based timestamping into COSE message structures ( COSE_Sign  and  COSE_Sign1 ).
-This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message. 
+This enables the use of established RFC 3161 timestamping infrastructure in COSE-based protocols. 
     " name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1091,7 +1091,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document defines two CBOR Signing And Encrypted (COSE) header parameters for incorporating RFC 3161-based timestamping into COSE message structures (<code>COSE_Sign</code> and <code>COSE_Sign1</code>).
-This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+This enables the use of established RFC 3161 timestamping infrastructure in COSE-based protocols.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1795,8 +1795,9 @@ In such a setting, any tampering with the COSE signer's clock does not have an i
 However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock so that the CMS validation fails.
 This could disrupt the timestamp validation.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">Implementers <span class="bcp14">MUST</span> clearly differentiate between RFC 3161 TSA timestamps proving the existence of payload data at an earlier point in time (TTC) and timestamps explicitly providing evidence of the existence of the cryptographic signature (CTT).
-Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps Validators <span class="bcp14">MUST NOT</span> interpret protected-header payload timestamps as proof of signature
-creation time and <span class="bcp14">SHOULD</span> rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.<a href="#section-5-4" class="pilcrow">¶</a></p>
+Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps.
+Validators must not interpret protected-header payload timestamps as proof of signature
+creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
 To avoid that, the signed COSE object should be integrity protected during transit and at rest.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <p id="section-5-6">In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) for the payload.
