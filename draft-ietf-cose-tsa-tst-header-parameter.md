@@ -52,7 +52,7 @@ entity:
 --- abstract
 
 This document defines two CBOR Signing And Encrypted (COSE) header parameters for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
-This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
+This enables the use of established RFC 3161 timestamping infrastructure in COSE-based protocols.
 
 --- middle
 
@@ -299,8 +299,9 @@ However, in both CTT and TTC mode, a denial of service can occur if the attacker
 This could disrupt the timestamp validation.
 
 Implementers MUST clearly differentiate between RFC 3161 TSA timestamps proving the existence of payload data at an earlier point in time (TTC) and timestamps explicitly providing evidence of the existence of the cryptographic signature (CTT).
-Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps Validators MUST NOT interpret protected-header payload timestamps as proof of signature
-creation time and SHOULD rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.
+Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps.
+Validators must not interpret protected-header payload timestamps as proof of signature
+creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.
 
 In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
 To avoid that, the signed COSE object should be integrity protected during transit and at rest.
