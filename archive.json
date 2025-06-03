@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T00:45:16.444855+00:00",
+  "timestamp": "2025-06-03T00:45:57.630353+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -2849,6 +2849,59 @@
           "createdAt": "2025-05-19T14:00:14Z",
           "updatedAt": "2025-05-19T14:00:14Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOH8Js786Yl3dy",
+      "title": "A holistic PR",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/60",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "trying to address Stefan's improvements and Deb's remaining comments.",
+      "createdAt": "2025-06-02T10:12:45Z",
+      "updatedAt": "2025-06-02T12:48:43Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "c819d028e73cb57fa2f94e2906d6f560d9635310",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "iesg-round-2",
+      "headRefOid": "876ffa79ac56283b11dc76289daa9acde322053b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js786sJkJL",
+          "commit": {
+            "abbreviatedOid": "876ffa7"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I added a bunch of small tweaks in 876ffa7 (please, `git pull`\u2019em)\r\n\r\nIf this PR wants to deliver on its holistic promise, it needs to address a couple more things noted inline ;-)",
+          "createdAt": "2025-06-02T12:31:36Z",
+          "updatedAt": "2025-06-02T12:48:43Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "The contents of the \u201cUse Cases\u201d section also need to be swapped.",
+              "createdAt": "2025-06-02T12:31:36Z",
+              "updatedAt": "2025-06-02T12:48:43Z"
+            },
+            {
+              "originalPosition": 96,
+              "body": "Deb suggested some further additions to the security considerations:\r\n\r\n```\r\nSection 5:  These types of systems rely on accurate time, and prompt reporting\r\nof compromised keys.  STD96 discusses the necessity of keeping private keys\r\nprivate, but does not discuss the prompt reporting when those keys are\r\ndisclosed.  I think two short warnings (one on the necessity for the accuracy\r\nof time, and one on the prompt reporting of compromised keys) would be useful\r\nfor someone using/implementing this document.  (I'm happy to help with the\r\nwords for these two warnings)\r\n```",
+              "createdAt": "2025-06-02T12:46:27Z",
+              "updatedAt": "2025-06-02T12:48:43Z"
+            }
+          ]
         }
       ]
     }
