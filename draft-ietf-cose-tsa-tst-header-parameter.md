@@ -70,7 +70,7 @@ This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
 
 The first use case is that of "long-term signatures", i.e., signatures that can still be verified even after the signing certificate has expired.
-This can address situations where it is important to prevent subsequent denial by the signer or to verify signatures made using (very) short-term certificates
+This can address situations where it is important to prevent subsequent denial by the signer or to verify signatures made using (very) short-term certificates.
 To achieve this, the document signer acquires a fresh TST for the document's signature from a trusted TSA and concatenates it with the document.
 Later, when a relying party verifies the signed document and its associated TST, they can be certain that the document was signed _at least_ at the time specified by the TSA, and that the signing certificate was valid at the time the signature was made.
 
