@@ -81,9 +81,7 @@ Table of Contents
    4.  Timestamp Processing
    5.  Security Considerations
    6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   7.  Normative References
    Appendix A.  Examples
      A.1.  TTC
      A.2.  CTT
@@ -111,13 +109,13 @@ Table of Contents
    signatures that can still be verified even after the signing
    certificate has expired.  This can address situations where it is
    important to prevent subsequent denial by the signer or to verify
-   signatures made using (very) short-term certificates To achieve this,
-   the document signer acquires a fresh TST for the document's signature
-   from a trusted TSA and concatenates it with the document.  Later,
-   when a relying party verifies the signed document and its associated
-   TST, they can be certain that the document was signed _at least_ at
-   the time specified by the TSA, and that the signing certificate was
-   valid at the time the signature was made.
+   signatures made using (very) short-term certificates.  To achieve
+   this, the document signer acquires a fresh TST for the document's
+   signature from a trusted TSA and concatenates it with the document.
+   Later, when a relying party verifies the signed document and its
+   associated TST, they can be certain that the document was signed _at
+   least_ at the time specified by the TSA, and that the signing
+   certificate was valid at the time the signature was made.
 
    This usage scenario motivates the "COSE then Timestamp" mode
    described in Section 2.1.
@@ -431,9 +429,12 @@ Table of Contents
    Please review the Security Considerations section in [RFC3161]; these
    considerations apply to this document as well.
 
-   Also review the Security Considerations section in [STD96]; these
-   considerations apply to this document as well, especially the need
-   for implementations to protect private key material.
+   Also review the Security Considerations section in [STD96].  These
+   considerations apply to this document as well, particularly with
+   regard to the need for implementations to protect private key
+   material.  Additionally, solutions based on the COSE header
+   parameters defined in this document must be able to report
+   compromised keys promptly.
 
    The following scenario assumes an attacker can manipulate the clocks
    on the COSE signer and its relying parties, but not the TSA.  It is
@@ -477,17 +478,10 @@ Table of Contents
    particular, symmetric to the signature and assembly mechanics, each
    mode has its own separate verification algorithm.
 
-   Consumers of TSTs typically rely not only on accurate time but also
-   prompt reporting of compromised keys.  [STD96] discusses the
-   necessity of keeping private keys private, but does not discuss the
-   prompt reporting when those keys are disclosed.  Therefore, keeping
-   track of cryptoperiods, key rotation, or key revocation is an
-   essential part of trusting a TSA.  Additionally, the resolution,
-   accuracy, and precision of a TSA's clock (see [RFC9581] for further
-   details on a clock's qualities), as well as an expected latency
-   introduced by round trips to the TSA and back can be critical
-   information that has to be taken into account by implementers when
-   implementing the COSE header parameters defined in this document.
+   The resolution, accuracy, and precision of the TSA clock, as well as
+   the expected latency introduced by round trips to and from the TSA
+   must be taken into account when implementing solutions based on the
+   COSE header parameters defined in this document.
 
 6.  IANA Considerations
 
@@ -514,9 +508,7 @@ Table of Contents
 
                   Table 1: New COSE Header Parameters
 
-7.  References
-
-7.1.  Normative References
+7.  Normative References
 
    [IANA.cose_header-parameters]
               IANA, "COSE Header Parameters",
@@ -544,13 +536,6 @@ Table of Contents
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
-
-7.2.  Informative References
-
-   [RFC9581]  Bormann, C., Gamari, B., and H. Birkholz, "Concise Binary
-              Object Representation (CBOR) Tags for Time, Duration, and
-              Period", RFC 9581, DOI 10.17487/RFC9581, August 2024,
-              <https://www.rfc-editor.org/rfc/rfc9581>.
 
 Appendix A.  Examples
 
