@@ -76,14 +76,14 @@ Later, when a relying party verifies the signed document and its associated TST,
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
-The second use case is the notarization of a signed document by registering it at a transparency service.
-This is common for accountability and auditability of issued documents, typically referred to as "statements" in this context.
-It is also common to only register signed parts of a statement (the "signed statement" part) at a transparency service to reduce the complexity of consistency checks at a later point in time to avoid the retrieval or reconstruction of unsigned parts.
-Once a document's signed parts are registered at a transparency service's append-only log, its log entry cannot be changed.
-To not lose the TST during a registration procedure, it must be part of the signed statement.
-To achieve this, the issuer acquires a TST from a TSA, includes it in the to-be-signed part of the statement so that the resulting signed statement includes the TST, and then registers the signed parts (rendering it a 'transparent statement').
-Later on, a relying party consuming the transparent statement including the TST can be certain that statement was signed by the issuer _at least_ at the time specified by the TSA.
-A relying party that wants to ascertain the authenticity of the statement after the issuer's signing key has expired (or has been compromised), can do so by making sure that no revocation information has been made public before the time asserted by the issuer, registered at the transparency service.
+The second use case is the notarization of a signed document by registering it with a transparency service.
+This is common practice for ensuring the accountability and auditability of issued documents, which are typically referred to as "statements" in this context.
+It is also common practice to only register the signed parts of a statement (the "signed statement" portion) with a transparency service, in order to reduce the complexity of consistency checks at a later stage, as well as avoiding the need to retrieve or reconstruct unsigned parts.
+Once the signed parts of a document have been registered in the append-only log at a transparency service, the log entry cannot be changed.
+In order to avoid losing the TST during the registration process, the TST must be included in the signed statement.
+To achieve this, the issuer acquires a TST from a TSA, includes it in the to-be-signed part of the statement so that the resulting signed statement includes the TST, and then registers the signed parts (rendering it a "transparent statement").
+Later on, a relying party consuming the transparent statement including the TST can be certain that the statement was signed by the issuer _at least_ at the time specified by the TSA.
+If the issuer's signing key has expired (or been compromised), the authenticity of the statement can ascertained by ensuring that no revocation information was made public before the time asserted by the issuer and registered at the transparency service.
 
 This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
 
