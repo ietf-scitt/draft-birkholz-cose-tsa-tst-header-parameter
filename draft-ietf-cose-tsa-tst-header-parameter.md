@@ -193,7 +193,7 @@ Such a mechanism can be employed inside the ones described in this specification
 Consumers of TSTs typically rely not only on accurate time but also prompt reporting of compromised keys.
 {{-COSE}} discusses the necessity of keeping private keys private, but does not discuss the prompt reporting when those keys are disclosed.
 Therefore, keeping track of cryptoperiods, key rotation, or key revocation is an essential part of trusting a TSA.
-Additionally, the resolution, accuracy, and precision of a TSA's clock (see {{-cbor-time-tag}} for further details on a clock's qualities), as well as an expected latency introduced by round trips to the TSA and back can be critical information that has to be taken into account by implementers when implementing the COSE header parameters defined in this document. 
+Additionally, the resolution, accuracy, and precision of a TSA's clock (see {{-cbor-time-tag}} for further details on a clock's qualities), as well as an expected latency introduced by round trips to the TSA and back can be critical information that has to be taken into account by implementers when implementing the COSE header parameters defined in this document.
 
 # IANA Considerations
 
