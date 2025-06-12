@@ -69,18 +69,16 @@ This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}
 
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
 
-A first use case is a digital document signature signed alongside a trustworthy timestamp.
-This is a common case in legal contracts.
-In such scenarios, the document signer wants to reinforce the claim that the document was signed at a specific time.
-To achieve this, the document signer acquires a fresh TST for the document's signature from a TSA and concatenates it with the document.
-Later on, a relying party consuming the both the signed document and the TST can be certain that the document was signed _at least_ at the time specified by the TSA.
-The relying party does not have to trust the document signer's clock, which may have been maliciously altered or simply inaccurate.
+The first use case is that of "long-term signatures", i.e., signatures that can still be verified even after the signing certificate has expired.
+This can address situations where it is important to prevent subsequent denial by the signer or to verify signatures made using (very) short-term certificates
+To achieve this, the document signer acquires a fresh TST for the document's signature from a trusted TSA and concatenates it with the document.
+Later, when a relying party verifies the signed document and its associated TST, they can be certain that the document was signed _at least_ at the time specified by the TSA, and that the signing certificate was valid at the time the signature was made.
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
-A second use case is the notarization of a signed document by registering it at a transparency service.
-This is common for accountability and auditability of issued documents, typically referred to as 'statements' in this context.
-It is also common to only register signed parts of a statement (the 'signed statement' part) at a transparency service to reduce the complexity of consistency checks at a later point in time to avoid the retrieval or reconstruction of unsigned parts.
+The second use case is the notarization of a signed document by registering it at a transparency service.
+This is common for accountability and auditability of issued documents, typically referred to as "statements" in this context.
+It is also common to only register signed parts of a statement (the "signed statement" part) at a transparency service to reduce the complexity of consistency checks at a later point in time to avoid the retrieval or reconstruction of unsigned parts.
 Once a document's signed parts are registered at a transparency service's append-only log, its log entry cannot be changed.
 To not lose the TST during a registration procedure, it must be part of the signed statement.
 To achieve this, the issuer acquires a TST from a TSA, includes it in the to-be-signed part of the statement so that the resulting signed statement includes the TST, and then registers the signed parts (rendering it a 'transparent statement').
