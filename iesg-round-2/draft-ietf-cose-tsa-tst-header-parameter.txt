@@ -142,7 +142,7 @@ Table of Contents
    can be certain that the statement was signed by the issuer _at least_
    at the time specified by the TSA.  If the issuer's signing key has
    expired (or been compromised), the authenticity of the statement can
-   ascertained by ensuring that no revocation information was made
+   be ascertained by ensuring that no revocation information was made
    public before the time asserted by the issuer and registered at the
    transparency service.
 
