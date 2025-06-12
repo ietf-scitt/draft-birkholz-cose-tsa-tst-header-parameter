@@ -47,7 +47,6 @@ normative:
     -: COSE
 
 informative:
-  RFC9581: cbor-time-tag
 
 entity:
   SELF: "RFCthis"
@@ -292,7 +291,9 @@ As part of the signature verification, the receiver MUST make sure that the Mess
 
 Please review the Security Considerations section in {{-TSA}}; these considerations apply to this document as well.
 
-Also review the Security Considerations section in {{-COSE}}; these considerations apply to this document as well, especially the need for implementations to protect private key material.
+Also review the Security Considerations section in {{-COSE}}.
+These considerations apply to this document as well, particularly with regard to the need for implementations to protect private key material.
+Additionally, solutions based on the COSE header parameters defined in this document must be able to report compromised keys promptly.
 
 The following scenario assumes an attacker can manipulate the clocks on the COSE signer and its relying parties, but not the TSA.
 It is also assumed that the TSA is a trusted third party, so the attacker cannot impersonate the TSA and create valid timestamp tokens.
@@ -316,10 +317,7 @@ CTT and TTC modes have different semantic meanings.
 An implementation must ensure that the contents of the CTT and TCC headers are interpreted according to their specific semantics.
 In particular, symmetric to the signature and assembly mechanics, each mode has its own separate verification algorithm.
 
-Consumers of TSTs typically rely not only on accurate time but also prompt reporting of compromised keys.
-{{-COSE}} discusses the necessity of keeping private keys private, but does not discuss the prompt reporting when those keys are disclosed.
-Therefore, keeping track of cryptoperiods, key rotation, or key revocation is an essential part of trusting a TSA.
-Additionally, the resolution, accuracy, and precision of a TSA's clock (see {{-cbor-time-tag}} for further details on a clock's qualities), as well as an expected latency introduced by round trips to the TSA and back can be critical information that has to be taken into account by implementers when implementing the COSE header parameters defined in this document.
+The resolution, accuracy, and precision of the TSA clock, as well as the expected latency introduced by round trips to and from the TSA must be taken into account when implementing solutions based on the COSE header parameters defined in this document.
 
 # IANA Considerations
 
