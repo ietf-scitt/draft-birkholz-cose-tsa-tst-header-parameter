@@ -83,7 +83,7 @@ Once the signed parts of a document have been registered in the append-only log 
 In order to avoid losing the TST during the registration process, the TST must be included in the signed statement.
 To achieve this, the issuer acquires a TST from a TSA, includes it in the to-be-signed part of the statement so that the resulting signed statement includes the TST, and then registers the signed parts (rendering it a "transparent statement").
 Later on, a relying party consuming the transparent statement including the TST can be certain that the statement was signed by the issuer _at least_ at the time specified by the TSA.
-If the issuer's signing key has expired (or been compromised), the authenticity of the statement can ascertained by ensuring that no revocation information was made public before the time asserted by the issuer and registered at the transparency service.
+If the issuer's signing key has expired (or been compromised), the authenticity of the statement can be ascertained by ensuring that no revocation information was made public before the time asserted by the issuer and registered at the transparency service.
 
 This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
 
