@@ -122,23 +122,23 @@ Table of Contents
    This usage scenario motivates the "COSE then Timestamp" mode
    described in Section 2.1.
 
-   A second use case is the notarization of a signed documents by
+   A second use case is the notarization of a signed document by
    registering it at a transparency service.  This is common for
-   accountability and auditability of issued documents, also referred to
-   'statements' in this context.  It is also common to only register
-   signed parts of a document (typically referred to as a 'signed
-   statement') at a transparency service to reduce the complexity of
-   consistency checks at a later point in time, which would require the
-   retrieval or reconstruction of unsigned parts.  Once a document's
-   signed parts are registered at a transparency service's append-only
-   log, its log entry cannot be changed.  To not loose the TST during a
-   registration procedure, it must be part of the signed statement.  To
-   achieve this, the Issuer acquires a TST from a TSA, bundles it with
-   the unsigned document so that the resulting signed statement includes
+   accountability and auditability of issued documents, typically
+   referred to as 'statements' in this context.  It is also common to
+   only register signed parts of a statement (the 'signed statement'
+   part) at a transparency service to reduce the complexity of
+   consistency checks at a later point in time to avoid the retrieval or
+   reconstruction of unsigned parts.  Once a document's signed parts are
+   registered at a transparency service's append-only log, its log entry
+   cannot be changed.  To not lose the TST during a registration
+   procedure, it must be part of the signed statement.  To achieve this,
+   the issuer acquires a TST from a TSA, includes it in the to-be-signed
+   part of the statement so that the resulting signed statement includes
    the TST, and then registers the signed parts (rendering it a
    'transparent statement').  Later on, a relying party consuming the
    transparent statement including the TST can be certain that statement
-   was signed by the Issuer _at least_ at the time specified by the TSA.
+   was signed by the issuer _at least_ at the time specified by the TSA.
    A relying party that wants to ascertain the authenticity of the
    statement after the issuer's signing key has expired (or has been
    compromised), can do so by making sure that no revocation information
