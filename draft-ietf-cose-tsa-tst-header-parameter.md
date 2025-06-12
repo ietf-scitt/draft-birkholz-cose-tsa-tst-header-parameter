@@ -46,13 +46,15 @@ normative:
     =: RFC9052
     -: COSE
 
+informative:
+
 entity:
   SELF: "RFCthis"
 
 --- abstract
 
 This document defines two CBOR Signing And Encrypted (COSE) header parameters for incorporating RFC 3161-based timestamping into COSE message structures (`COSE_Sign` and `COSE_Sign1`).
-This enables the use of established RFC 3161 timestamping infrastructure to prove the creation time of a message.
+This enables the use of established RFC 3161 timestamping infrastructure in COSE-based protocols.
 
 --- middle
 
@@ -66,24 +68,23 @@ This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}
 
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
 
-A first use case is a digital document signed alongside a trustworthy timestamp.
-This is a common case in legal contracts.
-In such scenario, the document signer wants to reinforce the claim that the document existed on a specific date.
-To achieve this, the document signer acquires a fresh TST for the document from a Time Stamping Authority (TSA), combines it with the document, and then signs the bundle.
-Later on, a relying party consuming the signed bundle can be certain that the document existed _at least_ at the time specified by the TSA.
-The relying party does not have to trust the signer's clock, which may have been maliciously altered or simply inaccurate.
-
-This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
-
-A second use case is the notarization of a signed document by registering it at a Transparency Service.
-This is common for accountability and auditability of issued documents.
-Once a document is registered at a Transparency Service's append-only log, its log entry cannot be changed.
-In certain cases, such as when a short-lived certificate is used for the signature, the registration policy of a Transparency Service may add a trustworthy timestamp to the signed document.
-This is done to lock the signature to a specific point in time.
-To achieve this, the Transparency Service acquires a TST from a TSA, bundles it alongside the signed document, and then registers it.
-A relying party that wants to ascertain the authenticity of the document after the signing key has expired (or has been compromised), can do so by making sure that no revocation information has been made public before the time asserted in the TST.
+The first use case is that of "long-term signatures", i.e., signatures that can still be verified even after the signing certificate has expired.
+This can address situations where it is important to prevent subsequent denial by the signer or to verify signatures made using (very) short-term certificates.
+To achieve this, the document signer acquires a fresh TST for the document's signature from a trusted TSA and concatenates it with the document.
+Later, when a relying party verifies the signed document and its associated TST, they can be certain that the document was signed _at least_ at the time specified by the TSA, and that the signing certificate was valid at the time the signature was made.
 
 This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
+
+The second use case is the notarization of a signed document by registering it with a transparency service.
+This is common practice for ensuring the accountability and auditability of issued documents, which are typically referred to as "statements" in this context.
+It is also common practice to only register the signed parts of a statement (the "signed statement" portion) with a transparency service, in order to reduce the complexity of consistency checks at a later stage, as well as avoiding the need to retrieve or reconstruct unsigned parts.
+Once the signed parts of a document have been registered in the append-only log at a transparency service, the log entry cannot be changed.
+In order to avoid losing the TST during the registration process, the TST must be included in the signed statement.
+To achieve this, the issuer acquires a TST from a TSA, includes it in the to-be-signed part of the statement so that the resulting signed statement includes the TST, and then registers the signed parts (rendering it a "transparent statement").
+Later on, a relying party consuming the transparent statement including the TST can be certain that the statement was signed by the issuer _at least_ at the time specified by the TSA.
+If the issuer's signing key has expired (or been compromised), the authenticity of the statement can be ascertained by ensuring that no revocation information was made public before the time asserted by the issuer and registered at the transparency service.
+
+This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
 
 ## Requirements Notation
 
@@ -96,6 +97,21 @@ There are two different modes of composing COSE protection and timestamping, mot
 The diagrams in this section illustrate the processing flow of the specified modes.
 For simplicity, only the `COSE_Sign1` processing is shown.
 Similar diagrams for `COSE_Sign` can be derived by allowing multiple `private-key` parallelogram boxes and replacing the label `[signature]` with `[signatures]`.
+
+## COSE then Timestamp (CTT) {#sec-cose-then-timestamp}
+
+{{fig-cose-then-timestamp}} shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
+The obtained timestamp token is then added back as an unprotected header into the same COSE object.
+
+This mode is utilized when a record of the timing of the signature operation is desired.
+
+~~~ aasvg
+{::include ascii-art/ctt-alt.ascii-art}
+~~~
+{: #fig-cose-then-timestamp artwork-align="center"
+   title="COSE, then Timestamp (CTT)"}
+
+In this context, timestamp tokens are similar to a countersignature made by the TSA.
 
 ## Timestamp then COSE (TTC) {#sec-timestamp-then-cose}
 
@@ -114,38 +130,10 @@ A signed COSE message is then built as follows:
 {: #fig-timestamp-then-cose artwork-align="center"
    title="Timestamp, then COSE (TTC)"}
 
-## COSE then Timestamp (CTT) {#sec-cose-then-timestamp}
-
-{{fig-cose-then-timestamp}} shows the case where the signature(s) field of the signed COSE object is digested and submitted to a TSA to be timestamped.
-The obtained timestamp token is then added back as an unprotected header into the same COSE object.
-
-This mode is utilized when a record of the timing of the signature operation is desired.
-
-~~~ aasvg
-{::include ascii-art/ctt-alt.ascii-art}
-~~~
-{: #fig-cose-then-timestamp artwork-align="center"
-   title="COSE, then Timestamp (CTT)"}
-
-In this context, timestamp tokens are similar to a countersignature made by the TSA.
-
 # RFC 3161 Time-Stamp Tokens COSE Header Parameters {#sec-tst-hdr}
 
 The two modes described in {{sec-timestamp-then-cose}} and {{sec-cose-then-timestamp}} use different inputs into the timestamping machinery, and consequently create different kinds of binding between COSE and TST.
 To clearly separate their semantics two different COSE header parameters are defined as described in the following subsections.
-
-## `3161-ttc` {#sec-tst-hdr-ttc}
-
-The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode described in {{sec-timestamp-then-cose}}.
-
-The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 `TimeStampToken` wrapped in a CBOR byte string (Major type 2).
-
-The `MessageImprint` sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload of the COSE signed object.
-This does not include the `bstr`-wrapping, only the payload bytes.
-(For an example, see {{ex-ttc}}.)
-
-To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
-However, this may not be possible if the timestamp requester and the COSE message signer are different entities.
 
 ## `3161-ctt` {#sec-tst-hdr-ctt}
 
@@ -163,7 +151,7 @@ This may not be possible if the timestamp token has been obtained outside the pr
 
 Refer to {{ctt-sign1}} and {{ctt-sign}} for concrete examples of `MessageImprint` computation.
 
-### `MessageImprint` Computation for `COSE_Sign1` {#ctt-sign1}
+### `MessageImprint` Computation for `COSE_Sign1` {#ctt-sign1}
 
 The following illustrates how `MessageImprint` is computed using a sample `COSE_Sign1` message.
 
@@ -212,7 +200,7 @@ SEQUENCE {
   }
 ~~~
 
-### `MessageImprint` Computation for `COSE_Sign` {#ctt-sign}
+### `MessageImprint` Computation for `COSE_Sign` {#ctt-sign}
 
 The following illustrates how `MessageImprint` is computed using a sample `COSE_Sign` message.
 
@@ -275,6 +263,19 @@ SEQUENCE {
   }
 ~~~
 
+## `3161-ttc` {#sec-tst-hdr-ttc}
+
+The `3161-ttc` COSE _protected_ header parameter MUST be used for the mode described in {{sec-timestamp-then-cose}}.
+
+The `3161-ttc` protected header parameter contains a DER-encoded RFC3161 `TimeStampToken` wrapped in a CBOR byte string (Major type 2).
+
+The `MessageImprint` sent to the TSA ({{Section 2.4 of -TSA}}) MUST be the hash of the payload of the COSE signed object.
+This does not include the `bstr`-wrapping, only the payload bytes.
+(For an example, see {{ex-ttc}}.)
+
+To minimize dependencies, the hash algorithm used for signing the COSE message SHOULD be the same as the algorithm used in the RFC3161 MessageImprint.
+However, this may not be possible if the timestamp requester and the COSE message signer are different entities.
+
 # Timestamp Processing
 
 RFC 3161 timestamp tokens use CMS as signature envelope format.
@@ -290,13 +291,20 @@ As part of the signature verification, the receiver MUST make sure that the Mess
 
 Please review the Security Considerations section in {{-TSA}}; these considerations apply to this document as well.
 
-Also review the Security Considerations section in {{-COSE}}; these considerations apply to this document as well, especially the need for implementations to protect private key material.
+Also review the Security Considerations section in {{-COSE}}.
+These considerations apply to this document as well, particularly with regard to the need for implementations to protect private key material.
+Additionally, solutions based on the COSE header parameters defined in this document must be able to report compromised keys promptly.
 
 The following scenario assumes an attacker can manipulate the clocks on the COSE signer and its relying parties, but not the TSA.
 It is also assumed that the TSA is a trusted third party, so the attacker cannot impersonate the TSA and create valid timestamp tokens.
 In such a setting, any tampering with the COSE signer's clock does not have an impact because, once the timestamp is obtained from the TSA, it becomes the only reliable source of time.
 However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock so that the CMS validation fails.
 This could disrupt the timestamp validation.
+
+Implementers MUST clearly differentiate between RFC 3161 TSA timestamps proving the existence of payload data at an earlier point in time (TTC) and timestamps explicitly providing evidence of the existence of the cryptographic signature (CTT).
+Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps.
+Validators must not interpret protected-header payload timestamps as proof of signature
+creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.
 
 In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
 To avoid that, the signed COSE object should be integrity protected during transit and at rest.
@@ -308,6 +316,8 @@ Such a mechanism can be employed inside the ones described in this specification
 CTT and TTC modes have different semantic meanings.
 An implementation must ensure that the contents of the CTT and TCC headers are interpreted according to their specific semantics.
 In particular, symmetric to the signature and assembly mechanics, each mode has its own separate verification algorithm.
+
+The resolution, accuracy, and precision of the TSA clock, as well as the expected latency introduced by round trips to and from the TSA must be taken into account when implementing solutions based on the COSE header parameters defined in this document.
 
 # IANA Considerations
 
