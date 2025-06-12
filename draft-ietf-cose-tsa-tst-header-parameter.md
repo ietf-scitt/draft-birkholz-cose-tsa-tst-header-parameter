@@ -394,14 +394,20 @@ The contents of the `TimeStampToken` are `bstr`-wrapped and added to the unprote
 {:unnumbered}
 
 The editors would like to thank
+Alexey Melnikov,
 Carl Wallace,
 Carsten Bormann,
+Deb Cooley,
+Éric Vyncke,
 Francesca Palombini,
 Leonard Rosenthol,
 Linda Dunbar,
 Michael B. Jones,
 Michael Prorock,
+Mike Bishop,
+Mohamed Boucadair,
 Orie Steele,
+Roman Danyliw,
 Shuping Peng,
 Stefan Santesson,
 Steve Lasker,
