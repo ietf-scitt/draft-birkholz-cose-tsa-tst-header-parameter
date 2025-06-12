@@ -1031,10 +1031,12 @@ A.2.  CTT
 
 Acknowledgments
 
-   The editors would like to thank Carl Wallace, Carsten Bormann,
-   Francesca Palombini, Leonard Rosenthol, Linda Dunbar, Michael B.
-   Jones, Michael Prorock, Orie Steele, Shuping Peng, Stefan Santesson,
-   Steve Lasker, and Yingzhen Qu for their reviews and comments.
+   The editors would like to thank Alexey Melnikov, Carl Wallace,
+   Carsten Bormann, Deb Cooley, Éric Vyncke, Francesca Palombini,
+   Leonard Rosenthol, Linda Dunbar, Michael B.  Jones, Michael Prorock,
+   Mike Bishop, Mohamed Boucadair, Orie Steele, Roman Danyliw, Shuping
+   Peng, Stefan Santesson, Steve Lasker, and Yingzhen Qu for their
+   reviews and comments.
 
 Contributors
 
