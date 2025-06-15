@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-03T00:45:57.630353+00:00",
+  "timestamp": "2025-06-15T00:52:19.389958+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -2857,24 +2857,26 @@
       "id": "PR_kwDOH8Js786Yl3dy",
       "title": "A holistic PR",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/60",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "henkbirkholz",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "trying to address Stefan's improvements and Deb's remaining comments.",
       "createdAt": "2025-06-02T10:12:45Z",
-      "updatedAt": "2025-06-02T12:48:43Z",
+      "updatedAt": "2025-06-12T10:12:23Z",
       "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "baseRefName": "main",
       "baseRefOid": "c819d028e73cb57fa2f94e2906d6f560d9635310",
       "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "headRefName": "iesg-round-2",
-      "headRefOid": "876ffa79ac56283b11dc76289daa9acde322053b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "cf748a8e718cf7d68ec358091c8dd3b504328215",
+      "closedAt": "2025-06-12T10:12:23Z",
+      "mergedAt": "2025-06-12T10:12:23Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "f9280202e9750ec441d27b97cf555598bdee0a7b"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2902,6 +2904,59 @@
               "updatedAt": "2025-06-02T12:48:43Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786uCgIE",
+          "commit": {
+            "abbreviatedOid": "e6db982"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-12T07:35:51Z",
+          "updatedAt": "2025-06-12T07:35:51Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Done",
+              "createdAt": "2025-06-12T07:35:51Z",
+              "updatedAt": "2025-06-12T07:35:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786uCga3",
+          "commit": {
+            "abbreviatedOid": "876ffa7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-12T07:36:18Z",
+          "updatedAt": "2025-06-12T07:36:19Z",
+          "comments": [
+            {
+              "originalPosition": 96,
+              "body": "Added a lightweight warning based on Deb's input",
+              "createdAt": "2025-06-12T07:36:18Z",
+              "updatedAt": "2025-06-12T07:36:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH8Js786uEgJj",
+          "commit": {
+            "abbreviatedOid": "cf748a8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "ship it!",
+          "createdAt": "2025-06-12T10:12:17Z",
+          "updatedAt": "2025-06-12T10:12:17Z",
+          "comments": []
         }
       ]
     }
