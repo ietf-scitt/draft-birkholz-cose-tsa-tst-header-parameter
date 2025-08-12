@@ -67,15 +67,18 @@ This document defines two new CBOR Object Signing and Encryption (COSE) {{-COSE}
 ## Use Cases
 
 This section discusses two use cases, each representing one of the two modes of use defined in {{modes}}.
+As the security characteristics of the two cases differ, care must be taken when choosing the appropriate mode for a given application.
+See {{sec-sema-confusion-avoidance}} for a discussion on the security of the implementations.
 
-The first use case is that of "long-term signatures", i.e., signatures that can still be verified even after the signing certificate has expired.
+The primary use case is that of "long-term signatures", i.e., signatures that can still be verified even after the signing certificate has expired.
 This can address situations where it is important to prevent subsequent denial by the signer or to verify signatures made using (very) short-term certificates.
 To achieve this, the document signer acquires a fresh TST for the document's signature from a trusted TSA and concatenates it with the document.
 Later, when a relying party verifies the signed document and its associated TST, they can be certain that the document was signed _at least_ at the time specified by the TSA, and that the signing certificate was valid at the time the signature was made.
 
-This usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
+This primary usage scenario motivates the "COSE then Timestamp" mode described in {{sec-cose-then-timestamp}}.
 
-The second use case is the notarization of a signed document by registering it with a transparency service.
+The second use case is new.
+It is the notarization of a signed document by registering it with a transparency service.
 This is common practice for ensuring the accountability and auditability of issued documents, which are typically referred to as "statements" in this context.
 It is also common practice to only register the signed parts of a statement (the "signed statement" portion) with a transparency service, in order to reduce the complexity of consistency checks at a later stage, as well as avoiding the need to retrieve or reconstruct unsigned parts.
 Once the signed parts of a document have been registered in the append-only log at a transparency service, the log entry cannot be changed.
@@ -84,7 +87,7 @@ To achieve this, the issuer acquires a TST from a TSA, includes it in the to-be-
 Later on, a relying party consuming the transparent statement including the TST can be certain that the statement was signed by the issuer _at least_ at the time specified by the TSA.
 If the issuer's signing key has expired (or been compromised), the authenticity of the statement can be ascertained by ensuring that no revocation information was made public before the time asserted by the issuer and registered at the transparency service.
 
-This usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
+This new usage scenario motivates the "Timestamp then COSE" mode defined in {{sec-timestamp-then-cose}}.
 
 ## Requirements Notation
 
@@ -301,11 +304,6 @@ In such a setting, any tampering with the COSE signer's clock does not have an i
 However, in both CTT and TTC mode, a denial of service can occur if the attacker can adjust the relying party's clock so that the CMS validation fails.
 This could disrupt the timestamp validation.
 
-Implementers MUST clearly differentiate between RFC 3161 TSA timestamps proving the existence of payload data at an earlier point in time (TTC) and timestamps explicitly providing evidence of the existence of the cryptographic signature (CTT).
-Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps.
-Validators must not interpret protected-header payload timestamps as proof of signature
-creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.
-
 In CTT mode, an attacker could manipulate the unprotected header by removing or replacing the timestamp.
 To avoid that, the signed COSE object should be integrity protected during transit and at rest.
 
@@ -313,11 +311,18 @@ In TTC mode, the TSA is given an opaque identifier (a cryptographic hash value) 
 While this means that the content of the payload is not directly revealed, to prevent comparison with known payloads or disclosure of identical payloads being used over time, the payload would need to be armored, e.g., with a nonce that is shared with the recipient of the header parameter but not the TSA.
 Such a mechanism can be employed inside the ones described in this specification, but is out of scope for this document.
 
+The resolution, accuracy, and precision of the TSA clock, as well as the expected latency introduced by round trips to and from the TSA must be taken into account when implementing solutions based on the COSE header parameters defined in this document.
+
+## Avoiding Semantic Confusion {#sec-sema-confusion-avoidance}
+
 CTT and TTC modes have different semantic meanings.
 An implementation must ensure that the contents of the CTT and TCC headers are interpreted according to their specific semantics.
 In particular, symmetric to the signature and assembly mechanics, each mode has its own separate verification algorithm.
 
-The resolution, accuracy, and precision of the TSA clock, as well as the expected latency introduced by round trips to and from the TSA must be taken into account when implementing solutions based on the COSE header parameters defined in this document.
+Implementers MUST clearly differentiate between RFC 3161 TSA timestamps proving the existence of payload data at an earlier point in time (TTC) and timestamps explicitly providing evidence of the existence of the cryptographic signature (CTT).
+Failure to clearly distinguish between these timestamp semantics can result in vulnerabilities, such as incorrectly accepting signatures created after key revocation based on older payload-only timestamps.
+Validators must not interpret protected-header payload timestamps as proof of signature
+creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly covering signature data for determining signature validity timing.
 
 # IANA Considerations
 
@@ -331,6 +336,10 @@ IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} 
 --- back
 
 # Examples
+
+[^rfced]: RFC Editor, please note that the following examples use fictitious numbers for TBD1 and TBD2. Once the assignments have been made by the IANA, they will need to be recomputed.
+
+[^rfced]
 
 ## TTC {#ex-ttc}
 
