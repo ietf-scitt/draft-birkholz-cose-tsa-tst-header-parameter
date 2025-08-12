@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T00:52:19.389958+00:00",
+  "timestamp": "2025-08-12T00:45:54.330699+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -2959,6 +2959,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 61,
+      "id": "PR_kwDOH8Js786jFjrf",
+      "title": "Address Deb's DISCUSS 2, 3, and 4.",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/61",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-11T16:27:38Z",
+      "updatedAt": "2025-08-11T16:27:38Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "05f087e11434fdf3d638389aa4351a8d34e45590",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "deb-discuss",
+      "headRefOid": "205f84cf3beb08824bf42bb51a7070a99bb9f3fd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
