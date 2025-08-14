@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-12T00:45:54.330699+00:00",
+  "timestamp": "2025-08-14T00:47:00.894921+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -2965,26 +2965,42 @@
       "id": "PR_kwDOH8Js786jFjrf",
       "title": "Address Deb's DISCUSS 2, 3, and 4.",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-08-11T16:27:38Z",
-      "updatedAt": "2025-08-11T16:27:38Z",
+      "updatedAt": "2025-08-12T10:48:55Z",
       "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "baseRefName": "main",
       "baseRefOid": "05f087e11434fdf3d638389aa4351a8d34e45590",
       "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
       "headRefName": "deb-discuss",
       "headRefOid": "205f84cf3beb08824bf42bb51a7070a99bb9f3fd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-08-12T10:48:52Z",
+      "mergedAt": "2025-08-12T10:48:52Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "04ea2ca1f5920fc6ef4085513406387407ea3a5b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js7865XOoZ",
+          "commit": {
+            "abbreviatedOid": "205f84c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "This addresses topic 2, 3, and 4 from Deb's review very well. Thanks Thomas.\r\n\r\nI think that the naming of CTT, and TTC is exactly at its sweet spot right now and will mirror that feedback on the list to Deb. Stefan's concerns are directly mapped into a new subsection of SecConSec, which is the right way to go, I think. Also, the early fwd reference to that Section (and I am not a huge fan of forward references...) is actually useful in this case.",
+          "createdAt": "2025-08-12T10:47:50Z",
+          "updatedAt": "2025-08-12T10:47:50Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
