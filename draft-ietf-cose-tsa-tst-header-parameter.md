@@ -326,11 +326,11 @@ creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly 
 
 # IANA Considerations
 
-IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} to the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
+IANA has allocated the COSE header parameters defined in {{tbl-new-hdrs}} in the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
 
 | Name | Label | Value Type | Value Registry | Description | Reference |
-| `3161-ttc` | TBD1 | bstr | - | RFC 3161 timestamp token: Timestamp then COSE | {{&SELF}}, {{sec-tst-hdr-ttc}} |
-| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token: COSE then Timestamp | {{&SELF}}, {{sec-tst-hdr-ctt}} |
+| `3161-ttc` | 269 | bstr | - | RFC 3161 timestamp token: Timestamp then COSE | {{&SELF}}, {{sec-tst-hdr-ttc}} |
+| `3161-ctt` | 270 | bstr | - | RFC 3161 timestamp token: COSE then Timestamp | {{&SELF}}, {{sec-tst-hdr-ctt}} |
 {: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
