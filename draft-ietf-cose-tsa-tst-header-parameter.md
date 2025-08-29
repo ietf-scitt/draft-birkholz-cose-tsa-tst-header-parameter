@@ -16,7 +16,7 @@ author:
 - name: Henk Birkholz
   org: Fraunhofer SIT
   abbrev: Fraunhofer SIT
-  email: henk.birkholz@sit.fraunhofer.de
+  email: henk.birkholz@ietf.contact
   street: Rheinstrasse 75
   code: '64295'
   city: Darmstadt
@@ -326,20 +326,16 @@ creation time and should rely exclusively on RFC 3161 TSA timestamps explicitly 
 
 # IANA Considerations
 
-IANA is requested to add the COSE header parameters defined in {{tbl-new-hdrs}} to the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
+IANA has allocated the COSE header parameters defined in {{tbl-new-hdrs}} in the "COSE Header Parameters" registry {{!IANA.cose_header-parameters}}.
 
 | Name | Label | Value Type | Value Registry | Description | Reference |
-| `3161-ttc` | TBD1 | bstr | - | RFC 3161 timestamp token: Timestamp then COSE | {{&SELF}}, {{sec-tst-hdr-ttc}} |
-| `3161-ctt` | TBD2 | bstr | - | RFC 3161 timestamp token: COSE then Timestamp | {{&SELF}}, {{sec-tst-hdr-ctt}} |
+| `3161-ttc` | 269 | bstr | - | RFC 3161 timestamp token: Timestamp then COSE | {{&SELF}}, {{sec-tst-hdr-ttc}} |
+| `3161-ctt` | 270 | bstr | - | RFC 3161 timestamp token: COSE then Timestamp | {{&SELF}}, {{sec-tst-hdr-ctt}} |
 {: #tbl-new-hdrs align="left" title="New COSE Header Parameters"}
 
 --- back
 
 # Examples
-
-[^rfced]: RFC Editor, please note that the following examples use fictitious numbers for TBD1 and TBD2. Once the assignments have been made by the IANA, they will need to be recomputed.
-
-[^rfced]
 
 ## TTC {#ex-ttc}
 
