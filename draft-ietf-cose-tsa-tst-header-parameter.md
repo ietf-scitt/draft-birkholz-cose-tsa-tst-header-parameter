@@ -337,10 +337,6 @@ IANA has allocated the COSE header parameters defined in {{tbl-new-hdrs}} in the
 
 # Examples
 
-[^rfced]: RFC Editor, please note that the following examples use fictitious numbers for TBD1 and TBD2. Once the assignments have been made by the IANA, they will need to be recomputed.
-
-[^rfced]
-
 ## TTC {#ex-ttc}
 
 The payload
