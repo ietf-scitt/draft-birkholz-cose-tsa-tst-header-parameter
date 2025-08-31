@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-14T00:47:00.894921+00:00",
+  "timestamp": "2025-08-31T00:46:13.781366+00:00",
   "repo": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
   "labels": [
     {
@@ -565,15 +565,15 @@
       "id": "I_kwDOH8Js78608ISX",
       "title": "ACKs",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/51",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* Alexey\n* Med\n* Mike Bishop\n* \u00c9ric\n* Deb",
       "createdAt": "2025-05-02T10:11:37Z",
-      "updatedAt": "2025-05-12T10:29:59Z",
-      "closedAt": null,
+      "updatedAt": "2025-08-29T10:08:58Z",
+      "closedAt": "2025-08-29T10:08:58Z",
       "comments": []
     },
     {
@@ -617,7 +617,7 @@
       "id": "I_kwDOH8Js7861vkGa",
       "title": "Deb\u2019s DISCUSS points",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -625,10 +625,10 @@
         "henkbirkholz"
       ],
       "labels": [],
-      "body": "[Deb\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/8LCvRl0aVZ5ovTF1eulzEGJFlsc/)\n\n\n* [ ] I agree with Stefan Santesson's review:  https://mailarchive.ietf.org/arch/msg/secdir/yiKmZx9ivRJZfUdj5g8W1HPB5xM/  (many thanks for that secdir review)\n\n* [ ] Section 5:  These types of systems rely on accurate time, and prompt reporting of compromised keys.  [STD96](https://datatracker.ietf.org/doc/std96/) discusses the necessity of keeping private keys private, but does not discuss the prompt reporting when those keys are disclosed.  I think two short warnings (one on the necessity for the accuracy of time, and one on the prompt reporting of compromised keys) would be useful for someone using/implementing this document.  (I'm happy to help with the words for these two warnings)",
+      "body": "[Deb\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/8LCvRl0aVZ5ovTF1eulzEGJFlsc/)\n\n\n* [x] I agree with Stefan Santesson's review:  https://mailarchive.ietf.org/arch/msg/secdir/yiKmZx9ivRJZfUdj5g8W1HPB5xM/  (many thanks for that secdir review)\n\n* [x] Section 5:  These types of systems rely on accurate time, and prompt reporting of compromised keys.  [STD96](https://datatracker.ietf.org/doc/std96/) discusses the necessity of keeping private keys private, but does not discuss the prompt reporting when those keys are disclosed.  I think two short warnings (one on the necessity for the accuracy of time, and one on the prompt reporting of compromised keys) would be useful for someone using/implementing this document.  (I'm happy to help with the words for these two warnings)",
       "createdAt": "2025-05-08T14:14:23Z",
-      "updatedAt": "2025-05-19T14:02:17Z",
-      "closedAt": null,
+      "updatedAt": "2025-08-29T10:08:21Z",
+      "closedAt": "2025-08-29T10:08:21Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -644,17 +644,17 @@
       "id": "I_kwDOH8Js78617ngI",
       "title": "Orie\u2019s DISCUSSes",
       "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
         "henkbirkholz"
       ],
       "labels": [],
-      "body": "[Orie\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/mb587DfKupYv4zqn0XR_-YExOn8/)\n\n\n* [ ] Transparency Service\n```\nThe term is capitalized, but no definition is provided.\nGiven the origin of the draft in scitt, its implied that this is the same TS\nthat the SCITT Architecture describes. However, SCITT architecture does not\nsupport registering anything in the unprotected header (can't support CTT).\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-11#section-6.2-6\n```\n\n* [ ] CTT\n\n```\n122        entry cannot be changed.  In certain cases, such as when a short-\n123        lived certificate is used for the signature, the registration policy\n124        of a Transparency Service may add a trustworthy timestamp to the\n125        signed document.  This is done to lock the signature to a specific\n126        point in time.  To achieve this, the Transparency Service acquires a\n127        TST from a TSA, bundles it alongside the signed document, and then\n128        registers it.  A relying party that wants to ascertain the\n129        authenticity of the document after the signing key has expired (or\n130        has been compromised), can do so by making sure that no revocation\n131        information has been made public before the time asserted in the TST.\n\nMUST the TSA be a separate entity from the Transparency Service?\n\nIs it possible for the document signer to supply the TST instead of the\nTransparency Service?\n\nWhat happens if there is already a TST present, when the Transparency Service\nreceives the cose object?\n```",
+      "body": "[Orie\u2019s review](https://mailarchive.ietf.org/arch/msg/cose/mb587DfKupYv4zqn0XR_-YExOn8/)\n\n\n* [x] Transparency Service\n```\nThe term is capitalized, but no definition is provided.\nGiven the origin of the draft in scitt, its implied that this is the same TS\nthat the SCITT Architecture describes. However, SCITT architecture does not\nsupport registering anything in the unprotected header (can't support CTT).\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-11#section-6.2-6\n```\n\n* [x] CTT\n\n```\n122        entry cannot be changed.  In certain cases, such as when a short-\n123        lived certificate is used for the signature, the registration policy\n124        of a Transparency Service may add a trustworthy timestamp to the\n125        signed document.  This is done to lock the signature to a specific\n126        point in time.  To achieve this, the Transparency Service acquires a\n127        TST from a TSA, bundles it alongside the signed document, and then\n128        registers it.  A relying party that wants to ascertain the\n129        authenticity of the document after the signing key has expired (or\n130        has been compromised), can do so by making sure that no revocation\n131        information has been made public before the time asserted in the TST.\n\nMUST the TSA be a separate entity from the Transparency Service?\n\nIs it possible for the document signer to supply the TST instead of the\nTransparency Service?\n\nWhat happens if there is already a TST present, when the Transparency Service\nreceives the cose object?\n```",
       "createdAt": "2025-05-09T14:12:00Z",
-      "updatedAt": "2025-05-19T14:02:08Z",
-      "closedAt": null,
+      "updatedAt": "2025-08-29T10:08:50Z",
+      "closedAt": "2025-08-29T10:08:50Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -2998,6 +2998,48 @@
           "body": "This addresses topic 2, 3, and 4 from Deb's review very well. Thanks Thomas.\r\n\r\nI think that the naming of CTT, and TTC is exactly at its sweet spot right now and will mirror that feedback on the list to Deb. Stefan's concerns are directly mapped into a new subsection of SecConSec, which is the right way to go, I think. Also, the early fwd reference to that Section (and I am not a huge fan of forward references...) is actually useful in this case.",
           "createdAt": "2025-08-12T10:47:50Z",
           "updatedAt": "2025-08-12T10:47:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOH8Js786l8CTA",
+      "title": "RFC-Ed / IANA updates",
+      "url": "https://github.com/ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter/pull/62",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See individual commits for the details. ",
+      "createdAt": "2025-08-29T07:48:22Z",
+      "updatedAt": "2025-08-29T10:09:18Z",
+      "baseRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "baseRefName": "main",
+      "baseRefOid": "04ea2ca1f5920fc6ef4085513406387407ea3a5b",
+      "headRepository": "ietf-scitt/draft-birkholz-cose-tsa-tst-header-parameter",
+      "headRefName": "rfc-ed-updates-1",
+      "headRefOid": "70f6af313ea169fbd34e389bb049bf7b95e91ec6",
+      "closedAt": "2025-08-29T10:09:15Z",
+      "mergedAt": "2025-08-29T10:09:15Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "b9c406db8b99d99481f803dd3a2e8c44bd29901d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH8Js78681kuQ",
+          "commit": {
+            "abbreviatedOid": "70f6af3"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "lgtm",
+          "createdAt": "2025-08-29T10:05:47Z",
+          "updatedAt": "2025-08-29T10:05:47Z",
           "comments": []
         }
       ]
